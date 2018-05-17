@@ -1,7 +1,8 @@
-package com.leticiafernandes.letsmovie
+package com.leticiafernandes.letsmovie.presentation.view.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.leticiafernandes.letsmovie.R
 
 class MainActivity : AppCompatActivity() {
 
