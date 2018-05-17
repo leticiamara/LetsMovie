@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_number": "403776409140",
+    "firebase_url": "https://letsmovie-8269e.firebaseio.com",
+    "project_id": "letsmovie-8269e",
+    "storage_bucket": "letsmovie-8269e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403776409140:android:438077eea3fa3d88",
+        "android_client_info": {
+          "package_name": "com.leticiafernandes.letsmovie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403776409140-fm7k8n53qsif8eimlknh7kn1djovqnrd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.leticiafernandes.letsmovie",
+            "certificate_hash": "f14a6b1426354f67087108be64a4a2b9da6185a2"
+          }
+        },
+        {
+          "client_id": "403776409140-en852p5bvb1dl06htuoc9qtpnkuhpr1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403776409140-en852p5bvb1dl06htuoc9qtpnkuhpr1l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
