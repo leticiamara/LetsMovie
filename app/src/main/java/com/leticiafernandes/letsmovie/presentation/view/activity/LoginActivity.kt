@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         Log.d(TAG, "signInWithEmail:success")
         val user = firebaseAuth?.currentUser
         sharedPreferencesManager?.saveUserEmail(user?.email.toString())
-        goToActivity(MainActivity::class.java)
+        goToActivity(MoviesActivity::class.java)
     }
 
     private fun goToActivity(activityClass: Class<out AppCompatActivity>) {

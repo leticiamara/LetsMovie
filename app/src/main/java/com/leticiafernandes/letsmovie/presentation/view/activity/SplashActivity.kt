@@ -1,6 +1,5 @@
 package com.leticiafernandes.letsmovie.presentation.view.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -22,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
         handler.postDelayed({
             if (!sharedPreferencesManager?.getUserEmail()?.isEmpty()!!) {
-                gotToActivity(MainActivity::class.java)
+                gotToActivity(MoviesActivity::class.java)
             } else {
                 gotToActivity(LoginActivity::class.java)
             }
