@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.sign_in_sign_up_data.*
 
 class SignUpActivity : AppCompatActivity() {
 
+    private val TAG = "FIREBASE"
     var firebaseAuth: FirebaseAuth? = null
 
     override fun onStart() {
@@ -38,13 +39,12 @@ class SignUpActivity : AppCompatActivity() {
                     .addOnCompleteListener({ task ->
                         run {
                             if (task.isSuccessful) {
-                                Log.d("", "createUserWithEmail:success")
+                                Log.d(TAG, "createUserWithEmail:success")
                                 val user = firebaseAuth?.currentUser
                                 val intent = Intent(this, MainActivity::class.java)
                                 startActivity(intent)
                             } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w("", "createUserWithEmail:failure", task.getException());
+                                Log.w(TAG, "createUserWithEmail:failure", task.exception);
                                 Toast.makeText(this, task.exception?.message,
                                         Toast.LENGTH_SHORT).show();
                             }
