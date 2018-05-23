@@ -1,5 +1,6 @@
 package com.leticiafernandes.letsmovie.domain.interactor
 
+import com.leticiafernandes.letsmovie.infrastructure.data.entity.GenreResponse
 import com.leticiafernandes.letsmovie.infrastructure.data.entity.MovieResponse
 import io.reactivex.Observable
 
@@ -9,4 +10,5 @@ import io.reactivex.Observable
 interface IMoviesInteractor {
 
     fun listPopularMovies() : Observable<MovieResponse>
+    fun listAllGenres(): Observable<GenreResponse>
 }
