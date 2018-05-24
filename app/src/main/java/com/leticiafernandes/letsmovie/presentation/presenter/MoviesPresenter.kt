@@ -11,11 +11,19 @@ import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMoviesMvpView
 class MoviesPresenter(val movieMvpView: IMoviesMvpView) : IMoviesPresenter {
 
     var moviesInteractor: IMoviesInteractor = MoviesInteractor()
+    var genres: Map<Long, String> = HashMap<Long, String>()
 
     override fun listPopularMovies() {
-        moviesInteractor.listPopularMovies().subscribe({movieList: MovieResponse? -> run {
-            movieMvpView.showPopularMovieList(movieList?.results)
-        } }, {throwable: Throwable? -> run { movieMvpView.showMessage(throwable?.message.toString()) } })
+        moviesInteractor.listAllGenres()
+                .flatMap { genreResponse ->
+                    genres = genreResponse.genres.associateBy({it.id}, {it.name})
+                    return@flatMap moviesInteractor.listPopularMovies()
+                }
+                .subscribe({ movieList: MovieResponse? ->
+                    run {
+                        movieMvpView.showPopularMovieList(movieList?.results)
+                    }
+                }, { throwable: Throwable? -> run { movieMvpView.showMessage(throwable?.message.toString()) } })
     }
 
     override fun listFavouriteMovies() {
