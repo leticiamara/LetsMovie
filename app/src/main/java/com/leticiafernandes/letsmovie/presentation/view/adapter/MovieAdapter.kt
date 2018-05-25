@@ -4,13 +4,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.infrastructure.data.model.Movie
+import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.view.viewholder.MovieViewHolder
 
 /**
- * Created by leticiafernandes on 20/05/18.
+ * Created by leticiafernandes on 25/05/18.
  */
-class MoviesAdapter(val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
+class MovieAdapter(private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
 
     var movieList: List<Movie>? = null
 

@@ -4,9 +4,9 @@ import android.content.Context
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.domain.interactor.IMoviesInteractor
 import com.leticiafernandes.letsmovie.domain.interactor.MoviesInteractor
-import com.leticiafernandes.letsmovie.infrastructure.data.database.LetsMovieDataBase
-import com.leticiafernandes.letsmovie.infrastructure.data.model.MovieResponse
-import com.leticiafernandes.letsmovie.infrastructure.data.entity.MovieEntity
+import com.leticiafernandes.letsmovie.infrastructure.model.Movie
+import com.leticiafernandes.letsmovie.infrastructure.persistence.LetsMovieDataBase
+import com.leticiafernandes.letsmovie.infrastructure.model.MovieResponse
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMoviesMvpView
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -44,9 +44,10 @@ class MoviesPresenter(var context: Context, val movieMvpView: IMoviesMvpView) : 
                                          originalLanguage: String, originalTitle: String,
                                          genreIds: List<Long>, backdropPath: String, adult: Boolean,
                                          overview: String, releaseDate: Date) {
-        val favouriteMovie = MovieEntity(theMovieDbId, theMovieDbId, voteCount, title, video,
+        val favouriteMovie = Movie(theMovieDbId, voteCount, title, video,
                 voteAverage, popularity, posterPath, originalLanguage, originalTitle, genreIds,
                 backdropPath, adult, overview, releaseDate)
+        favouriteMovie.favourite = true
 
         Single.fromCallable {
             database?.movieDao()?.insert(favouriteMovie)

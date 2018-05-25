@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.presentation.view.mvpview
 
-import com.leticiafernandes.letsmovie.infrastructure.data.entity.MovieEntity
+import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 
 /**
  * Created by leticiafernandes on 24/05/18.
@@ -8,5 +8,5 @@ import com.leticiafernandes.letsmovie.infrastructure.data.entity.MovieEntity
 interface IFavouriteMvpView {
 
     fun showMessage(resId: Int)
-    fun listMovies(movies: List<MovieEntity>?)
+    fun listMovies(movies: List<Movie>?)
 }

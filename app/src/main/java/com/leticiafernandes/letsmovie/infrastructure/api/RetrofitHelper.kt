@@ -1,6 +1,5 @@
-package com.leticiafernandes.letsmovie.infrastructure.service
+package com.leticiafernandes.letsmovie.infrastructure.api
 
-import android.app.Application
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.leticiafernandes.letsmovie.presentation.view.AppApplication
 import okhttp3.Cache

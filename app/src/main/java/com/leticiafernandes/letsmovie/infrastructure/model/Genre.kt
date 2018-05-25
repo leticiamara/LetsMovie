@@ -1,4 +1,4 @@
-package com.leticiafernandes.letsmovie.infrastructure.data.model
+package com.leticiafernandes.letsmovie.infrastructure.model
 
 /**
  * Created by leticiafernandes on 22/05/18.

@@ -9,13 +9,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.infrastructure.data.entity.MovieEntity
+import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.presenter.FavouriteMoviesPresenter
 import com.leticiafernandes.letsmovie.presentation.presenter.IFavouriteMoviesPresenter
-import com.leticiafernandes.letsmovie.presentation.view.adapter.FavouriteMoviesAdapter
+import com.leticiafernandes.letsmovie.presentation.view.adapter.MovieAdapter
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IFavouriteMvpView
 import kotlinx.android.synthetic.main.fragment_favourite_movies.*
-import kotlinx.android.synthetic.main.fragment_popular_movies.*
 
 /**
  * Created by leticiafernandes on 20/05/18.
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_popular_movies.*
 class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
 
     var favouriteMoviesPresenter: IFavouriteMoviesPresenter? = null
-    var favouriteMoviesAdapter: FavouriteMoviesAdapter? = null
+    var movieAdapter: MovieAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -39,8 +38,8 @@ class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
 
     private fun setUpRecyclerView() {
         rvFavouriteMovies.layoutManager = LinearLayoutManager(activity)
-        favouriteMoviesAdapter = FavouriteMoviesAdapter()
-        rvFavouriteMovies.adapter = favouriteMoviesAdapter
+        movieAdapter = MovieAdapter({})
+        rvFavouriteMovies.adapter = movieAdapter
     }
 
     private fun loadFavouriteList() {
@@ -51,9 +50,9 @@ class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
         Toast.makeText(activity, resId, LENGTH_SHORT).show()
     }
 
-    override fun listMovies(movies: List<MovieEntity>?) {
-        favouriteMoviesAdapter?.favouriteMovieList = movies
-        favouriteMoviesAdapter?.notifyDataSetChanged()
+    override fun listMovies(movies: List<Movie>?) {
+        movieAdapter?.movieList = movies
+        movieAdapter?.notifyDataSetChanged()
     }
 
 }

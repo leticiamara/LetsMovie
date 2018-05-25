@@ -1,4 +1,4 @@
-package com.leticiafernandes.letsmovie.infrastructure.data.model
+package com.leticiafernandes.letsmovie.infrastructure.model
 
 import com.google.gson.annotations.SerializedName
 

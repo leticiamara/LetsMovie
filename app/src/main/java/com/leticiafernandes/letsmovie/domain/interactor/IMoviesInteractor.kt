@@ -1,7 +1,7 @@
 package com.leticiafernandes.letsmovie.domain.interactor
 
-import com.leticiafernandes.letsmovie.infrastructure.data.model.GenreResponse
-import com.leticiafernandes.letsmovie.infrastructure.data.model.MovieResponse
+import com.leticiafernandes.letsmovie.infrastructure.model.GenreResponse
+import com.leticiafernandes.letsmovie.infrastructure.model.MovieResponse
 import io.reactivex.Observable
 
 /**

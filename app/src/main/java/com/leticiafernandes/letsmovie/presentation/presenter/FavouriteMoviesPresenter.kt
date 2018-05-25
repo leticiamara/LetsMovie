@@ -1,7 +1,7 @@
 package com.leticiafernandes.letsmovie.presentation.presenter
 
 import android.content.Context
-import com.leticiafernandes.letsmovie.infrastructure.data.database.LetsMovieDataBase
+import com.leticiafernandes.letsmovie.infrastructure.persistence.LetsMovieDataBase
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IFavouriteMvpView
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers

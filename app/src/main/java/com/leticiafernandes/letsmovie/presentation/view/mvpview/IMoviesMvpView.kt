@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.presentation.view.mvpview
 
-import com.leticiafernandes.letsmovie.infrastructure.data.model.Movie
+import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 
 /**
  * Created by leticiafernandes on 20/05/18.

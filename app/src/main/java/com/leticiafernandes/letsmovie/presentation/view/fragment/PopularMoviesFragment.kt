@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.infrastructure.data.model.Movie
+import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.presenter.IMoviesPresenter
 import com.leticiafernandes.letsmovie.presentation.presenter.MoviesPresenter
-import com.leticiafernandes.letsmovie.presentation.view.adapter.MoviesAdapter
+import com.leticiafernandes.letsmovie.presentation.view.adapter.MovieAdapter
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMoviesMvpView
 import kotlinx.android.synthetic.main.fragment_popular_movies.*
 
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_popular_movies.*
  */
 class PopularMoviesFragment : Fragment(), IMoviesMvpView {
 
-    var movieAdapter: MoviesAdapter? = null
+    var movieAdapter: MovieAdapter? = null
     var moviesPresenter: IMoviesPresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +50,7 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
 
     private fun setUpRecyclerView() {
         rvPopularMovies.layoutManager = LinearLayoutManager(activity)
-        movieAdapter = MoviesAdapter({movie -> moviesPresenter?.addMovieToFavouriteList(movie.id,
+        movieAdapter = MovieAdapter({movie -> moviesPresenter?.addMovieToFavouriteList(movie.id,
                 movie.voteCount, movie.title, movie.video, movie.voteAverage, movie.popularity,
                 movie.posterPath, movie.originalLanguage, movie.originalTitle, movie.genreIds,
                 movie.backdropPath, movie.adult, movie.overview, movie.releaseDate) })
