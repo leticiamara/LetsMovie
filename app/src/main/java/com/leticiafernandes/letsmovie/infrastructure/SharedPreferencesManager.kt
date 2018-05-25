@@ -1,4 +1,4 @@
-package com.leticiafernandes.letsmovie.infrastructure.data
+package com.leticiafernandes.letsmovie.infrastructure
 
 import android.content.Context
 import android.content.SharedPreferences

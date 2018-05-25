@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.infrastructure.data.SharedPreferencesManager
+import com.leticiafernandes.letsmovie.infrastructure.SharedPreferencesManager
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.sign_in_sign_up_data.*
 

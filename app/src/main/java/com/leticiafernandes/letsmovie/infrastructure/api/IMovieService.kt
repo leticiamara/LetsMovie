@@ -1,8 +1,7 @@
-package com.leticiafernandes.letsmovie.infrastructure.service
+package com.leticiafernandes.letsmovie.infrastructure.api
 
-import com.leticiafernandes.letsmovie.infrastructure.data.entity.GenreResponse
-import com.leticiafernandes.letsmovie.infrastructure.data.entity.Movie
-import com.leticiafernandes.letsmovie.infrastructure.data.entity.MovieResponse
+import com.leticiafernandes.letsmovie.infrastructure.model.GenreResponse
+import com.leticiafernandes.letsmovie.infrastructure.model.MovieResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

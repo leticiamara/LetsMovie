@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.infrastructure.data.SharedPreferencesManager
+import com.leticiafernandes.letsmovie.infrastructure.SharedPreferencesManager
 
 class SplashActivity : AppCompatActivity() {
 

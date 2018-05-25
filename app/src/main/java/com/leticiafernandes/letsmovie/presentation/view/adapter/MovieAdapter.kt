@@ -4,18 +4,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.infrastructure.data.entity.Movie
+import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.view.viewholder.MovieViewHolder
 
 /**
- * Created by leticiafernandes on 20/05/18.
+ * Created by leticiafernandes on 25/05/18.
  */
-class MoviesAdapter : RecyclerView.Adapter<MovieViewHolder>() {
+class MovieAdapter(private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
 
     var movieList: List<Movie>? = null
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindMovie(movieList?.get(position)!!)
+        holder.bindMovie(movieList?.get(position)!!, clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
