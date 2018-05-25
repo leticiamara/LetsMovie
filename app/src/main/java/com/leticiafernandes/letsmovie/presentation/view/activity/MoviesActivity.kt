@@ -1,6 +1,7 @@
 package com.leticiafernandes.letsmovie.presentation.view.activity
 
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -9,24 +10,28 @@ import com.leticiafernandes.letsmovie.presentation.view.fragment.FavouriteMovies
 import com.leticiafernandes.letsmovie.presentation.view.fragment.PopularMoviesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MoviesActivity : AppCompatActivity() {
+class MoviesActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+
+    private var popularMoviesFragment: PopularMoviesFragment? = null
+    private var favouriteMoviesFragment: FavouriteMoviesFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val popularMoviesFragment = PopularMoviesFragment()
-        val favouriteMoviesFragment = FavouriteMoviesFragment()
+        popularMoviesFragment = PopularMoviesFragment()
+        favouriteMoviesFragment = FavouriteMoviesFragment()
 
-        bottomNavigation.setOnNavigationItemReselectedListener{ item: MenuItem ->
-            run {
-                when(item.itemId) {
-                    R.id.item_popular_movies -> showFragment(popularMoviesFragment)
-                    R.id.item_favourite_movies -> showFragment(favouriteMoviesFragment)
-                    else -> {}
-                }
-            }
+        bottomNavigation.setOnNavigationItemSelectedListener(this)
+        showFragment(popularMoviesFragment!!)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.item_popular_movies -> showFragment(popularMoviesFragment!!)
+            R.id.item_favourite_movies -> showFragment(favouriteMoviesFragment!!)
+            else -> {}
         }
-        showFragment(popularMoviesFragment)
+        return true
     }
 
     private fun showFragment(fragment: Fragment) {

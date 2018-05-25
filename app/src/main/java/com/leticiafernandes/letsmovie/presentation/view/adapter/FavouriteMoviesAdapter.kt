@@ -4,18 +4,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.infrastructure.data.model.Movie
+import com.leticiafernandes.letsmovie.infrastructure.data.entity.MovieEntity
 import com.leticiafernandes.letsmovie.presentation.view.viewholder.MovieViewHolder
 
 /**
- * Created by leticiafernandes on 20/05/18.
+ * Created by leticiafernandes on 24/05/18.
  */
-class MoviesAdapter(val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
+class FavouriteMoviesAdapter : RecyclerView.Adapter<MovieViewHolder>() {
 
-    var movieList: List<Movie>? = null
+    var favouriteMovieList: List<MovieEntity>? = null
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindMovie(movieList?.get(position)!!, clickListener)
+        holder.bindMovie(favouriteMovieList?.get(position)!!)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -25,6 +25,6 @@ class MoviesAdapter(val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<M
     }
 
     override fun getItemCount(): Int {
-        return if (movieList != null) movieList!!.size else 0
+        return if (favouriteMovieList != null) favouriteMovieList!!.size else 0
     }
 }
