@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.leticiafernandes.letsmovie.presentation.view.activity.MoviesActivity">
 
-    <FrameLayout
-        android:id="@+id/moviesFrame"
+    <com.leticiafernandes.letsmovie.presentation.view.NoSwipePager
+        android:id="@+id/viewPagerMovies"
         android:layout_width="391dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"

@@ -1,5 +1,6 @@
 package com.leticiafernandes.letsmovie.presentation.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -50,11 +51,14 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
 
     private fun setUpRecyclerView() {
         rvPopularMovies.layoutManager = LinearLayoutManager(activity)
-        movieAdapter = MovieAdapter({movie -> moviesPresenter?.addMovieToFavouriteList(movie.id,
-                movie.voteCount, movie.title, movie.video, movie.voteAverage, movie.popularity,
-                movie.posterPath, movie.originalLanguage, movie.originalTitle, movie.genreIds,
-                movie.backdropPath, movie.adult, movie.overview, movie.releaseDate) })
+        movieAdapter = MovieAdapter(addMovieToFavouriteList())
         rvPopularMovies.adapter = movieAdapter
+    }
+
+    private fun addMovieToFavouriteList(): (Movie) -> Unit {
+        return { movie ->
+            moviesPresenter?.addMovieToFavouriteList(movie)
+        }
     }
 
     private fun loadPopularList() {

@@ -42,7 +42,7 @@ class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
         rvFavouriteMovies.adapter = movieAdapter
     }
 
-    private fun loadFavouriteList() {
+    fun loadFavouriteList() {
         favouriteMoviesPresenter?.listAllFavouriteMovies()
     }
 
