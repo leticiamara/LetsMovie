@@ -39,14 +39,7 @@ class MoviesPresenter(var context: Context, val movieMvpView: IMoviesMvpView) : 
                 }, { throwable: Throwable? -> run { movieMvpView.showMessage(throwable?.message.toString()) } })
     }
 
-    override fun addMovieToFavouriteList(theMovieDbId: Long, voteCount: Int, title: String, video: Boolean?,
-                                         voteAverage: Double, popularity: Double, posterPath: String,
-                                         originalLanguage: String, originalTitle: String,
-                                         genreIds: List<Long>, backdropPath: String, adult: Boolean,
-                                         overview: String, releaseDate: Date) {
-        val favouriteMovie = Movie(theMovieDbId, voteCount, title, video,
-                voteAverage, popularity, posterPath, originalLanguage, originalTitle, genreIds,
-                backdropPath, adult, overview, releaseDate)
+    override fun addMovieToFavouriteList(favouriteMovie: Movie) {
         favouriteMovie.favourite = true
 
         Single.fromCallable {
