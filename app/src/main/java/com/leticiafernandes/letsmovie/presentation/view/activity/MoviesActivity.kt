@@ -6,8 +6,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.infrastructure.model.Movie
-import com.leticiafernandes.letsmovie.presentation.view.fragment.BottomBarAdapter
+import com.leticiafernandes.letsmovie.presentation.view.adapter.BottomBarAdapter
 import com.leticiafernandes.letsmovie.presentation.view.fragment.FavouriteMoviesFragment
 import com.leticiafernandes.letsmovie.presentation.view.fragment.PopularMoviesFragment
 import kotlinx.android.synthetic.main.activity_main.*

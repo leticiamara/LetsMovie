@@ -9,4 +9,5 @@
     <string name="title_favourites">Favourites</string>
     <string name="release_date">Release date:</string>
     <string name="movie_added_to_favourite_list">Movie added to favourite list</string>
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
 </resources>

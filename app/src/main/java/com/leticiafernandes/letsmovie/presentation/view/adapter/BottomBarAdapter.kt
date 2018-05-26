@@ -1,4 +1,4 @@
-package com.leticiafernandes.letsmovie.presentation.view.fragment
+package com.leticiafernandes.letsmovie.presentation.view.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
