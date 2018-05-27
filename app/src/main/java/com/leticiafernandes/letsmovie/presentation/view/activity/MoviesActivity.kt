@@ -1,5 +1,6 @@
 package com.leticiafernandes.letsmovie.presentation.view.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.ViewPager
@@ -10,19 +11,21 @@ import com.google.firebase.auth.FirebaseAuth
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.infrastructure.SharedPreferencesManager
 import com.leticiafernandes.letsmovie.presentation.helper.ActivityHelper.Companion.goToActivity
+import com.leticiafernandes.letsmovie.presentation.presenter.IMainPresenter
+import com.leticiafernandes.letsmovie.presentation.presenter.MainPresenter
 import com.leticiafernandes.letsmovie.presentation.view.adapter.BottomBarAdapter
 import com.leticiafernandes.letsmovie.presentation.view.fragment.FavouriteMoviesFragment
 import com.leticiafernandes.letsmovie.presentation.view.fragment.PopularMoviesFragment
+import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMainMvpView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MoviesActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
-        ViewPager.OnPageChangeListener {
+        ViewPager.OnPageChangeListener, IMainMvpView {
 
     private var popularMoviesFragment: PopularMoviesFragment? = null
     private var favouriteMoviesFragment: FavouriteMoviesFragment? = null
-    private var firebaseAuth: FirebaseAuth? = null
-    private var sharedPreferencesManager: SharedPreferencesManager? = null
+    lateinit var presenter: IMainPresenter
 
     companion object {
         var PAGE_POPULAR_MOVIES = 0
@@ -33,8 +36,7 @@ class MoviesActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViewPager()
-        firebaseAuth = FirebaseAuth.getInstance()
-        sharedPreferencesManager = SharedPreferencesManager(this)
+        presenter = MainPresenter(this)
         bottomNavigation.setOnNavigationItemSelectedListener(this)
     }
 
@@ -46,10 +48,7 @@ class MoviesActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.action_logout -> {
-                firebaseAuth?.currentUser?.uid
-                firebaseAuth?.signOut()
-                sharedPreferencesManager?.saveUserEmail("")
-                goToActivity(this, LoginActivity::class.java)
+                presenter.logout()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -71,11 +70,13 @@ class MoviesActivity : AppCompatActivity(), BottomNavigationView.OnNavigationIte
     }
 
     override fun onPageScrollStateChanged(state: Int) {
-
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
 
+    override fun getContext(): Context {
+        return this
     }
 
     private fun setupViewPager() {

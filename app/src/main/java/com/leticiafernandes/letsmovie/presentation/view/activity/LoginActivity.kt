@@ -1,6 +1,7 @@
 
 package com.leticiafernandes.letsmovie.presentation.view.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -10,48 +11,31 @@ import com.google.firebase.auth.FirebaseAuth
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.infrastructure.SharedPreferencesManager
 import com.leticiafernandes.letsmovie.presentation.helper.ActivityHelper.Companion.goToActivity
+import com.leticiafernandes.letsmovie.presentation.presenter.ISignInPresenter
+import com.leticiafernandes.letsmovie.presentation.presenter.SignInPresenter
+import com.leticiafernandes.letsmovie.presentation.view.mvpview.ISignInMvpView
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.sign_in_sign_up_data.*
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), ISignInMvpView {
 
-    private val TAG = "FIREBASE"
-    private var firebaseAuth: FirebaseAuth? = null
-    private var sharedPreferencesManager: SharedPreferencesManager? = null
+    lateinit var presenter: ISignInPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        sharedPreferencesManager = SharedPreferencesManager(this)
+        presenter = SignInPresenter(this)
         containerSignUp.setOnClickListener({
             goToActivity(this, SignUpActivity::class.java)
         })
         buttonSignInSignUp.setOnClickListener({
-            signInUser()
+            (presenter as SignInPresenter).signInUser(editEmail.text.toString(),
+                    editPassword.text.toString())
         })
     }
 
-    private fun signInUser() {
-        firebaseAuth?.signInWithEmailAndPassword(editEmail.text.toString(),
-                editPassword.text.toString())?.addOnCompleteListener({ task ->
-            run {
-                if (task.isSuccessful) {
-                    signInUserSuccessful()
-                } else {
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(this, task.exception?.message,
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        })
-    }
-
-    private fun signInUserSuccessful() {
-        Log.d(TAG, "signInWithEmail:success")
-        val user = firebaseAuth?.currentUser
-        sharedPreferencesManager?.saveUserEmail(user?.email.toString())
-        goToActivity(this, MoviesActivity::class.java)
+    override fun getContext(): Context {
+        return this
     }
 }
