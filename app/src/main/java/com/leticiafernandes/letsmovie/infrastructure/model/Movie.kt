@@ -28,7 +28,9 @@ data class Movie(
         @field:SerializedName("backdrop_path") var backdropPath: String,
         var adult: Boolean,
         var overview: String,
-        @field:SerializedName("release_date") var releaseDate: Date) : Parcelable {
+        @field:SerializedName("release_date") var releaseDate: Date,
+        var genres: String) : Parcelable {
+
     var favourite: Boolean = false
 
     constructor(source: Parcel) : this(
@@ -45,7 +47,8 @@ data class Movie(
             source.readString(),
             1 == source.readInt(),
             source.readString(),
-            source.readSerializable() as Date
+            source.readSerializable() as Date,
+            source.readString()
     )
 
     override fun describeContents() = 0
@@ -65,6 +68,7 @@ data class Movie(
         writeInt((if (adult) 1 else 0))
         writeString(overview)
         writeSerializable(releaseDate)
+        writeString(genres)
     }
 
     companion object {

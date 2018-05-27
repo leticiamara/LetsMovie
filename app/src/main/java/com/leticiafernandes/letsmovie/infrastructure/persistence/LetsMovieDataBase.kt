@@ -4,16 +4,20 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import com.leticiafernandes.letsmovie.infrastructure.model.Genre
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
+import com.leticiafernandes.letsmovie.infrastructure.persistence.dao.GenreDao
 import com.leticiafernandes.letsmovie.infrastructure.persistence.dao.MovieDao
 
 /**
  * Created by leticiafernandes on 24/05/18.
  */
-@Database(entities = arrayOf(Movie::class), version = 1)
+@Database(entities = arrayOf(Movie::class, Genre::class), version = 1)
 abstract class LetsMovieDataBase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
+
+    abstract fun genreDao(): GenreDao
 
     companion object {
         private var INSTANCE: LetsMovieDataBase? = null

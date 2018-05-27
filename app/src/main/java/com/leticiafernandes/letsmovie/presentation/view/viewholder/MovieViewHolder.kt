@@ -16,20 +16,11 @@ class MovieViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
                   funItemClickListener: (Movie) -> Unit) {
         itemView.textMovieTitle.text = movie.title
         itemView.textReleaseDate.text = movie.releaseDate.formatToReleaseDate()
-        itemView.textGenre.text = movie.genreIds.toList().toString()
+        itemView.textGenre.text = movie.genres
         itemView.textVoteAverage.text = movie.voteAverage.toString()
         itemView.fabFavourite.setOnClickListener{ funFavouriteClickListener(movie) }
         itemView.setOnClickListener { funItemClickListener(movie) }
         loadImage(itemView.context, movie.posterPath, itemView?.imagePoster!!)
         if (movie.favourite) itemView.fabFavourite.visibility = View.GONE
     }
-
-    /*private fun loadImage(imageURL: String) {
-        val BASE_URL = "https://image.tmdb.org/t/p/original"
-        Picasso.with(itemView?.context)
-                .load(BASE_URL + imageURL)
-                .centerCrop()
-                .fit()
-                .into(itemView?.imagePoster)
-    }*/
 }

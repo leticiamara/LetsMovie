@@ -72,7 +72,7 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
 
     private fun addMovieToFavouriteList(): (Movie) -> Unit {
         return { movie ->
-            moviesPresenter?.addMovieToFavouriteList(movie)
+            moviesPresenter?.addMovieToFavoriteList(movie)
         }
     }
 
