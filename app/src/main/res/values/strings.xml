@@ -12,4 +12,6 @@
     <string name="title_activity_movie_detail">MovieDetailActivity</string>
     <string name="logout">Logout</string>
     <string name="about">About</string>
+    <string name="error_invalid_email">Invalid email</string>
+    <string name="error_password_less_than_six">Password less than six</string>
 </resources>

@@ -29,9 +29,7 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.google.firebase:firebase-auth:11.0.4'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
@@ -53,5 +51,24 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:2.15"
     kapt "com.google.dagger:dagger-compiler:2.15"
     kapt "com.google.dagger:dagger-android-processor:2.15"
+
+    // Tests
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    testImplementation "org.mockito:mockito-core:$rootProject.mockito_version"
+    testImplementation "org.mockito:mockito-inline:$rootProject.mockito_version"
+
+    androidTestImplementation "com.android.support:support-annotations:$rootProject.support_version"
+    androidTestImplementation "com.android.support.test:runner:$rootProject.test_support_version"
+    androidTestImplementation "com.android.support.test:rules:$rootProject.test_support_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espresso_version"
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$rootProject.espresso_version") {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
 }
 apply plugin: 'com.google.gms.google-services'

@@ -16,49 +16,63 @@
         android:layout_marginTop="72dp"
         android:text="@string/login"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/editEmail"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editEmail"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:drawableLeft="@drawable/ic_mail_outline_grey_900_24dp"
-        android:drawablePadding="16dp"
-        android:drawableStart="@drawable/ic_mail_outline_grey_900_24dp"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/editPassword"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInSignUpTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/signInSignUpTitle">
 
-    <EditText
-        android:id="@+id/editPassword"
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_mail_outline_grey_900_24dp"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/ic_mail_outline_grey_900_24dp"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:drawableLeft="@drawable/ic_lock_outline_grey_900_24dp"
-        android:drawablePadding="16dp"
-        android:drawableStart="@drawable/ic_lock_outline_grey_900_24dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
+        app:hintEnabled="false"
         app:layout_constraintBottom_toTopOf="@+id/buttonSignInSignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail">
+
+        <EditText
+            android:id="@+id/editPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_lock_outline_grey_900_24dp"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/ic_lock_outline_grey_900_24dp"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
 
     <ImageButton
         android:id="@+id/buttonSignInSignUp"
@@ -73,6 +87,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
 
 </android.support.constraint.ConstraintLayout>

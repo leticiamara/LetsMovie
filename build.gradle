@@ -30,4 +30,10 @@ task clean(type: Delete) {
 ext {
     roomVersion = '1.1.0'
     archLifecycleVersion = '1.1.1'
+    support_version = '27.1.0'
+    kotlin_version = '1.2.31'
+    anko_version = '0.10.4'
+    mockito_version = '2.16.0'
+    test_support_version = '1.0.2'
+    espresso_version = '3.0.1'
 }
