@@ -10,4 +10,6 @@
     <string name="release_date">Release date:</string>
     <string name="movie_added_to_favourite_list">Movie added to favourite list</string>
     <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="logout">Logout</string>
+    <string name="about">About</string>
 </resources>

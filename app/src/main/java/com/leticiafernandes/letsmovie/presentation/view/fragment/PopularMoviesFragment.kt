@@ -12,7 +12,7 @@ import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.presenter.IMoviesPresenter
 import com.leticiafernandes.letsmovie.presentation.presenter.MoviesPresenter
-import com.leticiafernandes.letsmovie.presentation.util.InfiniteScrollListener
+import com.leticiafernandes.letsmovie.presentation.helper.InfiniteScrollListener
 import com.leticiafernandes.letsmovie.presentation.view.activity.MovieDetailActivity
 import com.leticiafernandes.letsmovie.presentation.view.adapter.MovieAdapter
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMoviesMvpView
@@ -67,7 +67,7 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
         rvPopularMovies.layoutManager = linearLayoutManager
         movieAdapter = MovieAdapter(addMovieToFavouriteList(), showMovieDetails())
         rvPopularMovies.adapter = movieAdapter
-        rvPopularMovies.addOnScrollListener(InfiniteScrollListener({loadMoreMovies()}, linearLayoutManager))
+        rvPopularMovies.addOnScrollListener(InfiniteScrollListener({ loadMoreMovies() }, linearLayoutManager))
     }
 
     private fun addMovieToFavouriteList(): (Movie) -> Unit {
