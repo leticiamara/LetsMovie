@@ -10,12 +10,13 @@ import com.leticiafernandes.letsmovie.presentation.view.viewholder.MovieViewHold
 /**
  * Created by leticiafernandes on 25/05/18.
  */
-class MovieAdapter(private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
+class MovieAdapter(private val funFavouriteClickListener: (Movie) -> Unit,
+                   private val funItemClickListener: (Movie) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
 
     var movieList: List<Movie>? = null
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindMovie(movieList?.get(position)!!, clickListener)
+        holder.bindMovie(movieList?.get(position)!!, funFavouriteClickListener, funItemClickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {

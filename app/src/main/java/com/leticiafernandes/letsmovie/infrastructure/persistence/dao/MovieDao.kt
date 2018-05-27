@@ -16,6 +16,9 @@ interface MovieDao {
     @Query("SELECT * from movie")
     fun getAll(): List<Movie>
 
+    @Query("SELECT * from movie where id = :id")
+    fun findMovieById(id: Long): Movie
+
     @Insert(onConflict = REPLACE)
     fun insert(movie: Movie)
 

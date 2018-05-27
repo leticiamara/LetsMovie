@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.presentation.view.fragment
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -12,6 +12,7 @@ import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.presenter.IMoviesPresenter
 import com.leticiafernandes.letsmovie.presentation.presenter.MoviesPresenter
+import com.leticiafernandes.letsmovie.presentation.view.activity.MovieDetailActivity
 import com.leticiafernandes.letsmovie.presentation.view.adapter.MovieAdapter
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMoviesMvpView
 import kotlinx.android.synthetic.main.fragment_popular_movies.*
@@ -21,8 +22,12 @@ import kotlinx.android.synthetic.main.fragment_popular_movies.*
  */
 class PopularMoviesFragment : Fragment(), IMoviesMvpView {
 
-    var movieAdapter: MovieAdapter? = null
-    var moviesPresenter: IMoviesPresenter? = null
+    private var movieAdapter: MovieAdapter? = null
+    private var moviesPresenter: IMoviesPresenter? = null
+
+    companion object {
+        val KEY_MOVIE = "movie"
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -51,13 +56,21 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
 
     private fun setUpRecyclerView() {
         rvPopularMovies.layoutManager = LinearLayoutManager(activity)
-        movieAdapter = MovieAdapter(addMovieToFavouriteList())
+        movieAdapter = MovieAdapter(addMovieToFavouriteList(), showMovieDetails())
         rvPopularMovies.adapter = movieAdapter
     }
 
     private fun addMovieToFavouriteList(): (Movie) -> Unit {
         return { movie ->
             moviesPresenter?.addMovieToFavouriteList(movie)
+        }
+    }
+
+    private fun showMovieDetails(): (Movie) -> Unit {
+        return { movie ->
+            val intent = Intent(activity, MovieDetailActivity::class.java)
+            intent.putExtra(KEY_MOVIE, movie)
+            startActivity(intent)
         }
     }
 
