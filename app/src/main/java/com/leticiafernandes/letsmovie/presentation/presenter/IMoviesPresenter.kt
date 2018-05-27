@@ -8,4 +8,5 @@ import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 interface IMoviesPresenter {
     fun listPopularMovies()
     fun addMovieToFavouriteList(favouriteMovie: Movie)
+    fun listNextPage()
 }

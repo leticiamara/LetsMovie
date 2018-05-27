@@ -13,7 +13,7 @@ import com.leticiafernandes.letsmovie.presentation.view.viewholder.MovieViewHold
 class MovieAdapter(private val funFavouriteClickListener: (Movie) -> Unit,
                    private val funItemClickListener: (Movie) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
 
-    var movieList: List<Movie>? = null
+    var movieList: MutableList<Movie>? = null
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bindMovie(movieList?.get(position)!!, funFavouriteClickListener, funItemClickListener)
@@ -27,5 +27,9 @@ class MovieAdapter(private val funFavouriteClickListener: (Movie) -> Unit,
 
     override fun getItemCount(): Int {
         return if (movieList != null) movieList!!.size else 0
+    }
+
+    fun addAll(movies: List<Movie>) {
+        movieList?.addAll(movies)
     }
 }

@@ -1,6 +1,7 @@
 package com.leticiafernandes.letsmovie.presentation.presenter
 
 import android.content.Context
+import android.util.Log
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.domain.interactor.IMoviesInteractor
 import com.leticiafernandes.letsmovie.domain.interactor.MoviesInteractor
@@ -21,6 +22,7 @@ class MoviesPresenter(var context: Context, val movieMvpView: IMoviesMvpView) : 
     var moviesInteractor: IMoviesInteractor = MoviesInteractor()
     var genres: Map<Long, String> = HashMap()
     private var database: LetsMovieDataBase? = null
+    private var nextPage: Int = 1
 
     init {
         database = LetsMovieDataBase.getInstance(context)
@@ -37,6 +39,16 @@ class MoviesPresenter(var context: Context, val movieMvpView: IMoviesMvpView) : 
                         movieMvpView.showPopularMovieList(movieList?.results)
                     }
                 }, { throwable: Throwable? -> run { movieMvpView.showMessage(throwable?.message.toString()) } })
+    }
+
+    override fun listNextPage() {
+        nextPage = nextPage.inc()
+        moviesInteractor.listPopularMovies(nextPage).subscribe({ movieList: MovieResponse? ->
+            run {
+                movieMvpView.showNextPage(movieList?.results)
+                Log.d("Next page", "Next page: "+ nextPage.toString())
+            }
+        }, { throwable: Throwable? -> run { movieMvpView.showMessage(throwable?.message.toString()) } })
     }
 
     override fun addMovieToFavouriteList(favouriteMovie: Movie) {

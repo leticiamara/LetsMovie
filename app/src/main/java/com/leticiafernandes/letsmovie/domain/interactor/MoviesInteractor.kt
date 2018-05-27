@@ -15,9 +15,9 @@ import okhttp3.ResponseBody
  */
 class MoviesInteractor : IMoviesInteractor {
 
-    override fun listPopularMovies() : Observable<MovieResponse> {
+    override fun listPopularMovies(page: Int) : Observable<MovieResponse> {
         val movieService = RetrofitHelper().getRetrofit().create(IMovieService::class.java)
-        return movieService.listPopularMovies()
+        return movieService.listPopularMovies(page = page)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
     }
