@@ -12,6 +12,7 @@ import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.presenter.IMoviesPresenter
 import com.leticiafernandes.letsmovie.presentation.presenter.MoviesPresenter
+import com.leticiafernandes.letsmovie.presentation.util.InfiniteScrollListener
 import com.leticiafernandes.letsmovie.presentation.view.activity.MovieDetailActivity
 import com.leticiafernandes.letsmovie.presentation.view.adapter.MovieAdapter
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMoviesMvpView
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_popular_movies.*
  * Created by leticiafernandes on 20/05/18.
  */
 class PopularMoviesFragment : Fragment(), IMoviesMvpView {
+
 
     private var movieAdapter: MovieAdapter? = null
     private var moviesPresenter: IMoviesPresenter? = null
@@ -42,8 +44,14 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
     }
 
     override fun showPopularMovieList(movieList: List<Movie>?) {
-        movieAdapter?.movieList = movieList
+        movieAdapter?.movieList = movieList as MutableList<Movie>?
         movieAdapter?.notifyDataSetChanged()
+    }
+
+    override fun showNextPage(results: List<Movie>?) {
+        val adapterSize = movieAdapter?.itemCount
+        movieAdapter?.addAll(results!!)
+        movieAdapter?.notifyItemRangeInserted(adapterSize!!, adapterSize.plus(results?.size!!).minus(1))
     }
 
     override fun showMessage(resource: Int) {
@@ -55,9 +63,11 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
     }
 
     private fun setUpRecyclerView() {
-        rvPopularMovies.layoutManager = LinearLayoutManager(activity)
+        val linearLayoutManager = LinearLayoutManager(activity)
+        rvPopularMovies.layoutManager = linearLayoutManager
         movieAdapter = MovieAdapter(addMovieToFavouriteList(), showMovieDetails())
         rvPopularMovies.adapter = movieAdapter
+        rvPopularMovies.addOnScrollListener(InfiniteScrollListener({loadMoreMovies()}, linearLayoutManager))
     }
 
     private fun addMovieToFavouriteList(): (Movie) -> Unit {
@@ -76,5 +86,9 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
 
     private fun loadPopularList() {
         moviesPresenter?.listPopularMovies()
+    }
+
+    private fun loadMoreMovies() {
+        moviesPresenter?.listNextPage()
     }
 }

@@ -11,4 +11,6 @@ interface IMoviesMvpView {
     fun showMessage(resource: Int)
 
     fun showMessage(message: String)
+
+    fun showNextPage(results: List<Movie>?)
 }

@@ -10,7 +10,7 @@ import okhttp3.ResponseBody
  */
 interface IMoviesInteractor {
 
-    fun listPopularMovies() : Observable<MovieResponse>
+    fun listPopularMovies(page: Int = 1) : Observable<MovieResponse>
     fun listAllGenres(): Observable<GenreResponse>
     fun loadBackdropImage(imageName: String): Observable<ResponseBody>
 }

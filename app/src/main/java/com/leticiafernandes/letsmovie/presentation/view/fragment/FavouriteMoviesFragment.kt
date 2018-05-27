@@ -47,7 +47,7 @@ class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
     }
 
     override fun listMovies(movies: List<Movie>?) {
-        movieAdapter?.movieList = movies
+        movieAdapter?.movieList = movies as MutableList<Movie>?
         movieAdapter?.notifyDataSetChanged()
     }
 
