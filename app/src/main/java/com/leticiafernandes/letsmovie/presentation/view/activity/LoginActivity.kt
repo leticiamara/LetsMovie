@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.infrastructure.SharedPreferencesManager
+import com.leticiafernandes.letsmovie.presentation.helper.ActivityHelper.Companion.goToActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.sign_in_sign_up_data.*
 
@@ -25,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         sharedPreferencesManager = SharedPreferencesManager(this)
         containerSignUp.setOnClickListener({
-            goToActivity(SignUpActivity::class.java)
+            goToActivity(this, SignUpActivity::class.java)
         })
         buttonSignInSignUp.setOnClickListener({
             signInUser()
@@ -51,11 +52,6 @@ class LoginActivity : AppCompatActivity() {
         Log.d(TAG, "signInWithEmail:success")
         val user = firebaseAuth?.currentUser
         sharedPreferencesManager?.saveUserEmail(user?.email.toString())
-        goToActivity(MoviesActivity::class.java)
-    }
-
-    private fun goToActivity(activityClass: Class<out AppCompatActivity>) {
-        val intent = Intent(this, activityClass)
-        startActivity(intent)
+        goToActivity(this, MoviesActivity::class.java)
     }
 }

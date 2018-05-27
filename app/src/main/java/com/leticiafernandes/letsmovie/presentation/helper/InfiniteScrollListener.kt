@@ -1,4 +1,4 @@
-package com.leticiafernandes.letsmovie.presentation.util
+package com.leticiafernandes.letsmovie.presentation.helper
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
