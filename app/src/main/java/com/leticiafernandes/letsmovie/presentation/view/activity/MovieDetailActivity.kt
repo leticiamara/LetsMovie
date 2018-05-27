@@ -35,12 +35,11 @@ class MovieDetailActivity : AppCompatActivity(), IMovieDetailsMvpView {
     }
 
     override fun showMovieDetails(movie: Movie) {
-        //drawableFromUrl(this, movie.backdropPath, toolbar)
         detailsPresenter?.loadImageFromURL(movie.backdropPath)
         loadImage(this, movie.posterPath, imagePoster)
         textMovieTitle.text = movie.title
         textMovieVoteAverage.text = movie.voteAverage.toString()
-        textGenre.text = movie.genreIds.toString()
+        textGenre.text = movie.genres
         textReleaseDate.text = movie.releaseDate.formatToReleaseDate()
         textOverview.text = movie.overview
     }
