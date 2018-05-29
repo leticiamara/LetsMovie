@@ -1,17 +1,19 @@
 <resources>
-    <string name="app_name">LetsMovie</string>
+    <string name="app_name">Lets Movie</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_up_message">Dont you have an account ?</string>
     <string name="title_populars">Popular movies</string>
-    <string name="title_favourites">Favourites</string>
+    <string name="title_favourites">Favorites</string>
     <string name="release_date">Release date:</string>
-    <string name="movie_added_to_favourite_list">Movie added to favourite list</string>
+    <string name="movie_added_to_favourite_list">Movie added to favorite list</string>
     <string name="title_activity_movie_detail">MovieDetailActivity</string>
     <string name="logout">Logout</string>
     <string name="about">About</string>
     <string name="error_invalid_email">Invalid email</string>
     <string name="error_password_less_than_six">Password less than six</string>
+    <string name="movie_poster">Movie Poster</string>
+    <string name="no_favorite_movies">No favorite movies</string>
 </resources>

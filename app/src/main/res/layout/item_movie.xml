@@ -1,95 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    style="@style/CardView.Light"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginTop="6dp"
+    card_view:cardCornerRadius="0dp">
 
-    <TextView
-        android:id="@+id/textMovieTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textReleaseDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imagePoster"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:text="Title" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imagePoster"
-        android:layout_width="90dp"
-        android:layout_height="140dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/colorAccent" />
+        <ImageView
+            android:id="@+id/imagePoster"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/colorAccent"
+            android:contentDescription="@string/movie_poster" />
 
-    <TextView
-        android:id="@+id/textReleaseDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textGenre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imagePoster"
-        app:layout_constraintTop_toBottomOf="@+id/textMovieTitle"
-        tools:text="September 2018" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imagePoster"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabFavourite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="18dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/ic_favorite_black_24dp"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/textMovieTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/colorTextDark"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Movie Title" />
 
-    <TextView
-        android:id="@+id/textGenre"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textVoteAverage"
-        app:layout_constraintEnd_toStartOf="@+id/fabFavourite"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imagePoster"
-        app:layout_constraintTop_toBottomOf="@+id/textReleaseDate"
-        tools:text="Genre" />
+            <TextView
+                android:id="@+id/textReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textMovieTitle"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:textStyle="bold"
+                tools:text="September 2018" />
 
-    <TextView
-        android:id="@+id/textVoteAverage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fabFavourite"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imagePoster"
-        app:layout_constraintTop_toBottomOf="@+id/textGenre"
-        tools:text="8.1" />
-</android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/textGenre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textReleaseDate"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_toLeftOf="@id/fabFavourite"
+                android:layout_toStartOf="@id/fabFavourite"
+                android:ellipsize="end"
+                android:maxLines="2"
+                tools:text="Genre 1, genre 2, genre 3, genre 4, genre 5, genre 6, genre 7" />
+
+            <TextView
+                android:id="@+id/textVoteAverage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textGenre"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/rounded_background"
+                android:padding="6dp"
+                android:textColor="@color/colorTextLight"
+                android:textStyle="bold"
+                tools:text="8.10" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabFavourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textVoteAverage"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/ic_favorite_black_24dp"
+                app:fabSize="mini" />
+        </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

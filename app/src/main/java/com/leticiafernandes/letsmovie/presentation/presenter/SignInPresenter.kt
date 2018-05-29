@@ -28,6 +28,6 @@ class SignInPresenter(var mvpView: ISignInMvpView) : ISignInPresenter {
     private fun signInUserSuccessful() {
         val user = firebaseAuth?.currentUser
         sharedPreferencesManager.saveUserEmail(user?.email.toString())
-        mvpView.goToActivity(MoviesActivity::class.java)
+        mvpView.goToActivity(MoviesActivity::class.java, true)
     }
 }

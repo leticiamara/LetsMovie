@@ -47,6 +47,13 @@ class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
     }
 
     override fun listMovies(movies: List<Movie>?) {
+        if (movies?.isNotEmpty()!!) {
+            rvFavouriteMovies.visibility = View.VISIBLE
+            textEmptyStateFavorite.visibility = View.GONE
+        } else{
+            rvFavouriteMovies.visibility = View.GONE
+            textEmptyStateFavorite.visibility = View.VISIBLE
+        }
         movieAdapter?.movieList = movies as MutableList<Movie>?
         movieAdapter?.notifyDataSetChanged()
     }

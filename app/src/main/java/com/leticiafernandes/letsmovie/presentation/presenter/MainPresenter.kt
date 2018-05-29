@@ -17,6 +17,6 @@ class MainPresenter(var mvpView: IMainMvpView) : IMainPresenter {
         firebaseAuth?.currentUser?.uid
         firebaseAuth?.signOut()
         sharedPreferencesManager.saveUserEmail("")
-        mvpView.goToActivity(LoginActivity::class.java)
+        mvpView.goToActivity(LoginActivity::class.java, true)
     }
 }
