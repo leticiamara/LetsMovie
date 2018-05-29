@@ -17,7 +17,7 @@ class SignUpPresenter(var mvpView: ISignUpMvpView) : ISignUpPresenter {
                     run {
                         if (task.isSuccessful) {
                             val user = firebaseAuth.currentUser
-                            mvpView.goToActivity(MoviesActivity::class.java)
+                            mvpView.goToActivity(MoviesActivity::class.java, true)
                         } else {
                             mvpView.showMessage(task.exception?.message!!)
                         }

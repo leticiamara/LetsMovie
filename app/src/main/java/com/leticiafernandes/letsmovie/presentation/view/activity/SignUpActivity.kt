@@ -25,7 +25,9 @@ class SignUpActivity : AppCompatActivity(), ISignUpMvpView {
         presenter = SignUpPresenter(this)
         signInSignUpTitle.setText(R.string.sign_up)
         buttonSignInSignUp.setOnClickListener({
-            presenter.signUpUser(editEmail.text.toString(), editPassword.text.toString())
+            if (!editEmail.text.isEmpty() && !editPassword.text.isEmpty()) {
+                presenter.signUpUser(editEmail.text.toString(), editPassword.text.toString())
+            }
         })
     }
 

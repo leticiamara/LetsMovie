@@ -18,8 +18,8 @@ interface IBaseMvpView {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    fun goToActivity(activityClass: Class<out AppCompatActivity>) {
-        ActivityHelper.goToActivity(getContext(), activityClass)
+    fun goToActivity(activityClass: Class<out AppCompatActivity>, clearTask: Boolean = false) {
+        ActivityHelper.goToActivity(getContext(), activityClass, clearTask)
     }
 
     fun getContext(): Context
