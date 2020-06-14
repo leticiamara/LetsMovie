@@ -3,7 +3,7 @@ package com.leticiafernandes.letsmovie.presentation.view.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.presentation.helper.ActivityHelper.Companion.goToActivity
 import com.leticiafernandes.letsmovie.presentation.presenter.ISignInPresenter

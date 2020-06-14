@@ -2,15 +2,12 @@ package com.leticiafernandes.letsmovie.presentation.view.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.google.firebase.auth.FirebaseAuth
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.infrastructure.SharedPreferencesManager
-import com.leticiafernandes.letsmovie.presentation.helper.ActivityHelper.Companion.goToActivity
 import com.leticiafernandes.letsmovie.presentation.presenter.IMainPresenter
 import com.leticiafernandes.letsmovie.presentation.presenter.MainPresenter
 import com.leticiafernandes.letsmovie.presentation.view.adapter.BottomBarAdapter

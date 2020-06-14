@@ -2,7 +2,7 @@ package com.leticiafernandes.letsmovie.presentation.helper
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 /**
  * Created by leticiafernandes on 27/05/18.
  */

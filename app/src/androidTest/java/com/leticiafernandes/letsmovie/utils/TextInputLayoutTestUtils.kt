@@ -4,7 +4,7 @@ import android.view.View
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
-import android.support.design.widget.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout
 
 
 

@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.infrastructure.persistence.converters
 
-import android.arch.persistence.room.TypeConverter
+import androidx.room.TypeConverter
 
 /**
  * Created by leticiafernandes on 25/05/18.

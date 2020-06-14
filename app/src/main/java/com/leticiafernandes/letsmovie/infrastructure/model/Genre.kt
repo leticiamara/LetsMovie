@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.infrastructure.model
 
-import android.arch.persistence.room.Entity
+import androidx.room.Entity
 
 /**
  * Created by leticiafernandes on 22/05/18.

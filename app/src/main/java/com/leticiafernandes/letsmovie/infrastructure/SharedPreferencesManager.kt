@@ -20,6 +20,6 @@ class SharedPreferencesManager(context: Context) {
     }
 
     fun getUserEmail() : String {
-        return sharedPreferences.getString(USER_EMAIL_KEY, "")
+        return sharedPreferences.getString(USER_EMAIL_KEY, "") ?: ""
     }
 }

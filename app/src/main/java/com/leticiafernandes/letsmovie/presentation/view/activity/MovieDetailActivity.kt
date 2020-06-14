@@ -3,7 +3,7 @@ package com.leticiafernandes.letsmovie.presentation.view.activity
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
@@ -26,14 +26,16 @@ class MovieDetailActivity : AppCompatActivity(), IMovieDetailsMvpView {
         detailsPresenter = MovieDetailPresenter(this)
 
         val movie = intent.getParcelableExtra<Movie>(PopularMoviesFragment.KEY_MOVIE)
-        showMovieDetails(movie)
+        movie?.let {
+            showMovieDetails(it)
+        }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = ""
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 return true

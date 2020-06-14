@@ -1,7 +1,7 @@
 package com.leticiafernandes.letsmovie.presentation.view.mvpview
 
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import com.leticiafernandes.letsmovie.presentation.helper.ActivityHelper
 
