@@ -16,4 +16,5 @@
     <string name="error_password_less_than_six">Password less than six</string>
     <string name="movie_poster">Movie Poster</string>
     <string name="no_favorite_movies">No favorite movies</string>
+    <string name="title_movies">Movies</string>
 </resources>
