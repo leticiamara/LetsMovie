@@ -20,15 +20,7 @@ android {
         }
     }
 
-
     dynamicFeatures = [":features:movies"]
-
-
-
-
-    
-
-
 }
 
 dependencies {

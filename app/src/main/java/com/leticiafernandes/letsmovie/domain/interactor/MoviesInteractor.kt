@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.domain.interactor
 
-import com.leticiafernandes.letsmovie.infrastructure.api.IMovieService
+import com.leticiafernandes.letsmovie.infrastructure.api.MovieService
 import com.leticiafernandes.letsmovie.infrastructure.api.RetrofitHelper
 import com.leticiafernandes.letsmovie.infrastructure.model.GenreResponse
 import com.leticiafernandes.letsmovie.infrastructure.model.MovieResponse
@@ -17,7 +17,7 @@ import okhttp3.ResponseBody
 class MoviesInteractor : IMoviesInteractor {
 
     override fun listPopularMovies(genreDao: GenreDao, page: Int): Observable<MovieResponse> {
-        val movieService = RetrofitHelper().getRetrofit().create(IMovieService::class.java)
+        val movieService = RetrofitHelper().getRetrofit().create(MovieService::class.java)
         return movieService.listPopularMovies(page = page)
                 .flatMap({ movieResponse ->
                     run {
@@ -32,14 +32,14 @@ class MoviesInteractor : IMoviesInteractor {
     }
 
     override fun listAllGenres(): Observable<GenreResponse> {
-        val movieService = RetrofitHelper().getRetrofit().create(IMovieService::class.java)
+        val movieService = RetrofitHelper().getRetrofit().create(MovieService::class.java)
         return movieService.listAllGenres()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun loadBackdropImage(imageName: String): Observable<ResponseBody> {
-        val movieService = RetrofitHelper().getRetrofit().create(IMovieService::class.java)
+        val movieService = RetrofitHelper().getRetrofit().create(MovieService::class.java)
         return movieService.getImageBackdrop(BASE_URL + imageName)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
