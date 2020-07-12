@@ -1,2 +1,2 @@
+include ':features:movie'
 include ':app'
-include ':features:movies'

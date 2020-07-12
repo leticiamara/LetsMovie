@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 30
@@ -19,8 +20,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    dynamicFeatures = [":features:movies"]
 }
 
 dependencies {
@@ -72,5 +71,16 @@ dependencies {
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
+
+    // Hilt - Dependency injection
+    implementation "com.google.dagger:hilt-android:2.28-alpha"
+    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
+
+    // Navigation
+    api "androidx.navigation:navigation-fragment-ktx:$rootProject.nav_version"
+    api "androidx.navigation:navigation-ui-ktx:$rootProject.nav_version"
+    api "androidx.navigation:navigation-dynamic-features-fragment:$rootProject.nav_version"
 }
 apply plugin: 'com.google.gms.google-services'

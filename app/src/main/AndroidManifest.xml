@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.view.activity.MoviesActivity" />
+        <activity android:name=".presentation.HomeActivity" />
         <activity
             android:name=".presentation.view.activity.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

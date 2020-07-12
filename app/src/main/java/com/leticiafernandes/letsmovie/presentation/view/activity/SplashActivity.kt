@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.infrastructure.SharedPreferencesManager
+import com.leticiafernandes.letsmovie.presentation.HomeActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
 
         handler.postDelayed({
             if (!sharedPreferencesManager?.getUserEmail()?.isEmpty()!!) {
-                gotToActivity(MoviesActivity::class.java)
+                gotToActivity(HomeActivity::class.java)
             } else {
                 gotToActivity(LoginActivity::class.java)
             }

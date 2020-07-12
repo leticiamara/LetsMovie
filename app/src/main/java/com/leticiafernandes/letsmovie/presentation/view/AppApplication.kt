@@ -1,10 +1,9 @@
 package com.leticiafernandes.letsmovie.presentation.view
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-/**
- * Created by leticiafernandes on 24/05/18.
- */
+@HiltAndroidApp
 class AppApplication : Application() {
 
     override fun onCreate() {
