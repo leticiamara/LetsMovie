@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/moviesFragment"
-        android:name="com.leticiafernandes.movies.presentation.MoviesFragment"
+        android:name="com.leticiafernandes.movie.presentation.MoviesFragment"
         android:label="Movies"
         app:moduleName=":features:movies"/>
 </navigation>

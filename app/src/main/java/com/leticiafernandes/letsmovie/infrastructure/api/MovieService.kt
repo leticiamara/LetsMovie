@@ -2,7 +2,7 @@ package com.leticiafernandes.letsmovie.infrastructure.api
 
 import com.leticiafernandes.letsmovie.infrastructure.model.GenreResponse
 import com.leticiafernandes.letsmovie.infrastructure.model.MovieResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Query

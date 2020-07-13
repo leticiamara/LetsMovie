@@ -6,9 +6,9 @@ import com.leticiafernandes.letsmovie.infrastructure.model.GenreResponse
 import com.leticiafernandes.letsmovie.infrastructure.model.MovieResponse
 import com.leticiafernandes.letsmovie.infrastructure.persistence.dao.GenreDao
 import com.leticiafernandes.letsmovie.presentation.util.MovieImageUtils.Companion.BASE_URL
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.ResponseBody
 
 /**
@@ -17,7 +17,7 @@ import okhttp3.ResponseBody
 class MoviesInteractor : IMoviesInteractor {
 
     override fun listPopularMovies(genreDao: GenreDao, page: Int): Observable<MovieResponse> {
-        val movieService = RetrofitHelper().getRetrofit().create(MovieService::class.java)
+        val movieService = RetrofitHelper.getRetrofit().create(MovieService::class.java)
         return movieService.listPopularMovies(page = page)
                 .flatMap({ movieResponse ->
                     run {
@@ -32,14 +32,14 @@ class MoviesInteractor : IMoviesInteractor {
     }
 
     override fun listAllGenres(): Observable<GenreResponse> {
-        val movieService = RetrofitHelper().getRetrofit().create(MovieService::class.java)
+        val movieService = RetrofitHelper.getRetrofit().create(MovieService::class.java)
         return movieService.listAllGenres()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun loadBackdropImage(imageName: String): Observable<ResponseBody> {
-        val movieService = RetrofitHelper().getRetrofit().create(MovieService::class.java)
+        val movieService = RetrofitHelper.getRetrofit().create(MovieService::class.java)
         return movieService.getImageBackdrop(BASE_URL + imageName)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

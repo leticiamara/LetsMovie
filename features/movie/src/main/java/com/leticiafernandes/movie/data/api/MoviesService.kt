@@ -1,7 +1,7 @@
-package com.leticiafernandes.movies.data.api
+package com.leticiafernandes.movie.data.api
 
-import com.leticiafernandes.movies.data.datasource.remote.dto.GenreResultDTO
-import com.leticiafernandes.movies.data.datasource.remote.dto.MovieResultDTO
+import com.leticiafernandes.movie.data.datasource.remote.dto.GenreResultDTO
+import com.leticiafernandes.movie.data.datasource.remote.dto.MovieResultDTO
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import retrofit2.http.GET

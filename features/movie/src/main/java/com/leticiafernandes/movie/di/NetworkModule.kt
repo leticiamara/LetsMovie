@@ -1,6 +1,6 @@
-package com.leticiafernandes.movies.di
+package com.leticiafernandes.movie.di
 
-import com.leticiafernandes.movies.data.api.RetrofitHelper
+import com.leticiafernandes.movie.data.api.RetrofitHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

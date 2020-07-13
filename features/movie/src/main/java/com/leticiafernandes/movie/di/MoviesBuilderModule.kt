@@ -1,11 +1,11 @@
-package com.leticiafernandes.movies.di
+package com.leticiafernandes.movie.di
 
-import com.leticiafernandes.movies.data.datasource.remote.MoviesRemoteDataSource
-import com.leticiafernandes.movies.data.datasource.remote.MoviesRemoteDataSourceImpl
-import com.leticiafernandes.movies.data.repository.MoviesRepository
-import com.leticiafernandes.movies.data.repository.MoviesRepositoryImpl
-import com.leticiafernandes.movies.domain.usecase.MoviesUseCase
-import com.leticiafernandes.movies.domain.usecase.MoviesUseCaseImpl
+import com.leticiafernandes.movie.data.datasource.remote.MoviesRemoteDataSource
+import com.leticiafernandes.movie.data.datasource.remote.MoviesRemoteDataSourceImpl
+import com.leticiafernandes.movie.data.repository.MoviesRepository
+import com.leticiafernandes.movie.data.repository.MoviesRepositoryImpl
+import com.leticiafernandes.movie.domain.usecase.MoviesUseCase
+import com.leticiafernandes.movie.domain.usecase.MoviesUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

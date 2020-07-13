@@ -1,9 +1,9 @@
-package com.leticiafernandes.movies.di
+package com.leticiafernandes.movie.di
 
-import com.leticiafernandes.movies.data.datasource.remote.GenresRemoteDataSource
-import com.leticiafernandes.movies.data.datasource.remote.GenresRemoteDataSourceImpl
-import com.leticiafernandes.movies.data.repository.GenresRepository
-import com.leticiafernandes.movies.data.repository.GenresRepositoryImpl
+import com.leticiafernandes.movie.data.datasource.remote.GenresRemoteDataSource
+import com.leticiafernandes.movie.data.datasource.remote.GenresRemoteDataSourceImpl
+import com.leticiafernandes.movie.data.repository.GenresRepository
+import com.leticiafernandes.movie.data.repository.GenresRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

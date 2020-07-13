@@ -1,8 +1,8 @@
-package com.leticiafernandes.movies.presentation.viewholder
+package com.leticiafernandes.movie.presentation.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
-import com.leticiafernandes.movies.domain.model.Movie
+import com.leticiafernandes.movie.domain.model.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

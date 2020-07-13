@@ -1,6 +1,7 @@
-package com.leticiafernandes.movies.domain.model
+package com.leticiafernandes.movie.domain.model
 
 import android.os.Parcelable
+import com.leticiafernandes.movie.domain.model.Genre
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 

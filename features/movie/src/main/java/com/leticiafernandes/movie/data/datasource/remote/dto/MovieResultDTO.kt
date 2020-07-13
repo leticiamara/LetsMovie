@@ -1,4 +1,4 @@
-package com.leticiafernandes.movies.data.datasource.remote.dto
+package com.leticiafernandes.movie.data.datasource.remote.dto
 
 import com.google.gson.annotations.SerializedName
 

@@ -4,35 +4,32 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.presentation.view.adapter.BottomBarAdapter
+import com.leticiafernandes.movie.presentation.MoviesFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_home.*
+
+private const val PAGE_POPULAR_MOVIES = 0
+private const val PAGE_FAVOURITE_MOVIES = 1
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
         ViewPager.OnPageChangeListener {
 
-    //private var moviesFragment: MoviesFragment? = null
+    private val moviesFragment: MoviesFragment = MoviesFragment.newInstance()
     //private var favouriteMoviesFragment: FavouriteMoviesFragment? = null
     //lateinit var homeViewModel: HomeViewModel
 
-    companion object {
-        var PAGE_POPULAR_MOVIES = 0
-        var PAGE_FAVOURITE_MOVIES = 1
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setSupportActionBar(toolbar)
         setContentView(R.layout.activity_home)
         setupViewPager()
         bottomNavigation.setOnNavigationItemSelectedListener(this)
-        val navController = findNavController(R.id.navigationHostFragment)
-        bottomNavigation.setupWithNavController(navController)
+        supportActionBar?.title = getString(R.string.title_movies)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -41,7 +38,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.action_logout -> {
                 //homeViewModel.logout()
             }
@@ -50,16 +47,17 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.item_popular_movies -> viewPagerMovies.currentItem = PAGE_POPULAR_MOVIES
             R.id.item_favourite_movies -> viewPagerMovies.currentItem = PAGE_FAVOURITE_MOVIES
-            else -> {}
+            else -> {
+            }
         }
         return true
     }
 
     override fun onPageSelected(position: Int) {
-        when(position) {
+        when (position) {
             //PAGE_FAVOURITE_MOVIES -> favouriteMoviesFragment?.loadFavouriteList() //TODO remove
         }
     }
@@ -73,10 +71,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private fun setupViewPager() {
         viewPagerMovies.swipeEnabled = false
         val adapter = BottomBarAdapter(supportFragmentManager)
-        //moviesFragment = MoviesFragment()
-        //favouriteMoviesFragment = FavouriteMoviesFragment()
-        //adapter.addFragment(moviesFragment!!)
-        //adapter.addFragment(favouriteMoviesFragment!!)
+        adapter.addFragment(moviesFragment)
         viewPagerMovies.adapter = adapter
         viewPagerMovies.addOnPageChangeListener(this)
     }

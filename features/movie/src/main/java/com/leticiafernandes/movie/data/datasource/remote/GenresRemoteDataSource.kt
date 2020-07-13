@@ -1,6 +1,6 @@
-package com.leticiafernandes.movies.data.datasource.remote
+package com.leticiafernandes.movie.data.datasource.remote
 
-import com.leticiafernandes.movies.data.datasource.remote.dto.GenreDTO
+import com.leticiafernandes.movie.data.datasource.remote.dto.GenreDTO
 import io.reactivex.rxjava3.core.Observable
 
 interface GenresRemoteDataSource {

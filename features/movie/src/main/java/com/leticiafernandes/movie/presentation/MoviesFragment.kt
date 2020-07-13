@@ -1,4 +1,4 @@
-package com.leticiafernandes.movies.presentation
+package com.leticiafernandes.movie.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.leticiafernandes.movies.R
-import com.leticiafernandes.movies.domain.model.Movie
-import com.leticiafernandes.movies.presentation.adapter.MoviesAdapter
+import com.leticiafernandes.movie.R
+import com.leticiafernandes.movie.domain.model.Movie
+import com.leticiafernandes.movie.presentation.adapter.MoviesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
@@ -89,5 +89,9 @@ class MoviesFragment : Fragment() {
 
     private fun loadMoreMovies() {
         //moviesViewModel.listNextPage()
+    }
+
+    companion object {
+        fun newInstance() = MoviesFragment()
     }
 }

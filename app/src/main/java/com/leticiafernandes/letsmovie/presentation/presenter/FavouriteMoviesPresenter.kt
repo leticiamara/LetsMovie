@@ -3,9 +3,9 @@ package com.leticiafernandes.letsmovie.presentation.presenter
 import android.content.Context
 import com.leticiafernandes.letsmovie.infrastructure.persistence.LetsMovieDataBase
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IFavouriteMvpView
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 /**
  * Created by leticiafernandes on 24/05/18.

@@ -1,11 +1,12 @@
-package com.leticiafernandes.movies.domain.usecase
+package com.leticiafernandes.movie.domain.usecase
 
-import com.leticiafernandes.movies.data.repository.GenresRepository
-import com.leticiafernandes.movies.data.repository.MoviesRepository
-import com.leticiafernandes.movies.domain.model.MovieResult
+import com.leticiafernandes.movie.data.repository.GenresRepository
+import com.leticiafernandes.movie.data.repository.MoviesRepository
+import com.leticiafernandes.movie.domain.model.MovieResult
 import io.reactivex.rxjava3.core.Observable
+import javax.inject.Inject
 
-class MoviesUseCaseImpl(
+class MoviesUseCaseImpl @Inject constructor(
         private val moviesRepository: MoviesRepository,
         private val genresRepository: GenresRepository
 ) : MoviesUseCase {

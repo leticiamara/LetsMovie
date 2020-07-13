@@ -1,11 +1,11 @@
-package com.leticiafernandes.movies.presentation.adapter
+package com.leticiafernandes.movie.presentation.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.leticiafernandes.movies.R
-import com.leticiafernandes.movies.domain.model.Movie
-import com.leticiafernandes.movies.presentation.viewholder.MovieViewHolder
+import com.leticiafernandes.movie.R
+import com.leticiafernandes.movie.domain.model.Movie
+import com.leticiafernandes.movie.presentation.viewholder.MovieViewHolder
 
 class MoviesAdapter(private val funFavouriteClickListener: (Movie) -> Unit,
                     private val funItemClickListener: (Movie) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {

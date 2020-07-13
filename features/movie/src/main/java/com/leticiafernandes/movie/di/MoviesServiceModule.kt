@@ -1,6 +1,6 @@
-package com.leticiafernandes.movies.di
+package com.leticiafernandes.movie.di
 
-import com.leticiafernandes.movies.data.api.MoviesService
+import com.leticiafernandes.movie.data.api.MoviesService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

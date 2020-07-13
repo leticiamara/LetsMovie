@@ -1,41 +1,38 @@
-package com.leticiafernandes.movies.data.mapper
+package com.leticiafernandes.movie.data.mapper
 
-import com.leticiafernandes.movies.data.datasource.remote.dto.MovieDTO
-import com.leticiafernandes.movies.data.datasource.remote.dto.MovieResultDTO
-import com.leticiafernandes.movies.domain.model.Movie
-import com.leticiafernandes.movies.domain.model.MovieResult
+import com.leticiafernandes.movie.data.datasource.remote.dto.MovieDTO
+import com.leticiafernandes.movie.data.datasource.remote.dto.MovieResultDTO
+import com.leticiafernandes.movie.domain.model.Movie
+import com.leticiafernandes.movie.domain.model.MovieResult
 
-class MovieMapper {
-
-    fun mapTo(movieResultDTO: MovieResultDTO): MovieResult {
-        movieResultDTO.apply {
-            return MovieResult(page, totalResults, totalPages, mapTo(results))
-        }
+fun MovieResultDTO.mapToMovieResultDomain(): MovieResult {
+    this.apply {
+        return MovieResult(page, totalResults, totalPages, mapToMovies(results))
     }
+}
 
-    private fun mapTo(moviesDTOs: List<MovieDTO>): List<Movie> {
-        return moviesDTOs.map { mapTo(it) }
-    }
+private fun mapToMovies(moviesDTOs: List<MovieDTO>): List<Movie> {
+    return moviesDTOs.map { mapToMovie(it) }
+}
 
-    private fun mapTo(movieDTO: MovieDTO): Movie {
-        movieDTO.apply {
-            return Movie(
-                    id,
-                    voteCount,
-                    title,
-                    video,
-                    voteAverage,
-                    popularity,
-                    posterPath,
-                    originalLanguage,
-                    originalTitle,
-                    genreIds,
-                    backdropPath,
-                    adult,
-                    overview,
-                    releaseDate,
-                    listOf() //TODO
-            )
-        }
+private fun mapToMovie(movieDTO: MovieDTO): Movie {
+    movieDTO.apply {
+        return Movie(
+                id,
+                voteCount,
+                title,
+                video,
+                voteAverage,
+                popularity,
+                posterPath,
+                originalLanguage,
+                originalTitle,
+                genreIds,
+                backdropPath,
+                adult,
+                overview,
+                releaseDate,
+                listOf() //TODO
+        )
     }
 }

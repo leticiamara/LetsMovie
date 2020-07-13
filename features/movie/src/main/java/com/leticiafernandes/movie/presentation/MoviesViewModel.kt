@@ -1,16 +1,16 @@
-package com.leticiafernandes.movies.presentation
+package com.leticiafernandes.movie.presentation
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.leticiafernandes.movies.domain.model.Movie
-import com.leticiafernandes.movies.domain.usecase.MoviesUseCase
+import com.leticiafernandes.movie.domain.model.Movie
+import com.leticiafernandes.movie.domain.usecase.MoviesUseCase
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
-class MoviesViewModel @ViewModelInject constructor(
+class MoviesViewModel @Inject constructor(
         private val moviesUseCase: MoviesUseCase
 ) : ViewModel() {
 

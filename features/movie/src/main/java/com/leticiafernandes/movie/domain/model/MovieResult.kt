@@ -1,4 +1,4 @@
-package com.leticiafernandes.movies.domain.model
+package com.leticiafernandes.movie.domain.model
 
 data class MovieResult(
         val page: Int,

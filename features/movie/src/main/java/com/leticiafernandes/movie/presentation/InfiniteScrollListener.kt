@@ -1,4 +1,4 @@
-package com.leticiafernandes.movies.presentation
+package com.leticiafernandes.movie.presentation
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

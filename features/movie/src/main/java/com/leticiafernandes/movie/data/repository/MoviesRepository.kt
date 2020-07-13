@@ -1,6 +1,6 @@
-package com.leticiafernandes.movies.data.repository
+package com.leticiafernandes.movie.data.repository
 
-import com.leticiafernandes.movies.domain.model.MovieResult
+import com.leticiafernandes.movie.domain.model.MovieResult
 import io.reactivex.rxjava3.core.Observable
 
 interface MoviesRepository {

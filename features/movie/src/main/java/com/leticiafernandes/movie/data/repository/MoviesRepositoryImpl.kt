@@ -1,19 +1,18 @@
-package com.leticiafernandes.movies.data.repository
+package com.leticiafernandes.movie.data.repository
 
-import com.leticiafernandes.movies.data.datasource.remote.MoviesRemoteDataSource
-import com.leticiafernandes.movies.data.mapper.MovieMapper
-import com.leticiafernandes.movies.domain.model.MovieResult
+import com.leticiafernandes.movie.data.datasource.remote.MoviesRemoteDataSource
+import com.leticiafernandes.movie.data.mapper.mapToMovieResultDomain
+import com.leticiafernandes.movie.domain.model.MovieResult
 import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 class MoviesRepositoryImpl @Inject constructor(
-        private val moviesRemoteDataSource: MoviesRemoteDataSource,
-        private val movieMapper: MovieMapper
+        private val moviesRemoteDataSource: MoviesRemoteDataSource
 ) : MoviesRepository {
 
     override fun listPopularMovies(page: Int): Observable<MovieResult> {
         return moviesRemoteDataSource.listPopularMovies(page).map {
-            movieMapper.mapTo(it)
+            it.mapToMovieResultDomain()
         }
     }
 }
