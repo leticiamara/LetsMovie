@@ -90,7 +90,7 @@ class MoviesFragment : Fragment() {
     }
 
     private fun loadMoreMovies() {
-        //moviesViewModel.listNextPage()
+        moviesViewModel.listNextPage()
     }
 
     companion object {
