@@ -20,6 +20,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         ViewPager.OnPageChangeListener {
 
     private val moviesFragment: MoviesFragment = MoviesFragment.newInstance()
+    private val adapter = BottomBarAdapter(supportFragmentManager)
     //private var favouriteMoviesFragment: FavouriteMoviesFragment? = null
     //lateinit var homeViewModel: HomeViewModel
 
@@ -71,7 +72,6 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun setupViewPager() {
         viewPagerMovies.swipeEnabled = false
-        val adapter = BottomBarAdapter(supportFragmentManager)
         adapter.addFragment(moviesFragment)
         viewPagerMovies.adapter = adapter
         viewPagerMovies.addOnPageChangeListener(this)
