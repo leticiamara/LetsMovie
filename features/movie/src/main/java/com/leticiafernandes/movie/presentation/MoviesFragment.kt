@@ -38,8 +38,10 @@ class MoviesFragment : Fragment() {
     }
 
     private fun handleMovies() {
-        moviesViewModel.getMovies().observe(viewLifecycleOwner, Observer { movies ->
-            showMovies(movies)
+        moviesViewModel.uiState.observe(viewLifecycleOwner, Observer { uiState ->
+            when (uiState) {
+                is Success -> showMovies(uiState.moviesList)
+            }
         })
     }
 

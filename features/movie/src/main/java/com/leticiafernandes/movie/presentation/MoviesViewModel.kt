@@ -15,7 +15,10 @@ class MoviesViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private val movies: MutableLiveData<List<Movie>> = MutableLiveData()
+    private val _uiState = MutableLiveData<MoviesUiState>()
+    val uiState: LiveData<MoviesUiState>
+        get() = _uiState
+    //private val movies: MutableLiveData<List<Movie>> = MutableLiveData()
 
     fun listPopularMovies() {
         moviesUseCase.listPopularMovies()
@@ -28,9 +31,9 @@ class MoviesViewModel @Inject constructor(
                 }
     }
 
-    fun getMovies(): LiveData<List<Movie>> = movies
+    //fun getMovies(): LiveData<List<Movie>> = movies
 
     private fun showMovies(movieList: List<Movie>) {
-        movies.value = movieList
+        _uiState.value = Success(movieList)
     }
 }
