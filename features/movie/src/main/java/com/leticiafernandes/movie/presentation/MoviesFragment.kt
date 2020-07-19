@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.leticiafernandes.movie.R
 import com.leticiafernandes.movie.domain.model.Movie
 import com.leticiafernandes.movie.presentation.adapter.MoviesAdapter
@@ -46,14 +47,9 @@ class MoviesFragment : Fragment() {
     }
 
     private fun showMovies(movies: List<Movie>) {
-        movieAdapter.addAll(movies)
-        movieAdapter.notifyDataSetChanged()
-    }
-
-    private fun showNextPage(results: List<Movie>) {
         val adapterSize = movieAdapter.itemCount
-        movieAdapter.addAll(results)
-        movieAdapter.notifyItemRangeInserted(adapterSize, adapterSize.plus(results.size).minus(1))
+        movieAdapter.addAll(movies)
+        movieAdapter.notifyItemRangeInserted(adapterSize, adapterSize.plus(movies.size).minus(1))
     }
 
     private fun showMessage(resource: Int) {
@@ -68,7 +64,11 @@ class MoviesFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(activity)
         recyclerViewMovies.layoutManager = linearLayoutManager
         recyclerViewMovies.adapter = movieAdapter
-        recyclerViewMovies.addOnScrollListener(InfiniteScrollListener({ loadMoreMovies() }, linearLayoutManager))
+        recyclerViewMovies.addOnScrollListener(object : EndlessScrollEventListener(linearLayoutManager) {
+            override fun onLoadMore(pageNumber: Int, recyclerView: RecyclerView) {
+                loadMoreMovies()
+            }
+        })
     }
 
     private fun favouriteClickListener(): (Movie) -> Unit {

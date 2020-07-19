@@ -14,7 +14,7 @@ data class MovieDTO(
         @SerializedName("original_language") val originalLanguage: String,
         @SerializedName("original_title") val originalTitle: String,
         @SerializedName("genre_ids") val genreIds: List<Long>,
-        @SerializedName("backdrop_path") val backdropPath: String,
+        @SerializedName("backdrop_path") val backdropPath: String?,
         val adult: Boolean,
         val overview: String,
         @SerializedName("release_date") var releaseDate: Date,

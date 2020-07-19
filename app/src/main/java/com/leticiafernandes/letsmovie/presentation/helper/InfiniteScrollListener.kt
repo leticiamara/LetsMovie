@@ -6,10 +6,10 @@ import android.util.Log
 
 /**
  * From: https://github.com/juanchosaravia/KedditBySteps/blob/master/app/src/main/java/com/droidcba/kedditbysteps/commons/InfiniteScrollListener.kt
- * Created by leticiafernandes on 26/05/18.
  */
 class InfiniteScrollListener(val func: () -> Unit,
-        val layoutManager: LinearLayoutManager) : RecyclerView.OnScrollListener() {
+                             private val layoutManager: LinearLayoutManager
+) : RecyclerView.OnScrollListener() {
 
     private var previousTotal = 0
     private var loading = true

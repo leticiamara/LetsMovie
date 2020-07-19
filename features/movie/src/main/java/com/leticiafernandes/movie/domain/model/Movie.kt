@@ -1,7 +1,6 @@
 package com.leticiafernandes.movie.domain.model
 
 import android.os.Parcelable
-import com.leticiafernandes.movie.domain.model.Genre
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -13,11 +12,11 @@ data class Movie(
         val video: Boolean? = null,
         val voteAverage: Double,
         val popularity: Double,
-        val posterPath: String,
+        val posterPath: String?,
         val originalLanguage: String,
         val originalTitle: String,
         val genreIds: List<Long>,
-        val backdropPath: String,
+        val backdropPath: String?,
         val adult: Boolean,
         val overview: String,
         val releaseDate: Date,

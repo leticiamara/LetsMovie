@@ -10,6 +10,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
+private const val FIRST_PAGE = 1
+
 class MoviesViewModel @Inject constructor(
         private val moviesUseCase: MoviesUseCase
 ) : ViewModel() {
@@ -18,23 +20,35 @@ class MoviesViewModel @Inject constructor(
     private val _uiState = MutableLiveData<MoviesUiState>()
     val uiState: LiveData<MoviesUiState>
         get() = _uiState
+    private var pageNumber: Int = FIRST_PAGE
+    private var totalPages: Int = FIRST_PAGE
 
-    fun listPopularMovies() {
-        moviesUseCase.listPopularMovies()
+    fun listPopularMovies(pageNumber: Int = FIRST_PAGE) {
+        moviesUseCase.listPopularMovies(pageNumber)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     showMovies(it.results)
-                }, {}).apply {
+                    totalPages = it.totalPages
+                }, {
+                    showError(it)
+                }).apply {
                     compositeDisposable.add(this)
                 }
     }
 
     fun listNextPage() {
-        // TODO
+        pageNumber = pageNumber.inc()
+        if (pageNumber <= totalPages) {
+            listPopularMovies(pageNumber)
+        }
     }
 
     private fun showMovies(movieList: List<Movie>) {
         _uiState.value = Success(movieList)
+    }
+
+    private fun showError(throwable: Throwable) {
+        _uiState.value = Error
     }
 }
