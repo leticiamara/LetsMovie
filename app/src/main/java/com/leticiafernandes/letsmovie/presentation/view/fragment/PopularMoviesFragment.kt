@@ -38,7 +38,7 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        moviesPresenter = MoviesPresenter(this.context!!, this)
+        moviesPresenter = MoviesPresenter(this.requireContext(), this)
         setUpRecyclerView()
         loadPopularList()
     }
