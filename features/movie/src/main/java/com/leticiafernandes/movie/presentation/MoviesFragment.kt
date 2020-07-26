@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,12 +47,14 @@ class MoviesFragment : Fragment() {
                 is Success -> showMovies(uiState.moviesList)
                 is ShowMovieListProgress -> showMovieListProgress(uiState.progressItem)
                 is HideMovieListProgress -> hideMovieListProgress()
+                is Loading -> handleLoading(uiState.loading)
             }
         })
     }
 
     private fun showMovies(movies: List<PagingItem>) {
         movieAdapter.addAll(movies)
+        recyclerViewMovies.isVisible = true
     }
 
     private fun showMovieListProgress(progressItem: ProgressItem) {
@@ -60,6 +63,10 @@ class MoviesFragment : Fragment() {
 
     private fun hideMovieListProgress() {
         movieAdapter.removeLastItem()
+    }
+
+    private fun handleLoading(loading: Boolean) {
+        progressBarMovies.isVisible = loading
     }
 
     private fun showMessage(resource: Int) {

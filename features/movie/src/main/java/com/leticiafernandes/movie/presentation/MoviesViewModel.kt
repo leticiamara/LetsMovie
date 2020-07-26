@@ -29,9 +29,8 @@ class MoviesViewModel @Inject constructor(
         moviesUseCase.listPopularMovies(pageNumber)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { isLoading = true }
-                .doOnTerminate { _uiState.value = HideMovieListProgress }
-                .doAfterTerminate { isLoading = false }
+                .doOnSubscribe { showLoading() }
+                .doOnTerminate { hideLoading() }
                 .subscribe({
                     showMovies(it.results)
                     totalPages = it.totalPages
@@ -48,6 +47,17 @@ class MoviesViewModel @Inject constructor(
             _uiState.value = ShowMovieListProgress(ProgressItem)
             listPopularMovies(pageNumber)
         }
+    }
+
+    private fun showLoading() {
+        isLoading = true
+        _uiState.value = Loading(true)
+    }
+
+    private fun hideLoading() {
+        isLoading = false
+        _uiState.value = HideMovieListProgress
+        _uiState.value = Loading(false)
     }
 
     private fun showMovies(movieList: List<MovieItem>) {
