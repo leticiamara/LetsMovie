@@ -65,6 +65,6 @@ class MoviesViewModel @Inject constructor(
     }
 
     private fun showError(throwable: Throwable) {
-        _uiState.value = Error
+        _uiState.value = Error(throwable.message)
     }
 }

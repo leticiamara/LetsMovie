@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -48,6 +48,7 @@ class MoviesFragment : Fragment() {
                 is ShowMovieListProgress -> showMovieListProgress(uiState.progressItem)
                 is HideMovieListProgress -> hideMovieListProgress()
                 is Loading -> handleLoading(uiState.loading)
+                is Error -> showAlertError(uiState.errorMessage)
             }
         })
     }
@@ -69,12 +70,17 @@ class MoviesFragment : Fragment() {
         progressBarMovies.isVisible = loading
     }
 
-    private fun showMessage(resource: Int) {
-        Toast.makeText(activity, activity?.getString(resource), Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showMessage(message: String) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+    private fun showAlertError(errorMessage: String?) {
+        context?.run {
+            val alertDialogBuilder = AlertDialog.Builder(this)
+            alertDialogBuilder.apply {
+                setTitle(R.string.generic_error_title)
+                setMessage(errorMessage)
+                setPositiveButton(R.string.error_action_ok) { dialog, _ -> dialog.dismiss() }
+            }
+            val alertDialog = alertDialogBuilder.create()
+            alertDialog.show()
+        }
     }
 
     private fun setUpRecyclerView() {
