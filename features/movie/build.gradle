@@ -19,15 +19,23 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "MOVIE_IMAGE_BASE_URL", '"https://image.tmdb.org/t/p/original"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "MOVIE_IMAGE_BASE_URL", '"https://image.tmdb.org/t/p/original"'
         }
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -59,4 +67,7 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
+
+    // Coil
+    implementation "io.coil-kt:coil:0.11.0"
 }
