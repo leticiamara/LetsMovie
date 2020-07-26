@@ -1,8 +1,8 @@
 package com.leticiafernandes.movie.data.repository
 
 import com.leticiafernandes.movie.domain.model.Genre
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 
 interface GenresRepository {
-    fun listAllGenres(): Observable<List<Genre>>
+    fun listAllGenres(): Single<List<Genre>>
 }

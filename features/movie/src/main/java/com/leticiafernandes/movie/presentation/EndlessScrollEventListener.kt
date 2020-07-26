@@ -24,9 +24,6 @@ abstract class EndlessScrollEventListener(
     /** total number of items that we retrieve lastly */
     private var previousTotalItemCount = 0
 
-    /** indicating whether we are loading new dataset or not */
-    private var loading = true
-
     /** the initial index of the page that'll start from  */
     private val startingPageIndex = 0
 
@@ -42,7 +39,7 @@ abstract class EndlessScrollEventListener(
     private var lastVisibleItemPosition = 0
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-        super.onScrolled(recyclerView, dx, dy);
+        super.onScrolled(recyclerView, dx, dy)
 
         totalItemCount = linearLayoutManager.itemCount
         lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition()
@@ -50,26 +47,24 @@ abstract class EndlessScrollEventListener(
         if (totalItemCount < previousTotalItemCount) {
             this.currentPage = this.startingPageIndex
             this.previousTotalItemCount = totalItemCount
-            if (totalItemCount == 0) { this.loading = true }
         }
 
-        if (loading && (totalItemCount > previousTotalItemCount)) {
-            loading = false
+        if (totalItemCount > previousTotalItemCount) {
             previousTotalItemCount = totalItemCount
         }
 
-        if (!loading && (lastVisibleItemPosition + visibleThreshold) > totalItemCount) {
+        if (isLoadingData().not() && (lastVisibleItemPosition + visibleThreshold) > totalItemCount) {
             currentPage++
             onLoadMore(currentPage, recyclerView)
-            loading = true
         }
     }
 
     fun reset() {
         this.currentPage = this.startingPageIndex
         this.previousTotalItemCount = 0
-        this.loading = true
     }
 
     abstract fun onLoadMore(pageNumber: Int, recyclerView: RecyclerView)
+
+    abstract fun isLoadingData(): Boolean
 }

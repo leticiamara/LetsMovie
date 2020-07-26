@@ -10,8 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leticiafernandes.movie.R
-import com.leticiafernandes.movie.domain.model.Movie
 import com.leticiafernandes.movie.presentation.adapter.MoviesAdapter
+import com.leticiafernandes.movie.presentation.model.MovieItem
+import com.leticiafernandes.movie.presentation.model.PagingItem
+import com.leticiafernandes.movie.presentation.model.ProgressItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
@@ -42,14 +44,22 @@ class MoviesFragment : Fragment() {
         moviesViewModel.uiState.observe(viewLifecycleOwner, Observer { uiState ->
             when (uiState) {
                 is Success -> showMovies(uiState.moviesList)
+                is ShowMovieListProgress -> showMovieListProgress(uiState.progressItem)
+                is HideMovieListProgress -> hideMovieListProgress()
             }
         })
     }
 
-    private fun showMovies(movies: List<Movie>) {
-        val adapterSize = movieAdapter.itemCount
+    private fun showMovies(movies: List<PagingItem>) {
         movieAdapter.addAll(movies)
-        movieAdapter.notifyItemRangeInserted(adapterSize, adapterSize.plus(movies.size).minus(1))
+    }
+
+    private fun showMovieListProgress(progressItem: ProgressItem) {
+        movieAdapter.add(progressItem)
+    }
+
+    private fun hideMovieListProgress() {
+        movieAdapter.removeLastItem()
     }
 
     private fun showMessage(resource: Int) {
@@ -68,16 +78,20 @@ class MoviesFragment : Fragment() {
             override fun onLoadMore(pageNumber: Int, recyclerView: RecyclerView) {
                 loadMoreMovies()
             }
+
+            override fun isLoadingData(): Boolean {
+                return moviesViewModel.isLoading
+            }
         })
     }
 
-    private fun favouriteClickListener(): (Movie) -> Unit {
+    private fun favouriteClickListener(): (MovieItem) -> Unit {
         return { movie ->
             //TODO moviesViewModel.addMovieToFavoriteList(movie)
         }
     }
 
-    private fun showMovieDetails(): (Movie) -> Unit {
+    private fun showMovieDetails(): (MovieItem) -> Unit {
         return { movie ->
 //            val intent = Intent(activity, MovieDetailActivity::class.java)
 //            intent.putExtra(KEY_MOVIE, movie)
