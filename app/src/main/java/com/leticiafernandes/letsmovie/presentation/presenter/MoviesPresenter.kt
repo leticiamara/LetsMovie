@@ -9,11 +9,10 @@ import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.infrastructure.model.MovieResponse
 import com.leticiafernandes.letsmovie.infrastructure.persistence.LetsMovieDataBase
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMoviesMvpView
-import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import java.util.*
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 /**
  * Created by leticiafernandes on 20/05/18.

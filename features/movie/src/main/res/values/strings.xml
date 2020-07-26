@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_populars">Popular movies</string>
+    <string name="title_favourites">Favorites</string>
+    <string name="movie_poster">Movie Poster</string>
+    <string name="generic_error_title">Opps!</string>
+    <string name="error_action_ok">OK</string>
+</resources>

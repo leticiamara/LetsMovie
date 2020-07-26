@@ -3,7 +3,7 @@ package com.leticiafernandes.letsmovie.domain.interactor
 import com.leticiafernandes.letsmovie.infrastructure.model.GenreResponse
 import com.leticiafernandes.letsmovie.infrastructure.model.MovieResponse
 import com.leticiafernandes.letsmovie.infrastructure.persistence.dao.GenreDao
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 
 /**

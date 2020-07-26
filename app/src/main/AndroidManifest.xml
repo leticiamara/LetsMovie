@@ -13,14 +13,17 @@
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.view.activity.MoviesActivity" />
         <activity
+            android:name=".presentation.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".presentation.view.activity.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.SignUpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +33,7 @@
         <activity
             android:name=".presentation.view.activity.MovieDetailActivity"
             android:label="@string/title_activity_movie_detail"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

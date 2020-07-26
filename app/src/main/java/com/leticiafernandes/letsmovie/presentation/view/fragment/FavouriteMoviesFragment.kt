@@ -33,7 +33,7 @@ class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        favouriteMoviesPresenter = FavouriteMoviesPresenter(this.context!!, this)
+        favouriteMoviesPresenter = FavouriteMoviesPresenter(this.requireContext(), this)
         setUpRecyclerView()
         loadFavouriteList()
     }

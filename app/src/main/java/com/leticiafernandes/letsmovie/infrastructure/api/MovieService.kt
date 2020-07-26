@@ -2,7 +2,7 @@ package com.leticiafernandes.letsmovie.infrastructure.api
 
 import com.leticiafernandes.letsmovie.infrastructure.model.GenreResponse
 import com.leticiafernandes.letsmovie.infrastructure.model.MovieResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,7 +11,7 @@ import retrofit2.http.Url
 /**
  * Created by leticiafernandes on 20/05/18.
  */
-interface IMovieService {
+interface MovieService {
 
     @GET("/3/movie/popular")
     fun listPopularMovies(@Query("api_key") apiKey: String = "95ba8e4e85f5add6b0de44a9e213ef31",
