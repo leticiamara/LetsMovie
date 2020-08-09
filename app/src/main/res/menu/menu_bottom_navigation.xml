@@ -4,16 +4,23 @@
 
     <item
         android:id="@+id/item_popular_movies"
-        android:icon="@drawable/ic_view_list_black_24dp"
-        android:title="@string/title_populars"
-        app:showAsAction="ifRoom"
-        android:enabled="true"/>
+        android:enabled="true"
+        android:icon="@drawable/ic_round_movie_24"
+        android:title="@string/title_movies"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/item_favourite_movies"
-        android:icon="@drawable/ic_favorite_black_24dp"
-        android:title="@string/title_favourites"
-        app:showAsAction="ifRoom"
-        android:enabled="true"/>
+        android:enabled="true"
+        android:icon="@drawable/ic_round_turned_in_24"
+        android:title="@string/title_my_list"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/item_profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_round_person_24"
+        android:title="@string/title_profile"
+        app:showAsAction="ifRoom" />
 
 </menu>
