@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_bar_movie_detail_height">200dp</dimen>
+    <dimen name="movie_poster_width">90dp</dimen>
+    <dimen name="movie_poster_height">130dp</dimen>
+    <dimen name="movie_detail_title_size">20sp</dimen>
+</resources>
