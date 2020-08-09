@@ -207,3 +207,7 @@ gradle-app.setting
 /.idea/libraries
 /build
 /captures
+/.idea/assetWizardSettings.xml
+
+# Sonar lint
+/.idea/sonarlint/issuestore

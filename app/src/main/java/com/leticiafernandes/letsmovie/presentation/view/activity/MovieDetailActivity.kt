@@ -21,7 +21,7 @@ class MovieDetailActivity : AppCompatActivity(), IMovieDetailsMvpView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_detail)
+        setContentView(R.layout.activity_movie_detail2)
         setSupportActionBar(toolbar)
         detailsPresenter = MovieDetailPresenter(this)
 

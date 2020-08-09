@@ -34,6 +34,9 @@
             android:name=".presentation.view.activity.MovieDetailActivity"
             android:label="@string/title_activity_movie_detail"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.leticiafernandes.movie.presentation.detail.MovieDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

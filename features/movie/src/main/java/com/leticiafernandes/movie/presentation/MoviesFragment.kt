@@ -1,5 +1,6 @@
 package com.leticiafernandes.movie.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leticiafernandes.movie.R
 import com.leticiafernandes.movie.presentation.adapter.MoviesAdapter
+import com.leticiafernandes.movie.presentation.detail.EXTRA_KEY_MOVIE
+import com.leticiafernandes.movie.presentation.detail.MovieDetailActivity
 import com.leticiafernandes.movie.presentation.model.MovieItem
 import com.leticiafernandes.movie.presentation.model.PagingItem
 import com.leticiafernandes.movie.presentation.model.ProgressItem
@@ -106,9 +109,9 @@ class MoviesFragment : Fragment() {
 
     private fun showMovieDetails(): (MovieItem) -> Unit {
         return { movie ->
-//            val intent = Intent(activity, MovieDetailActivity::class.java)
-//            intent.putExtra(KEY_MOVIE, movie)
-//            startActivity(intent)
+            val intent = Intent(activity, MovieDetailActivity::class.java)
+            intent.putExtra(EXTRA_KEY_MOVIE, movie)
+            startActivity(intent)
         }
     }
 
