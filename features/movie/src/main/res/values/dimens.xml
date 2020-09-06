@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="app_bar_movie_detail_height">200dp</dimen>
-    <dimen name="movie_poster_width">90dp</dimen>
-    <dimen name="movie_poster_height">130dp</dimen>
     <dimen name="movie_detail_title_size">20sp</dimen>
+    <dimen name="movie_poster_width">100dp</dimen>
+    <dimen name="movie_poster_height">150dp</dimen>
+    <dimen name="movie_title_size">18sp</dimen>
+    <dimen name="movie_text_caption_size">13sp</dimen>
+
+    <!-- Spacings -->
+    <dimen name="movie_spacing_small">8dp</dimen>
+    <dimen name="movie_spacing_medium">16dp</dimen>
+    <dimen name="movie_spacing_large">24dp</dimen>
+    <dimen name="movie_spacing_xlarge">32dp</dimen>
 </resources>

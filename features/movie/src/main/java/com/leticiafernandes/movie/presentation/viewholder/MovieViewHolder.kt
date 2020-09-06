@@ -7,7 +7,7 @@ import com.leticiafernandes.movie.BuildConfig.MOVIE_IMAGE_BASE_URL
 import com.leticiafernandes.movie.R
 import com.leticiafernandes.movie.extensions.formatToReleaseDate
 import com.leticiafernandes.movie.presentation.model.MovieItem
-import kotlinx.android.synthetic.main.item_movie.view.*
+import kotlinx.android.synthetic.main.item_movie2.view.*
 
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -17,11 +17,11 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.textReleaseDate.text = movie.releaseDate.formatToReleaseDate()
         itemView.textGenre.text = movie.genres.toString()
         itemView.textVoteAverage.text = movie.voteAverage.toString()
-        itemView.fabFavourite.setOnClickListener { funFavouriteClickListener(movie) }
+        itemView.buttonMyList.setOnClickListener { funFavouriteClickListener(movie) }
         itemView.setOnClickListener { funItemClickListener(movie) }
-        itemView.imagePoster.load(MOVIE_IMAGE_BASE_URL + movie.posterPath) {
+        itemView.imageMoviePoster.load(MOVIE_IMAGE_BASE_URL + movie.posterPath) {
             placeholder(R.drawable.ic_popcorn)
         }
-        if (movie.favourite) itemView.fabFavourite.visibility = View.GONE
+        if (movie.favourite) itemView.buttonMyList.visibility = View.GONE
     }
 }

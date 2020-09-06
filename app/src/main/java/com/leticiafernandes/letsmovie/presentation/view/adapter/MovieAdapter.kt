@@ -21,7 +21,7 @@ class MovieAdapter(private val funFavouriteClickListener: (Movie) -> Unit,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_movie, parent, false)
+                .inflate(R.layout.item_movie2, parent, false)
         return MovieViewHolder(view)
     }
 
