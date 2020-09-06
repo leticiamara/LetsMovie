@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setSupportActionBar(toolbar)
         setupViewPager()
         bottomNavigation.setOnNavigationItemSelectedListener(this)
-        supportActionBar?.title = getString(R.string.title_movies)
+        supportActionBar?.title = getString(R.string.app_name)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
