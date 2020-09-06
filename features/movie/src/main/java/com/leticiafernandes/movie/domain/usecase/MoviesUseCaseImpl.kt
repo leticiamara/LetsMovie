@@ -13,9 +13,9 @@ class MoviesUseCaseImpl @Inject constructor(
 ) : MoviesUseCase {
 
     override fun listPopularMovies(page: Int): Single<MovieResultItem> {
-        return genresRepository.listAllGenres().concatMap {
-            moviesRepository.listPopularMovies(page).map {
-                it.mapToMovieResultItem()
+        return genresRepository.listAllGenres().concatMap { moviesGenres ->
+            moviesRepository.listPopularMovies(page).map { movieResult ->
+                movieResult.mapToMovieResultItem(moviesGenres)
             }
         }
     }
