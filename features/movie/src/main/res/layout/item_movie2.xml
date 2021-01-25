@@ -10,6 +10,7 @@
     android:layout_marginTop="@dimen/movie_spacing_small"
     android:layout_marginRight="@dimen/movie_spacing_medium"
     android:layout_marginBottom="@dimen/movie_spacing_small"
+    android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp">
 
