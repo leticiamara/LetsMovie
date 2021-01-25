@@ -1,17 +1,14 @@
 package com.leticiafernandes.movie.presentation.detail
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import coil.ImageLoader
 import coil.api.load
-import coil.request.GetRequest
-import coil.request.LoadRequest
 import com.leticiafernandes.movie.R
 import com.leticiafernandes.movie.extensions.formatToReleaseDate
 import com.leticiafernandes.movie.extensions.toMovieAPIImageURL
+import com.leticiafernandes.movie.extensions.toStringGenres
 import com.leticiafernandes.movie.presentation.model.MovieItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_movie_detail2.*
@@ -57,11 +54,11 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun showMovieInfo(movie: MovieItem) {
-        toolbarMovieBackdrop.load(movie.backdropPath?.toMovieAPIImageURL())
-        imagePoster.load(movie.posterPath?.toMovieAPIImageURL())
+        imageMovieBackdrop.load(movie.backdropPath?.toMovieAPIImageURL())
+        imageMoviePoster.load(movie.posterPath?.toMovieAPIImageURL())
         textMovieTitle.text = movie.title
         textMovieVoteAverage.text = movie.voteAverage.toString()
-        textGenre.text = movie.genres.toString()
+        textGenre.text = movie.genres.toStringGenres()
         textReleaseDate.text = movie.releaseDate.formatToReleaseDate()
         textOverview.text = movie.overview
     }

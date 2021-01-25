@@ -36,7 +36,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.leticiafernandes.movie.presentation.detail.MovieDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/StatusBarTransparent" />
     </application>
 
 </manifest>

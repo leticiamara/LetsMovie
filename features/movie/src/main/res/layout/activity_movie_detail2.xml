@@ -5,43 +5,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".presentation.detail.MovieDetailActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMovieDetail"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/movieDetailAppBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_movie_detail_height"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:fitsSystemWindows="true">
 
-        <ImageView
-            android:id="@+id/toolbarMovieBackdrop"
-            android:src="@drawable/rounded_background"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"/>
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    </androidx.appcompat.widget.Toolbar>
+            <ImageView
+                android:id="@+id/imageMovieBackdrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/content_description_movie_backdrop"
+                android:fitsSystemWindows="true"
+                android:scaleType="fitXY"
+                android:alpha="0.8"
+                android:src="@drawable/ic_popcorn"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarMovieDetail"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imagePoster"
-            android:layout_width="@dimen/movie_poster_width"
-            android:layout_height="@dimen/movie_poster_height"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="135dp"
-            android:contentDescription="@string/movie_poster"
-            app:layout_anchorGravity="left|top"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardMoviePoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/movie_spacing_medium"
+            android:layout_marginTop="150dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageMoviePoster"
+                android:layout_width="@dimen/movie_poster_width"
+                android:layout_height="@dimen/movie_poster_height"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/movie_poster"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@color/colorAccent" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textMovieTitle"
@@ -54,7 +84,7 @@
             android:textSize="@dimen/movie_detail_title_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/textMovieVoteAverage"
-            app:layout_constraintStart_toEndOf="@+id/imagePoster"
+            app:layout_constraintStart_toEndOf="@+id/cardMoviePoster"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Movie Title" />
 
@@ -63,8 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="208dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="@dimen/movie_spacing_medium"
             android:background="@drawable/rounded_background"
             android:padding="6dp"
             android:textColor="@color/colorTextLight"
@@ -77,22 +106,22 @@
             android:id="@+id/textGenre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/movie_spacing_medium"
+            android:layout_marginTop="@dimen/movie_spacing_small"
+            android:layout_marginEnd="@dimen/movie_spacing_medium"
             app:layout_constraintBottom_toTopOf="@+id/textReleaseDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagePoster"
-            tools:text="Drama, Romance" />
+            app:layout_constraintTop_toBottomOf="@+id/cardMoviePoster"
+            tools:text="Drama | Romance" />
 
         <TextView
             android:id="@+id/textReleaseDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/movie_spacing_medium"
+            android:layout_marginTop="@dimen/movie_spacing_small"
+            android:layout_marginEnd="@dimen/movie_spacing_medium"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,9 +132,9 @@
             android:id="@+id/textOverview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/movie_spacing_medium"
+            android:layout_marginTop="@dimen/movie_spacing_small"
+            android:layout_marginEnd="@dimen/movie_spacing_medium"
             android:textColor="@color/colorTextDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
