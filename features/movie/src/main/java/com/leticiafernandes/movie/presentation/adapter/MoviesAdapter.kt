@@ -3,7 +3,8 @@ package com.leticiafernandes.movie.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.leticiafernandes.movie.R
+import com.leticiafernandes.movie.databinding.ItemLoadingBinding
+import com.leticiafernandes.movie.databinding.ItemMovie2Binding
 import com.leticiafernandes.movie.presentation.model.MovieItem
 import com.leticiafernandes.movie.presentation.model.PagingItem
 import com.leticiafernandes.movie.presentation.model.ProgressItem
@@ -33,13 +34,11 @@ class MoviesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == VIEW_TYPE_MOVIE) {
-            val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_movie2, parent, false)
-            MovieViewHolder(view)
+            val binding = ItemMovie2Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+            MovieViewHolder(binding)
         } else {
-            val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_loading, parent, false)
-            LoadingViewHolder(view)
+            val binding = ItemLoadingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            LoadingViewHolder(binding.root)
         }
     }
 

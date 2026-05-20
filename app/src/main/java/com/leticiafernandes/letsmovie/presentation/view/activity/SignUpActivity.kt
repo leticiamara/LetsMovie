@@ -1,34 +1,35 @@
 package com.leticiafernandes.letsmovie.presentation.view.activity
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.leticiafernandes.letsmovie.R
+import com.leticiafernandes.letsmovie.databinding.ActivitySignUpBinding
 import com.leticiafernandes.letsmovie.presentation.presenter.ISignUpPresenter
 import com.leticiafernandes.letsmovie.presentation.presenter.SignUpPresenter
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.ISignUpMvpView
-import kotlinx.android.synthetic.main.sign_in_sign_up_data.*
 
 class SignUpActivity : AppCompatActivity(), ISignUpMvpView {
 
+    private lateinit var binding: ActivitySignUpBinding
     lateinit var presenter: ISignUpPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         presenter = SignUpPresenter(this)
-        signInSignUpTitle.setText(R.string.sign_up)
-        buttonSignInSignUp.setOnClickListener({
-            if (!editEmail.text.isEmpty() && !editPassword.text.isEmpty()) {
-                presenter.signUpUser(editEmail.text.toString(), editPassword.text.toString())
+        binding.signInSignUpData.signInSignUpTitle.setText(R.string.sign_up)
+        binding.signInSignUpData.buttonSignInSignUp.setOnClickListener {
+            if (!binding.signInSignUpData.editEmail.text.isEmpty() &&
+                !binding.signInSignUpData.editPassword.text.isEmpty()) {
+                presenter.signUpUser(
+                    binding.signInSignUpData.editEmail.text.toString(),
+                    binding.signInSignUpData.editPassword.text.toString()
+                )
             }
-        })
+        }
     }
 
     override fun getContext(): Context {

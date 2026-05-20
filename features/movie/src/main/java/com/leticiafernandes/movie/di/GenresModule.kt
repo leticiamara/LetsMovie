@@ -7,11 +7,10 @@ import com.leticiafernandes.movie.data.repository.GenresRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(ActivityComponent::class, FragmentComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class GenresModule {
 
     @Binds

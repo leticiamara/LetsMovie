@@ -2,7 +2,7 @@ package com.leticiafernandes.letsmovie.infrastructure.persistence.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
@@ -19,9 +19,9 @@ interface MovieDao {
     @Query("SELECT * from movie where id = :id")
     fun findMovieById(id: Long): Movie
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(movie: Movie)
 
-    @Update(onConflict = REPLACE)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(movie: Movie)
 }

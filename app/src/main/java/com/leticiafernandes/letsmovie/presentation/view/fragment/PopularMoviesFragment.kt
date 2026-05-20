@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.leticiafernandes.letsmovie.R
+import com.leticiafernandes.letsmovie.databinding.FragmentPopularMoviesBinding
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.presenter.IMoviesPresenter
 import com.leticiafernandes.letsmovie.presentation.presenter.MoviesPresenter
@@ -16,13 +16,11 @@ import com.leticiafernandes.letsmovie.presentation.helper.InfiniteScrollListener
 import com.leticiafernandes.letsmovie.presentation.view.activity.MovieDetailActivity
 import com.leticiafernandes.letsmovie.presentation.view.adapter.MovieAdapter
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMoviesMvpView
-import kotlinx.android.synthetic.main.fragment_popular_movies.*
 
-/**
- * Created by leticiafernandes on 20/05/18.
- */
 class PopularMoviesFragment : Fragment(), IMoviesMvpView {
 
+    private var _binding: FragmentPopularMoviesBinding? = null
+    private val binding get() = _binding!!
 
     private var movieAdapter: MovieAdapter? = null
     private var moviesPresenter: IMoviesPresenter? = null
@@ -32,8 +30,9 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_popular_movies, container, false)
+                              savedInstanceState: Bundle?): View {
+        _binding = FragmentPopularMoviesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,6 +40,11 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
         moviesPresenter = MoviesPresenter(this.requireContext(), this)
         setUpRecyclerView()
         loadPopularList()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun showPopularMovieList(movieList: List<Movie>?) {
@@ -64,10 +68,10 @@ class PopularMoviesFragment : Fragment(), IMoviesMvpView {
 
     private fun setUpRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(activity)
-        rvPopularMovies.layoutManager = linearLayoutManager
+        binding.rvPopularMovies.layoutManager = linearLayoutManager
         movieAdapter = MovieAdapter(addMovieToFavouriteList(), showMovieDetails())
-        rvPopularMovies.adapter = movieAdapter
-        rvPopularMovies.addOnScrollListener(InfiniteScrollListener({ loadMoreMovies() }, linearLayoutManager))
+        binding.rvPopularMovies.adapter = movieAdapter
+        binding.rvPopularMovies.addOnScrollListener(InfiniteScrollListener({ loadMoreMovies() }, linearLayoutManager))
     }
 
     private fun addMovieToFavouriteList(): (Movie) -> Unit {

@@ -10,8 +10,8 @@ import com.leticiafernandes.letsmovie.infrastructure.model.MovieResponse
 import com.leticiafernandes.letsmovie.infrastructure.persistence.LetsMovieDataBase
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMoviesMvpView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 /**
@@ -44,20 +44,18 @@ class MoviesPresenter(var context: Context, val movieMvpView: IMoviesMvpView) : 
     override fun addMovieToFavoriteList(favouriteMovie: Movie) {
         favouriteMovie.favourite = true
 
-        Single.fromCallable {
+        Completable.fromAction {
             database?.movieDao()?.insert(favouriteMovie)
         }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe { _ ->
-            run {
-                movieMvpView.showMessage(R.string.movie_added_to_favourite_list)
-            }
+                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+            movieMvpView.showMessage(R.string.movie_added_to_favourite_list)
         }
     }
 
     private fun getAllGenresObservable(): Observable<GenreResponse> {
         return moviesInteractor.listAllGenres()
                 .doOnNext({ genreResponse ->
-                    Single.fromCallable {
+                    Completable.fromAction {
                         database?.genreDao()?.insert(genreResponse.genres)
                     }.subscribeOn(Schedulers.io())
                             .subscribe()

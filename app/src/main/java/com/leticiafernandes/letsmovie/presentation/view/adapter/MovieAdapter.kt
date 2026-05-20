@@ -1,15 +1,12 @@
 package com.leticiafernandes.letsmovie.presentation.view.adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.leticiafernandes.letsmovie.R
+import androidx.recyclerview.widget.RecyclerView
+import com.leticiafernandes.letsmovie.databinding.ItemMovieBinding
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.view.viewholder.MovieViewHolder
 
-/**
- * Created by leticiafernandes on 25/05/18.
- */
 class MovieAdapter(private val funFavouriteClickListener: (Movie) -> Unit,
                    private val funItemClickListener: (Movie) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
 
@@ -20,9 +17,8 @@ class MovieAdapter(private val funFavouriteClickListener: (Movie) -> Unit,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_movie2, parent, false)
-        return MovieViewHolder(view)
+        val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MovieViewHolder(binding)
     }
 
     override fun getItemCount(): Int {

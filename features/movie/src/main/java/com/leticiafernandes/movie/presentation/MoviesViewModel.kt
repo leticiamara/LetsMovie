@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.leticiafernandes.movie.domain.usecase.MoviesUseCase
 import com.leticiafernandes.movie.presentation.model.MovieItem
 import com.leticiafernandes.movie.presentation.model.ProgressItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -13,6 +14,7 @@ import javax.inject.Inject
 
 private const val FIRST_PAGE = 1
 
+@HiltViewModel
 class MoviesViewModel @Inject constructor(
         private val moviesUseCase: MoviesUseCase
 ) : ViewModel() {

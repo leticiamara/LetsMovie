@@ -9,26 +9,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
-import com.leticiafernandes.letsmovie.R
+import com.leticiafernandes.letsmovie.databinding.FragmentFavouriteMoviesBinding
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.presenter.FavouriteMoviesPresenter
 import com.leticiafernandes.letsmovie.presentation.presenter.IFavouriteMoviesPresenter
 import com.leticiafernandes.letsmovie.presentation.view.activity.MovieDetailActivity
 import com.leticiafernandes.letsmovie.presentation.view.adapter.MovieAdapter
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IFavouriteMvpView
-import kotlinx.android.synthetic.main.fragment_favourite_movies.*
 
-/**
- * Created by leticiafernandes on 20/05/18.
- */
 class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
+
+    private var _binding: FragmentFavouriteMoviesBinding? = null
+    private val binding get() = _binding!!
 
     var favouriteMoviesPresenter: IFavouriteMoviesPresenter? = null
     var movieAdapter: MovieAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_favourite_movies, container, false)
+                              savedInstanceState: Bundle?): View {
+        _binding = FragmentFavouriteMoviesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,6 +36,11 @@ class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
         favouriteMoviesPresenter = FavouriteMoviesPresenter(this.requireContext(), this)
         setUpRecyclerView()
         loadFavouriteList()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     fun loadFavouriteList() {
@@ -48,20 +53,20 @@ class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
 
     override fun listMovies(movies: List<Movie>?) {
         if (movies?.isNotEmpty()!!) {
-            rvFavouriteMovies.visibility = View.VISIBLE
-            textEmptyStateFavorite.visibility = View.GONE
-        } else{
-            rvFavouriteMovies.visibility = View.GONE
-            textEmptyStateFavorite.visibility = View.VISIBLE
+            binding.rvFavouriteMovies.visibility = View.VISIBLE
+            binding.textEmptyStateFavorite.visibility = View.GONE
+        } else {
+            binding.rvFavouriteMovies.visibility = View.GONE
+            binding.textEmptyStateFavorite.visibility = View.VISIBLE
         }
         movieAdapter?.movieList = movies as MutableList<Movie>?
         movieAdapter?.notifyDataSetChanged()
     }
 
     private fun setUpRecyclerView() {
-        rvFavouriteMovies.layoutManager = LinearLayoutManager(activity)
+        binding.rvFavouriteMovies.layoutManager = LinearLayoutManager(activity)
         movieAdapter = MovieAdapter({}, showMovieDetails())
-        rvFavouriteMovies.adapter = movieAdapter
+        binding.rvFavouriteMovies.adapter = movieAdapter
     }
 
     private fun showMovieDetails(): (Movie) -> Unit {
@@ -71,5 +76,4 @@ class FavouriteMoviesFragment : Fragment(), IFavouriteMvpView {
             startActivity(intent)
         }
     }
-
 }

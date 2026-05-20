@@ -15,7 +15,7 @@ class MovieImageUtils {
         val BASE_URL = "https://image.tmdb.org/t/p/original"
 
         fun loadImage(context: Context, imageURL: String, imageView: ImageView) {
-            Picasso.with(context)
+            Picasso.get()
                     .load(BASE_URL + imageURL)
                     .centerCrop()
                     .fit()

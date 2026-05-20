@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leticiafernandes.movie.R
+import com.leticiafernandes.movie.databinding.FragmentMoviesBinding
 import com.leticiafernandes.movie.presentation.adapter.MoviesAdapter
 import com.leticiafernandes.movie.presentation.detail.EXTRA_KEY_MOVIE
 import com.leticiafernandes.movie.presentation.detail.MovieDetailActivity
@@ -19,22 +21,23 @@ import com.leticiafernandes.movie.presentation.model.MovieItem
 import com.leticiafernandes.movie.presentation.model.PagingItem
 import com.leticiafernandes.movie.presentation.model.ProgressItem
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_movies.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MoviesFragment : Fragment() {
+
+    private var _binding: FragmentMoviesBinding? = null
+    private val binding get() = _binding!!
+
+    private val moviesViewModel: MoviesViewModel by viewModels()
 
     private val movieAdapter: MoviesAdapter by lazy {
         MoviesAdapter(favouriteClickListener(), showMovieDetails())
     }
 
-    @Inject
-    lateinit var moviesViewModel: MoviesViewModel
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_movies, container, false)
+                              savedInstanceState: Bundle?): View {
+        _binding = FragmentMoviesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,6 +45,11 @@ class MoviesFragment : Fragment() {
         setUpRecyclerView()
         loadPopularList()
         handleMovies()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun handleMovies() {
@@ -58,7 +66,7 @@ class MoviesFragment : Fragment() {
 
     private fun showMovies(movies: List<PagingItem>) {
         movieAdapter.addAll(movies)
-        recyclerViewMovies.isVisible = true
+        binding.recyclerViewMovies.isVisible = true
     }
 
     private fun showMovieListProgress(progressItem: ProgressItem) {
@@ -70,7 +78,7 @@ class MoviesFragment : Fragment() {
     }
 
     private fun handleLoading(loading: Boolean) {
-        progressBarMovies.isVisible = loading
+        binding.progressBarMovies.isVisible = loading
     }
 
     private fun showAlertError(errorMessage: String?) {
@@ -88,9 +96,9 @@ class MoviesFragment : Fragment() {
 
     private fun setUpRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(activity)
-        recyclerViewMovies.layoutManager = linearLayoutManager
-        recyclerViewMovies.adapter = movieAdapter
-        recyclerViewMovies.addOnScrollListener(object : EndlessScrollEventListener(linearLayoutManager) {
+        binding.recyclerViewMovies.layoutManager = linearLayoutManager
+        binding.recyclerViewMovies.adapter = movieAdapter
+        binding.recyclerViewMovies.addOnScrollListener(object : EndlessScrollEventListener(linearLayoutManager) {
             override fun onLoadMore(pageNumber: Int, recyclerView: RecyclerView) {
                 loadMoreMovies()
             }

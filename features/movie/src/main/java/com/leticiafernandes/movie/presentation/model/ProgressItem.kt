@@ -1,6 +1,6 @@
 package com.leticiafernandes.movie.presentation.model
 
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 object ProgressItem : PagingItem

@@ -1,20 +1,13 @@
 package com.leticiafernandes.movie.presentation.detail
 
-import android.graphics.drawable.Drawable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import coil.ImageLoader
-import coil.request.GetRequest
-import coil.request.LoadRequest
-import com.leticiafernandes.movie.domain.usecase.MoviesUseCase
 import com.leticiafernandes.movie.presentation.model.MovieItem
-import com.leticiafernandes.movie.presentation.model.ProgressItem
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MovieDetailViewModel @Inject constructor() : ViewModel() {
 
     private val _uiState = MutableLiveData<MovieDetailUiState>()

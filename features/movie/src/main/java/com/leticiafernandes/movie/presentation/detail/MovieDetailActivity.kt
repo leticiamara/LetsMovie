@@ -1,34 +1,30 @@
 package com.leticiafernandes.movie.presentation.detail
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import coil.ImageLoader
-import coil.api.load
-import coil.request.GetRequest
-import coil.request.LoadRequest
-import com.leticiafernandes.movie.R
+import coil.load
+import com.leticiafernandes.movie.databinding.ActivityMovieDetail2Binding
 import com.leticiafernandes.movie.extensions.formatToReleaseDate
 import com.leticiafernandes.movie.extensions.toMovieAPIImageURL
 import com.leticiafernandes.movie.presentation.model.MovieItem
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_movie_detail2.*
-import javax.inject.Inject
 
 const val EXTRA_KEY_MOVIE = "EXTRA_KEY_MOVIE"
 
 @AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var movieDetailViewModel: MovieDetailViewModel
+    private lateinit var binding: ActivityMovieDetail2Binding
+    private val movieDetailViewModel: MovieDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_detail2)
-        setSupportActionBar(toolbarMovieDetail)
+        binding = ActivityMovieDetail2Binding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbarMovieDetail)
         setUpUiState()
 
         val movie = intent.getParcelableExtra<MovieItem>(EXTRA_KEY_MOVIE)
@@ -52,17 +48,18 @@ class MovieDetailActivity : AppCompatActivity() {
         movieDetailViewModel.uiState.observe(this, Observer { uiState ->
             when (uiState) {
                 is ShowMovieInfo -> showMovieInfo(uiState.movie)
+                ShowMovieEmptyState -> { /* no-op: empty state not handled in this view */ }
             }
         })
     }
 
     private fun showMovieInfo(movie: MovieItem) {
-        toolbarMovieBackdrop.load(movie.backdropPath?.toMovieAPIImageURL())
-        imagePoster.load(movie.posterPath?.toMovieAPIImageURL())
-        textMovieTitle.text = movie.title
-        textMovieVoteAverage.text = movie.voteAverage.toString()
-        textGenre.text = movie.genres.toString()
-        textReleaseDate.text = movie.releaseDate.formatToReleaseDate()
-        textOverview.text = movie.overview
+        binding.toolbarMovieBackdrop.load(movie.backdropPath?.toMovieAPIImageURL())
+        binding.imagePoster.load(movie.posterPath?.toMovieAPIImageURL())
+        binding.textMovieTitle.text = movie.title
+        binding.textMovieVoteAverage.text = movie.voteAverage.toString()
+        binding.textGenre.text = movie.genres.toString()
+        binding.textReleaseDate.text = movie.releaseDate.formatToReleaseDate()
+        binding.textOverview.text = movie.overview
     }
 }

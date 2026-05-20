@@ -3,6 +3,7 @@ package com.leticiafernandes.letsmovie.presentation.presenter
 import android.content.Context
 import com.leticiafernandes.letsmovie.infrastructure.persistence.LetsMovieDataBase
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IFavouriteMvpView
+import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -21,7 +22,7 @@ class FavouriteMoviesPresenter(var context: Context, private var favouriteMvpVie
 
     override fun listAllFavouriteMovies() {
         Single.fromCallable {
-            database?.movieDao()?.getAll()
+            database?.movieDao()?.getAll() ?: emptyList<Movie>()
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe { movies ->
             run {

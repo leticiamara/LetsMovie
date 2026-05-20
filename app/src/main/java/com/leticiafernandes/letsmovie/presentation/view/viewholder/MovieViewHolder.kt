@@ -1,26 +1,23 @@
 package com.leticiafernandes.letsmovie.presentation.view.viewholder
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import com.leticiafernandes.letsmovie.databinding.ItemMovieBinding
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.extensions.formatToReleaseDate
 import com.leticiafernandes.letsmovie.presentation.util.MovieImageUtils.Companion.loadImage
-import kotlinx.android.synthetic.main.item_movie.view.*
 
-/**
- * Created by leticiafernandes on 20/05/18.
- */
-class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class MovieViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bindMovie(movie: Movie, funFavouriteClickListener: (Movie) -> Unit,
                   funItemClickListener: (Movie) -> Unit) {
-        itemView.textMovieTitle.text = movie.title
-        itemView.textReleaseDate.text = movie.releaseDate.formatToReleaseDate()
-        itemView.textGenre.text = movie.genres
-        itemView.textVoteAverage.text = movie.voteAverage.toString()
-        itemView.fabFavourite.setOnClickListener{ funFavouriteClickListener(movie) }
-        itemView.setOnClickListener { funItemClickListener(movie) }
-        loadImage(itemView.context, movie.posterPath, itemView.imagePoster!!)
-        if (movie.favourite) itemView.fabFavourite.visibility = View.GONE
+        binding.textMovieTitle.text = movie.title
+        binding.textReleaseDate.text = movie.releaseDate.formatToReleaseDate()
+        binding.textGenre.text = movie.genres
+        binding.textVoteAverage.text = movie.voteAverage.toString()
+        binding.fabFavourite.setOnClickListener { funFavouriteClickListener(movie) }
+        binding.root.setOnClickListener { funItemClickListener(movie) }
+        loadImage(binding.root.context, movie.posterPath, binding.imagePoster)
+        if (movie.favourite) binding.fabFavourite.visibility = View.GONE
     }
 }

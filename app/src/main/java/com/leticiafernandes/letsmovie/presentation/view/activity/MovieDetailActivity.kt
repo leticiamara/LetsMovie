@@ -5,7 +5,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
-import com.leticiafernandes.letsmovie.R
+import com.leticiafernandes.letsmovie.databinding.ActivityMovieDetailBinding
 import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.presentation.extensions.formatToReleaseDate
 import com.leticiafernandes.letsmovie.presentation.presenter.IMovieDetailPresenter
@@ -13,16 +13,17 @@ import com.leticiafernandes.letsmovie.presentation.presenter.MovieDetailPresente
 import com.leticiafernandes.letsmovie.presentation.util.MovieImageUtils.Companion.loadImage
 import com.leticiafernandes.letsmovie.presentation.view.fragment.PopularMoviesFragment
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IMovieDetailsMvpView
-import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class MovieDetailActivity : AppCompatActivity(), IMovieDetailsMvpView {
 
+    private lateinit var binding: ActivityMovieDetailBinding
     private var detailsPresenter: IMovieDetailPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_detail2)
-        setSupportActionBar(toolbar)
+        binding = ActivityMovieDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         detailsPresenter = MovieDetailPresenter(this)
 
         val movie = intent.getParcelableExtra<Movie>(PopularMoviesFragment.KEY_MOVIE)
@@ -50,15 +51,15 @@ class MovieDetailActivity : AppCompatActivity(), IMovieDetailsMvpView {
 
     override fun showMovieDetails(movie: Movie) {
         detailsPresenter?.loadImageFromURL(movie.backdropPath)
-        loadImage(this, movie.posterPath, imagePoster)
-        textMovieTitle.text = movie.title
-        textMovieVoteAverage.text = movie.voteAverage.toString()
-        textGenre.text = movie.genres
-        textReleaseDate.text = movie.releaseDate.formatToReleaseDate()
-        textOverview.text = movie.overview
+        loadImage(this, movie.posterPath, binding.imagePoster)
+        binding.textMovieTitle.text = movie.title
+        binding.textMovieVoteAverage.text = movie.voteAverage.toString()
+        binding.textGenre.text = movie.genres
+        binding.textReleaseDate.text = movie.releaseDate.formatToReleaseDate()
+        binding.textOverview.text = movie.overview
     }
 
     override fun setBackdrop(bitmapDrawable: BitmapDrawable) {
-        toolbar.background = bitmapDrawable
+        binding.toolbar.background = bitmapDrawable
     }
 }

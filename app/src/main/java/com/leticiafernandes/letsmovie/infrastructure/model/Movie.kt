@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import com.leticiafernandes.letsmovie.infrastructure.persistence.converters.DateConverter
 import com.leticiafernandes.letsmovie.infrastructure.persistence.converters.LongListConverter
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 /**
