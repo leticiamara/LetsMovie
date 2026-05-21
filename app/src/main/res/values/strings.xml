@@ -26,4 +26,13 @@
     <string name="error_password_too_short">Password must be at least 6 characters</string>
     <string name="remove_from_favorites">Remove from favorites</string>
     <string name="favorites_empty">You haven\'t favorited any movies yet.</string>
+    <string name="username">Username</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="invalid_credentials">Invalid credentials. Please try again.</string>
+    <string name="create_tmdb_account">Create a TMDB Account</string>
+    <string name="tmdb_account_description">TMDB accounts are created on the TMDB website.</string>
+    <string name="open_tmdb_website">Open TMDB Website</string>
+    <string name="guest_badge">Guest</string>
+    <string name="splash_tagline">Discover your next favorite film</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
 </resources>

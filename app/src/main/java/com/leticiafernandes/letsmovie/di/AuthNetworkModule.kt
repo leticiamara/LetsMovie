@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.di
 
-import com.leticiafernandes.letsmovie.data.remote.api.FavoritesService
+import com.leticiafernandes.letsmovie.data.remote.api.AuthService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,9 +9,9 @@ import retrofit2.Retrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
-object FavoritesNetworkModule {
+object AuthNetworkModule {
 
     @Provides
-    fun provideFavoritesService(retrofit: Retrofit): FavoritesService =
-        retrofit.create(FavoritesService::class.java)
+    fun provideAuthService(retrofit: Retrofit): AuthService =
+        retrofit.create(AuthService::class.java)
 }
