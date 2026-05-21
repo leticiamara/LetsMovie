@@ -1,5 +1,9 @@
 package com.leticiafernandes.letsmovie.ui.navigation
 
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -39,7 +43,11 @@ fun NavGraph(
             SplashScreen()
         }
 
-        composable(Destination.Home.route) {
+        composable(
+            route = Destination.Home.route,
+            exitTransition = { slideOutHorizontally { -it / 3 } + fadeOut() },
+            popEnterTransition = { slideInHorizontally { -it / 3 } + fadeIn() }
+        ) {
             HomeScreen(
                 onMovieClick = { movieId ->
                     navController.navigate(Destination.MovieDetail.createRoute(movieId))
@@ -49,7 +57,9 @@ fun NavGraph(
 
         composable(
             route = Destination.MovieDetail.route,
-            arguments = listOf(navArgument("movieId") { type = NavType.LongType })
+            arguments = listOf(navArgument("movieId") { type = NavType.LongType }),
+            enterTransition = { slideInHorizontally { it } + fadeIn() },
+            popExitTransition = { slideOutHorizontally { it } + fadeOut() }
         ) {
             val viewModel: MovieDetailViewModel = hiltViewModel()
             MovieDetailScreen(
