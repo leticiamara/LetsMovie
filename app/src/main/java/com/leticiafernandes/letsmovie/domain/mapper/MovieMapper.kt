@@ -6,7 +6,7 @@ import com.leticiafernandes.letsmovie.domain.model.MovieResult
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieResultItem
 
-fun MovieResult.mapToMovieResultItem(moviesGenres: List<Genre>): MovieResultItem {
+fun MovieResult.mapToMovieResultItem(moviesGenres: List<Genre>?): MovieResultItem {
     this.apply {
         return MovieResultItem(
                 page,

@@ -18,13 +18,13 @@ class MoviesUseCaseImpl @Inject constructor(
 ) : MoviesUseCase {
 
     override suspend fun listPopularMovies(page: Int): NetworkResult<MovieResultItem> = coroutineScope {
-        val genresDeferred = async { genresRepository.listAllGenres() }
+        //val genresDeferred = async { genresRepository.listAllGenres() }
         val moviesDeferred = async { moviesRepository.listPopularMovies(page) }
 
-        val genres = genresDeferred.await().getOrElse { return@coroutineScope it }
+        //val genres = genresDeferred.await().getOrElse { return@coroutineScope it }
         val movies = moviesDeferred.await().getOrElse { return@coroutineScope it }
 
-        NetworkResult.Success(movies.mapToMovieResultItem(genres))
+        NetworkResult.Success(movies.mapToMovieResultItem(null))
     }
 
     override suspend fun listMovieDetails(movieId: Long): NetworkResult<MovieItem> {
