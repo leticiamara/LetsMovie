@@ -14,7 +14,7 @@ import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 interface MovieDao {
 
     @Query("SELECT * from movie")
-    fun getAll(): List<Movie>
+    suspend fun getAll(): List<Movie>
 
     @Query("SELECT * from movie where id = :id")
     fun findMovieById(id: Long): Movie

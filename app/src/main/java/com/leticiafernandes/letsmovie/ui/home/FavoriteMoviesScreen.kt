@@ -49,7 +49,7 @@ fun FavouriteMoviesScreen(
 
     DisposableEffect(Unit) {
         presenter.listAllFavouriteMovies()
-        onDispose { }
+        onDispose { presenter.clear() }
     }
 
     Box(modifier = modifier.fillMaxSize()) {

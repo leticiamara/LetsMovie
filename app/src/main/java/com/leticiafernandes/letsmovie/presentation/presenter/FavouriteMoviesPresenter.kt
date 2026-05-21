@@ -1,19 +1,20 @@
 package com.leticiafernandes.letsmovie.presentation.presenter
 
 import android.content.Context
+import com.leticiafernandes.letsmovie.infrastructure.model.Movie
 import com.leticiafernandes.letsmovie.infrastructure.persistence.LetsMovieDataBase
 import com.leticiafernandes.letsmovie.presentation.view.mvpview.IFavouriteMvpView
-import com.leticiafernandes.letsmovie.infrastructure.model.Movie
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-/**
- * Created by leticiafernandes on 24/05/18.
- */
 class FavouriteMoviesPresenter(var context: Context, private var favouriteMvpView: IFavouriteMvpView) :
         IFavouriteMoviesPresenter {
 
+    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
     private var database: LetsMovieDataBase? = null
 
     init {
@@ -21,13 +22,15 @@ class FavouriteMoviesPresenter(var context: Context, private var favouriteMvpVie
     }
 
     override fun listAllFavouriteMovies() {
-        Single.fromCallable {
-            database?.movieDao()?.getAll() ?: emptyList<Movie>()
-        }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe { movies ->
-            run {
-                favouriteMvpView.listMovies(movies)
+        scope.launch {
+            val movies = withContext(Dispatchers.IO) {
+                database?.movieDao()?.getAll() ?: emptyList<Movie>()
             }
+            favouriteMvpView.listMovies(movies)
         }
+    }
+
+    fun clear() {
+        scope.cancel()
     }
 }

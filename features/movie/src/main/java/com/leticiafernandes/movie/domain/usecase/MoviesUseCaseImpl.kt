@@ -6,7 +6,8 @@ import com.leticiafernandes.movie.domain.mapper.mapToMovieItem
 import com.leticiafernandes.movie.domain.mapper.mapToMovieResultItem
 import com.leticiafernandes.movie.presentation.model.MovieItem
 import com.leticiafernandes.movie.presentation.model.MovieResultItem
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
 class MoviesUseCaseImpl @Inject constructor(
@@ -14,20 +15,13 @@ class MoviesUseCaseImpl @Inject constructor(
         private val genresRepository: GenresRepository
 ) : MoviesUseCase {
 
-    override fun listPopularMovies(page: Int): Single<MovieResultItem> {
-        return genresRepository.listAllGenres().concatMap { moviesGenres ->
-            moviesRepository.listPopularMovies(page).map { movieResult ->
-                movieResult.mapToMovieResultItem(moviesGenres)
-            }
-        }
+    override suspend fun listPopularMovies(page: Int): MovieResultItem = coroutineScope {
+        val genresDeferred = async { genresRepository.listAllGenres() }
+        val moviesDeferred = async { moviesRepository.listPopularMovies(page) }
+        moviesDeferred.await().mapToMovieResultItem(genresDeferred.await())
     }
 
-    override fun listMovieDetails(movieId: Long): Single<MovieItem> {
-        return moviesRepository.listMovieDetails(movieId).map {
-            mapToMovieItem(it, null)
-        }
-//        return genresRepository.listAllGenres().concatMap { moviesGenres ->
-//
-//        }
+    override suspend fun listMovieDetails(movieId: Long): MovieItem {
+        return mapToMovieItem(moviesRepository.listMovieDetails(movieId), null)
     }
 }

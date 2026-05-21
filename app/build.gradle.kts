@@ -75,14 +75,12 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
 
-    // Rx
-    implementation(libs.rxkotlin)
-    implementation(libs.rxjava)
-    implementation(libs.rxandroid)
+    // Coroutines
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
 
     // Retrofit
     implementation(libs.retrofit)
-    implementation(libs.retrofit.adapter.rxjava3)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp.logging.interceptor)
 
