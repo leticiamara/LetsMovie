@@ -7,11 +7,12 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
+    id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
 }
 
 extensions.configure<LibraryExtension> {
     namespace = "com.leticiafernandes.movie"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 23
@@ -31,8 +32,9 @@ extensions.configure<LibraryExtension> {
     }
 
     buildFeatures {
-        viewBinding = true
         buildConfig = true
+        compose = true
+        viewBinding = false
     }
 
     compileOptions {
@@ -40,10 +42,10 @@ extensions.configure<LibraryExtension> {
         targetCompatibility = JavaVersion.VERSION_17
     }
     lint {
-        targetSdk = 35
+        targetSdk = 36
     }
     testOptions {
-        targetSdk = 35
+        targetSdk = 36
     }
 }
 
@@ -57,12 +59,26 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.recyclerview)
-    implementation(libs.material)
-    implementation(libs.androidx.constraintlayout)
+
+    // Compose
+    val composeBom = platform(libs.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.runtime.livedata)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.icons.core)
+    implementation(libs.compose.icons.extended)
+    implementation(libs.compose.activity)
+    implementation(libs.compose.navigation)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.coil.compose)
+
+    debugImplementation(libs.compose.ui.tooling)
     implementation(libs.androidx.activity.ktx)
-    implementation(libs.androidx.fragment.ktx)
 
     // Lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -84,7 +100,7 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
     // Coil
-    implementation(libs.coil)
+    implementation(libs.coil.kt)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

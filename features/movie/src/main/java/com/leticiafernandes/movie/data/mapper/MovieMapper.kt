@@ -15,7 +15,7 @@ private fun mapToMovies(moviesDTOs: List<MovieDTO>): List<Movie> {
     return moviesDTOs.map { mapToMovie(it) }
 }
 
-private fun mapToMovie(movieDTO: MovieDTO): Movie {
+fun mapToMovie(movieDTO: MovieDTO): Movie {
     movieDTO.apply {
         return Movie(
                 id,
@@ -27,12 +27,12 @@ private fun mapToMovie(movieDTO: MovieDTO): Movie {
                 posterPath,
                 originalLanguage,
                 originalTitle,
-                genreIds,
+                genreIds ?: emptyList(),
                 backdropPath,
                 adult,
                 overview,
                 releaseDate,
-                listOf() //TODO
+                genres?.map { it.mapToGenreDomain() }
         )
     }
 }

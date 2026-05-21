@@ -19,6 +19,6 @@ data class MovieItem(
         val adult: Boolean,
         val overview: String,
         val releaseDate: Date,
-        val genres: List<GenreItem>,
+        val genres: List<GenreItem>?,
         var favourite: Boolean = false
 ) : PagingItem

@@ -17,15 +17,16 @@ fun MovieResult.mapToMovieResultItem(moviesGenres: List<Genre>): MovieResultItem
     }
 }
 
-private fun mapToMovieItemList(movieList: List<Movie>, moviesGenres: List<Genre>): List<MovieItem> {
+private fun mapToMovieItemList(movieList: List<Movie>, moviesGenres: List<Genre>?): List<MovieItem> {
     return movieList.map {
-        val movieGenreList = moviesGenres.filter { genre -> genre.id in it.genreIds }
+        val movieGenreList = moviesGenres?.filter { genre -> genre.id in it.genreIds }
         mapToMovieItem(it, movieGenreList)
     }
 }
 
-private fun mapToMovieItem(movie: Movie, movieGenreList: List<Genre>): MovieItem {
+fun mapToMovieItem(movie: Movie, movieGenreList: List<Genre>?): MovieItem {
     movie.apply {
+        val genresToMap = genres ?: movieGenreList
         return MovieItem(
                 id,
                 voteCount,
@@ -41,7 +42,7 @@ private fun mapToMovieItem(movie: Movie, movieGenreList: List<Genre>): MovieItem
                 adult,
                 overview,
                 releaseDate,
-                movieGenreList.map { it.mapToGenreItem() }
+                genresToMap?.map { it.mapToGenreItem() }
         )
     }
 }

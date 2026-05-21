@@ -2,7 +2,9 @@ package com.leticiafernandes.movie.domain.usecase
 
 import com.leticiafernandes.movie.data.repository.GenresRepository
 import com.leticiafernandes.movie.data.repository.MoviesRepository
+import com.leticiafernandes.movie.domain.mapper.mapToMovieItem
 import com.leticiafernandes.movie.domain.mapper.mapToMovieResultItem
+import com.leticiafernandes.movie.presentation.model.MovieItem
 import com.leticiafernandes.movie.presentation.model.MovieResultItem
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
@@ -18,5 +20,14 @@ class MoviesUseCaseImpl @Inject constructor(
                 movieResult.mapToMovieResultItem(moviesGenres)
             }
         }
+    }
+
+    override fun listMovieDetails(movieId: Long): Single<MovieItem> {
+        return moviesRepository.listMovieDetails(movieId).map {
+            mapToMovieItem(it, null)
+        }
+//        return genresRepository.listAllGenres().concatMap { moviesGenres ->
+//
+//        }
     }
 }

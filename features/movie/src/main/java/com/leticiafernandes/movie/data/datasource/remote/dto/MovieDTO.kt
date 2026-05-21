@@ -10,13 +10,13 @@ data class MovieDTO(
         val video: Boolean? = null,
         @SerializedName("vote_average") val voteAverage: Double,
         val popularity: Double,
-        @SerializedName("poster_path") val posterPath: String,
+        @SerializedName("poster_path") val posterPath: String?,
         @SerializedName("original_language") val originalLanguage: String,
         @SerializedName("original_title") val originalTitle: String,
-        @SerializedName("genre_ids") val genreIds: List<Long>,
+        @SerializedName("genre_ids") val genreIds: List<Long>? = null,
         @SerializedName("backdrop_path") val backdropPath: String?,
         val adult: Boolean,
         val overview: String,
         @SerializedName("release_date") var releaseDate: Date,
-        val genres: String
+        val genres: List<GenreDTO>? = null
 )

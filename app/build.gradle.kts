@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
     alias(libs.plugins.google.services)
+    id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
 }
 
 extensions.configure<ApplicationExtension> {
@@ -31,7 +32,8 @@ extensions.configure<ApplicationExtension> {
     }
 
     buildFeatures {
-        viewBinding = true
+        compose = true
+        viewBinding = false
     }
 
     compileOptions {
@@ -49,7 +51,25 @@ dependencies {
     implementation(libs.androidx.cardview)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.activity.ktx)
-    implementation(libs.androidx.fragment.ktx)
+
+    // Compose
+    val composeBom = platform(libs.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.runtime.livedata)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.icons.core)
+    implementation(libs.compose.icons.extended)
+    implementation(libs.compose.activity)
+    implementation(libs.compose.navigation)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.coil.compose)
+
+    debugImplementation(libs.compose.ui.tooling)
 
     // Firebase
     implementation(platform(libs.firebase.bom))
@@ -80,11 +100,6 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-
-    // Navigation
-    api(libs.androidx.navigation.fragment.ktx)
-    api(libs.androidx.navigation.ui.ktx)
-    api(libs.androidx.navigation.dynamic.features.fragment)
 
     // Tests
     testImplementation(libs.junit)

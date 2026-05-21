@@ -1,10 +1,12 @@
 package com.leticiafernandes.movie.data.api
 
 import com.leticiafernandes.movie.data.datasource.remote.dto.GenreResultDTO
+import com.leticiafernandes.movie.data.datasource.remote.dto.MovieDTO
 import com.leticiafernandes.movie.data.datasource.remote.dto.MovieResultDTO
 import io.reactivex.rxjava3.core.Single
 import okhttp3.ResponseBody
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
@@ -21,4 +23,9 @@ interface MoviesService {
 
     @GET
     fun getImageBackdrop(@Url imageUrl: String): Single<ResponseBody>
+
+    @GET("/3/movie/{movie_id}")
+    fun listMovieDetails(@Path("movie_id") movieId: Long,
+                         @Query("api_key") apiKey: String = "95ba8e4e85f5add6b0de44a9e213ef31",
+                         @Query("language") language: String = "en-US"): Single<MovieDTO>
 }
