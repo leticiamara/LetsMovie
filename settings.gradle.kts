@@ -22,4 +22,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "LetsMovie"
 include(":app")
-include(":features:movie")

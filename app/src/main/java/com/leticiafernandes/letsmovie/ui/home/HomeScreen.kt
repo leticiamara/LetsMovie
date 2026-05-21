@@ -17,9 +17,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.leticiafernandes.letsmovie.ui.favorite.FavoritesViewModel
+import com.leticiafernandes.letsmovie.ui.favorite.FavoritesScreen
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.movie.presentation.MoviesViewModel
-import com.leticiafernandes.movie.presentation.compose.MoviesScreen
+import com.leticiafernandes.letsmovie.ui.movie.MoviesViewModel
+import com.leticiafernandes.letsmovie.ui.movie.MoviesScreen
 
 @Composable
 fun HomeScreen(
@@ -56,9 +58,11 @@ fun HomeScreen(
                 )
             }
             HomeTab.Favourite -> {
-                FavouriteMoviesScreen(
+                val favoritesViewModel: FavoritesViewModel = hiltViewModel()
+                FavoritesScreen(
+                    viewModel = favoritesViewModel,
                     modifier = modifier,
-                    onMovieClick = { movie -> onMovieClick(movie.id) }
+                    onMovieClick = { favorite -> onMovieClick(favorite.id) }
                 )
             }
         }

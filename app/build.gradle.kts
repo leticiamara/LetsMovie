@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
     alias(libs.plugins.google.services)
@@ -25,14 +26,19 @@ extensions.configure<ApplicationExtension> {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "MOVIE_IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/original\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "MOVIE_IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/original\"")
         }
     }
 
     buildFeatures {
         compose = true
+        buildConfig = true
         viewBinding = false
     }
 
@@ -44,7 +50,6 @@ extensions.configure<ApplicationExtension> {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(project(":features:movie"))
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -79,10 +84,10 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
 
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.retrofit)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.kotlinx.serialization.converter)
 
     // Picasso
     implementation(libs.picasso)

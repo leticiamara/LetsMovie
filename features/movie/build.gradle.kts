@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt)
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
 }
@@ -88,9 +89,12 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
 
+    // Serialization
+    implementation(libs.kotlinx.serialization.json)
+
     // Retrofit
     implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.kotlinx.serialization.converter)
     implementation(libs.okhttp.logging.interceptor)
 
     // Hilt
