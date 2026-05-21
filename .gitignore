@@ -211,3 +211,9 @@ gradle-app.setting
 
 # Sonar lint
 /.idea/sonarlint/issuestore
+
+# IDE state
+/.idea/planningMode.xml
+
+# Antigravity CLI
+.antigravitycli/

@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,14 +30,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.ui.EmailUtils
 import com.leticiafernandes.letsmovie.ui.theme.Accent
+import com.leticiafernandes.letsmovie.ui.theme.Dimens
+import com.leticiafernandes.letsmovie.ui.theme.Spacing
 import com.leticiafernandes.letsmovie.ui.theme.TextDark
 
 @Composable
@@ -50,25 +50,26 @@ fun LoginScreen(
     var passwordError by remember { mutableStateOf<String?>(null) }
 
     val emailUtils = EmailUtils()
+    val errorInvalidEmail = stringResource(R.string.error_invalid_email)
+    val errorPasswordTooShort = stringResource(R.string.error_password_too_short)
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(Spacing.medium),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = stringResource(id = R.string.login),
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleLarge,
             color = TextDark,
-            modifier = Modifier.padding(bottom = 32.dp)
+            modifier = Modifier.padding(bottom = Spacing.extraLarge)
         )
 
         OutlinedTextField(
             value = email,
-            onValueChange = { 
+            onValueChange = {
                 email = it
                 emailError = null
             },
@@ -80,11 +81,11 @@ fun LoginScreen(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(Spacing.small))
 
         OutlinedTextField(
             value = password,
-            onValueChange = { 
+            onValueChange = {
                 password = it
                 passwordError = null
             },
@@ -97,17 +98,17 @@ fun LoginScreen(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(Spacing.medium))
 
         Button(
             onClick = {
                 var valid = true
                 if (!emailUtils.isValidEmail(email)) {
-                    emailError = "Invalid email"
+                    emailError = errorInvalidEmail
                     valid = false
                 }
                 if (password.length < 6) {
-                    passwordError = "Password must be at least 6 characters"
+                    passwordError = errorPasswordTooShort
                     valid = false
                 }
                 if (valid) {
@@ -116,14 +117,14 @@ fun LoginScreen(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(60.dp),
+                .height(Dimens.buttonHeight),
             colors = ButtonDefaults.buttonColors(containerColor = Accent)
         ) {
             Icon(
                 Icons.Default.ArrowForward,
                 contentDescription = stringResource(id = R.string.login),
                 tint = Color.White,
-                modifier = Modifier.size(32.dp)
+                modifier = Modifier.size(Dimens.buttonIconSize)
             )
         }
 
@@ -132,16 +133,15 @@ fun LoginScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp),
+                .padding(bottom = Spacing.medium),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(text = stringResource(id = R.string.sign_up_message), color = TextDark)
-            Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+            Spacer(modifier = Modifier.padding(horizontal = Spacing.extraSmall))
             Text(
                 text = stringResource(id = R.string.sign_up),
-                fontWeight = FontWeight.Bold,
-                color = TextDark,
+                style = MaterialTheme.typography.bodyLarge.copy(color = TextDark),
                 modifier = Modifier.clickable { onSignUpClick() }
             )
         }

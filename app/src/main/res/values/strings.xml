@@ -19,4 +19,11 @@
     <string name="title_movies">Movies</string>
     <string name="title_my_list">My list</string>
     <string name="title_profile">Profile</string>
+    <string name="movie_detail_title">Movie Detail</string>
+    <string name="overview">Overview</string>
+    <string name="rating_format">Rating: %1$s</string>
+    <string name="name">Name</string>
+    <string name="error_password_too_short">Password must be at least 6 characters</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="favorites_empty">You haven\'t favorited any movies yet.</string>
 </resources>

@@ -25,16 +25,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
+import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.extensions.formatToReleaseDate
 import com.leticiafernandes.letsmovie.extensions.toMovieAPIImageURL
-import com.leticiafernandes.letsmovie.ui.movie.MovieDetailViewModel
-import com.leticiafernandes.letsmovie.ui.movie.ShowMovieError
-import com.leticiafernandes.letsmovie.ui.movie.ShowMovieInfo
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
+import com.leticiafernandes.letsmovie.ui.theme.Dimens
+import com.leticiafernandes.letsmovie.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,7 +45,7 @@ fun MovieDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Teste") },
+                title = { Text(text = stringResource(R.string.movie_detail_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
@@ -82,40 +80,42 @@ fun MovieDetailContent(movie: MovieItem) {
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp),
+                .height(Dimens.backdropHeight),
             contentScale = ContentScale.Crop
         )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(Spacing.medium)
         ) {
             AsyncImage(
                 model = movie.posterPath?.toMovieAPIImageURL(),
                 contentDescription = null,
-                modifier = Modifier.size(100.dp, 150.dp),
+                modifier = Modifier.size(Dimens.posterWidth, Dimens.posterHeight),
                 contentScale = ContentScale.Crop
             )
             Column(
                 modifier = Modifier
-                    .padding(start = 16.dp)
+                    .padding(start = Spacing.medium)
                     .align(Alignment.CenterVertically)
             ) {
-                Text(text = movie.title, fontWeight = FontWeight.Bold, fontSize = 22.sp)
-                Text(text = "Rating: ${movie.voteAverage}", fontSize = 16.sp)
-                Text(text = movie.releaseDate.formatToReleaseDate(), fontSize = 14.sp)
+                Text(text = movie.title, style = MaterialTheme.typography.titleLarge)
+                Text(
+                    text = stringResource(R.string.rating_format, "%.1f".format(movie.voteAverage)),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+                Text(text = movie.releaseDate.formatToReleaseDate(), style = MaterialTheme.typography.bodyMedium)
             }
         }
         Text(
-            text = "Overview",
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            text = stringResource(R.string.overview),
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(horizontal = Spacing.medium, vertical = Spacing.small)
         )
         Text(
             text = movie.overview,
-            fontSize = 16.sp,
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(start = Spacing.medium, end = Spacing.medium, bottom = Spacing.medium)
         )
     }
 }

@@ -23,16 +23,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.leticiafernandes.letsmovie.extensions.formatToReleaseDate
-import com.leticiafernandes.letsmovie.ui.movie.Error
-import com.leticiafernandes.letsmovie.ui.movie.Loading
-import com.leticiafernandes.letsmovie.ui.movie.MoviesViewModel
-import com.leticiafernandes.letsmovie.ui.movie.Success
+import com.leticiafernandes.letsmovie.extensions.toMovieAPIImageURL
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
+import com.leticiafernandes.letsmovie.ui.theme.Dimens
+import com.leticiafernandes.letsmovie.ui.theme.Spacing
 
 @Composable
 fun MoviesScreen(
@@ -95,21 +91,21 @@ fun MovieRow(movie: MovieItem, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() }
-            .padding(8.dp)
+            .padding(Spacing.small)
     ) {
         AsyncImage(
-            model = "https://image.tmdb.org/t/p/w500${movie.posterPath}",
+            model = movie.posterPath?.toMovieAPIImageURL(),
             contentDescription = null,
-            modifier = Modifier.size(100.dp, 150.dp),
+            modifier = Modifier.size(Dimens.posterWidth, Dimens.posterHeight),
             contentScale = ContentScale.Crop
         )
         Column(
             modifier = Modifier
-                .padding(start = 8.dp)
+                .padding(start = Spacing.small)
                 .align(Alignment.CenterVertically)
         ) {
-            Text(text = movie.title, fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Text(text = movie.releaseDate.formatToReleaseDate(), fontSize = 14.sp)
+            Text(text = movie.title, style = MaterialTheme.typography.titleSmall)
+            Text(text = movie.releaseDate.formatToReleaseDate(), style = MaterialTheme.typography.bodyMedium)
         }
     }
 }

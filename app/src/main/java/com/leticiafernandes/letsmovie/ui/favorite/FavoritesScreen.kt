@@ -25,13 +25,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
-import com.leticiafernandes.letsmovie.ui.favorite.FavoritesUiState
-import com.leticiafernandes.letsmovie.ui.favorite.FavoritesViewModel
-import com.leticiafernandes.letsmovie.ui.favorite.FavoriteMovieItem
+import com.leticiafernandes.letsmovie.R
+import com.leticiafernandes.letsmovie.extensions.toMovieAPIImageURL
+import com.leticiafernandes.letsmovie.ui.theme.Dimens
+import com.leticiafernandes.letsmovie.ui.theme.Spacing
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -50,7 +49,7 @@ fun FavoritesScreen(
             }
             is FavoritesUiState.Empty -> {
                 Text(
-                    text = "You haven't favorited any movies yet.",
+                    text = stringResource(R.string.favorites_empty),
                     modifier = Modifier.align(Alignment.Center),
                     style = MaterialTheme.typography.bodyLarge
                 )
@@ -104,35 +103,34 @@ private fun FavoriteMovieRow(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() }
-            .padding(8.dp),
+            .padding(Spacing.small),
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
-            model = "https://image.tmdb.org/t/p/w500${movie.posterPath}",
+            model = movie.posterPath?.toMovieAPIImageURL(),
             contentDescription = null,
-            modifier = Modifier.size(100.dp, 150.dp),
+            modifier = Modifier.size(Dimens.posterWidth, Dimens.posterHeight),
             contentScale = ContentScale.Crop
         )
         Column(
             modifier = Modifier
-                .padding(start = 8.dp)
+                .padding(start = Spacing.small)
                 .weight(1f),
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = movie.title, fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Text(text = releaseDateLabel, fontSize = 14.sp)
+            Text(text = movie.title, style = MaterialTheme.typography.titleSmall)
+            Text(text = releaseDateLabel, style = MaterialTheme.typography.bodyMedium)
             Text(
-                text = "Rating: ${"%.1f".format(movie.voteAverage)}",
-                fontSize = 14.sp
+                text = stringResource(R.string.rating_format, "%.1f".format(movie.voteAverage)),
+                style = MaterialTheme.typography.bodyMedium
             )
         }
         IconButton(onClick = onRemoveClick) {
             Icon(
                 imageVector = Icons.Default.Favorite,
-                contentDescription = "Remove from favorites",
+                contentDescription = stringResource(R.string.remove_from_favorites),
                 tint = MaterialTheme.colorScheme.primary
             )
         }
     }
 }
-
