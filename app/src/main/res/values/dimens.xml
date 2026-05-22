@@ -1,8 +1,0 @@
-<resources>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="height_app_bar_movie_detail">200dp</dimen>
-    <dimen name="width_poster">90dp</dimen>
-    <dimen name="height_poster">130dp</dimen>
-    <dimen name="margin_large">16dp</dimen>
-    <dimen name="size_movie_title">20sp</dimen>
-</resources>
