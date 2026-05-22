@@ -9,13 +9,13 @@ import com.leticiafernandes.letsmovie.data.local.converter.DateConverter
 import com.leticiafernandes.letsmovie.data.local.dao.FavoriteMovieDao
 import com.leticiafernandes.letsmovie.data.local.dao.GenreDao
 import com.leticiafernandes.letsmovie.data.local.dao.MovieDao
-import com.leticiafernandes.letsmovie.data.model.FavoriteMovieData
+import com.leticiafernandes.letsmovie.data.model.FavoriteMovieEntity
 import com.leticiafernandes.letsmovie.data.model.Genre
 import com.leticiafernandes.letsmovie.data.model.Movie
 
 @Database(
-    entities = [Movie::class, Genre::class, FavoriteMovieData::class],
-    version = 1
+    entities = [Movie::class, Genre::class, FavoriteMovieEntity::class],
+    version = 2
 )
 @TypeConverters(DateConverter::class)
 abstract class LetsMovieDataBase : RoomDatabase() {
@@ -37,6 +37,7 @@ abstract class LetsMovieDataBase : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
                             LetsMovieDataBase::class.java, DATABASE_NAME
                     )
+                            .fallbackToDestructiveMigration(dropAllTables = true)
                             .build()
                 }
             }

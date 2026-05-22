@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 import java.util.Date
 
 @Entity(tableName = "favorite_movies")
-data class FavoriteMovieData(
-    @PrimaryKey val id: Long,
+data class FavoriteMovieEntity(
+    @PrimaryKey val movieId: Long,
     val title: String,
     val voteAverage: Double,
     val posterPath: String?,

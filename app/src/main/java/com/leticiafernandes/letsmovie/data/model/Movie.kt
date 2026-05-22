@@ -27,6 +27,4 @@ data class Movie(
     var overview: String,
     var releaseDate: Date?,
     var genres: String
-) : Parcelable {
-    var favourite: Boolean = false
-}
+) : Parcelable

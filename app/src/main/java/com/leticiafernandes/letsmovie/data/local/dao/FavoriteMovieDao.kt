@@ -1,31 +1,24 @@
 package com.leticiafernandes.letsmovie.data.local.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.leticiafernandes.letsmovie.data.model.FavoriteMovieData
+import com.leticiafernandes.letsmovie.data.model.FavoriteMovieEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteMovieDao {
 
     @Query("SELECT * FROM favorite_movies ORDER BY favoriteAt DESC")
-    fun observeAll(): Flow<List<FavoriteMovieData>>
+    fun observeAll(): Flow<List<FavoriteMovieEntity>>
 
-    @Query("SELECT * FROM favorite_movies WHERE id = :id LIMIT 1")
-    suspend fun findById(id: Long): FavoriteMovieData?
+    @Query("SELECT EXISTS(SELECT 1 FROM favorite_movies WHERE movieId = :movieId)")
+    fun isFavorite(movieId: Long): Flow<Boolean>
 
-    @Query("SELECT EXISTS(SELECT 1 FROM favorite_movies WHERE id = :id)")
-    fun isFavorite(id: Long): Flow<Boolean>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsert(movie: FavoriteMovieEntity)
 
-    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
-    suspend fun upsert(movie: FavoriteMovieData)
-
-    @Delete
-    suspend fun delete(movie: FavoriteMovieData)
-
-    @Query("DELETE FROM favorite_movies WHERE id = :id")
-    suspend fun deleteById(id: Long)
+    @Query("DELETE FROM favorite_movies WHERE movieId = :movieId")
+    suspend fun deleteById(movieId: Long)
 }
