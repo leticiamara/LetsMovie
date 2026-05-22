@@ -1,6 +1,7 @@
 package com.leticiafernandes.letsmovie.data.local
 
 import android.content.Context
+import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -13,7 +14,7 @@ class SessionPreferencesManager @Inject constructor(
 
     var guestSessionId: String?
         get() = prefs.getString(KEY_GUEST_SESSION_ID, null)
-        set(value) = prefs.edit().putString(KEY_GUEST_SESSION_ID, value).apply()
+        set(value) = prefs.edit { putString(KEY_GUEST_SESSION_ID, value) }
 
     val isLoggedIn: Boolean get() = guestSessionId != null
 
