@@ -15,13 +15,19 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,6 +57,7 @@ fun MoviesScreen(
     onMovieClick: (MovieItem) -> Unit
 ) {
     val movies = viewModel.movies.collectAsLazyPagingItems()
+    val bookmarkedIds by viewModel.bookmarkedIds.collectAsState()
     val gridState = rememberLazyGridState()
 
     Box(modifier = modifier.fillMaxSize()) {
@@ -73,7 +80,12 @@ fun MoviesScreen(
                     items(count = movies.itemCount) { index ->
                         val movie = movies[index]
                         if (movie != null) {
-                            MovieCard(movie = movie, onClick = { onMovieClick(movie) })
+                            MovieCard(
+                                movie = movie,
+                                isBookmarked = movie.id in bookmarkedIds,
+                                onBookmarkClick = { viewModel.toggleBookmark(movie.id) },
+                                onClick = { onMovieClick(movie) },
+                            )
                         }
                     }
                     if (movies.loadState.append is LoadState.Loading) {
@@ -129,7 +141,12 @@ fun Modifier.verticalScrollbar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieCard(movie: MovieItem, onClick: () -> Unit) {
+fun MovieCard(
+    movie: MovieItem,
+    isBookmarked: Boolean,
+    onBookmarkClick: () -> Unit,
+    onClick: () -> Unit,
+) {
     Card(
         onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
@@ -137,14 +154,27 @@ fun MovieCard(movie: MovieItem, onClick: () -> Unit) {
         shape = MaterialTheme.shapes.medium
     ) {
         Column {
-            AsyncImage(
-                model = movie.posterPath?.toMovieAPIImageURL(),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(Dimens.backdropHeight),
-                contentScale = ContentScale.Crop
-            )
+            Box {
+                AsyncImage(
+                    model = movie.posterPath?.toMovieAPIImageURL(),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(Dimens.backdropHeight),
+                    contentScale = ContentScale.Crop
+                )
+                IconButton(
+                    onClick = onBookmarkClick,
+                    modifier = Modifier.align(Alignment.TopEnd)
+                ) {
+                    Icon(
+                        imageVector = if (isBookmarked) Icons.Default.Bookmark
+                        else Icons.Default.BookmarkBorder,
+                        contentDescription = null,
+                        tint = if (isBookmarked) MaterialTheme.colorScheme.primary else Color.White,
+                    )
+                }
+            }
             Column(modifier = Modifier.padding(Spacing.medium)) {
                 Text(
                     text = movie.title,

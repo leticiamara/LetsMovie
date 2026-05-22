@@ -18,5 +18,5 @@ data class MovieItem(
     val overview: String,
     val releaseDate: Date,
     val genres: List<GenreItem>?,
-    var favourite: Boolean = false
+    var isBookmarked: Boolean = false
 )
