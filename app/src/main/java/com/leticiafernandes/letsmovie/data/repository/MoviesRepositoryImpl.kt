@@ -1,21 +1,26 @@
 package com.leticiafernandes.letsmovie.data.repository
 
-import com.leticiafernandes.letsmovie.data.remote.MoviesRemoteDataSource
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.leticiafernandes.letsmovie.data.mapper.mapToMovie
-import com.leticiafernandes.letsmovie.data.mapper.mapToMovieResultDomain
+import com.leticiafernandes.letsmovie.data.remote.MoviesRemoteDataSource
+import com.leticiafernandes.letsmovie.data.remote.MoviesPagingSource
 import com.leticiafernandes.letsmovie.data.remote.NetworkResult
 import com.leticiafernandes.letsmovie.data.remote.safeApiCall
 import com.leticiafernandes.letsmovie.domain.model.Movie
-import com.leticiafernandes.letsmovie.domain.model.MovieResult
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MoviesRepositoryImpl @Inject constructor(
-        private val moviesRemoteDataSource: MoviesRemoteDataSource
+    private val remoteDataSource: MoviesRemoteDataSource
 ) : MoviesRepository {
 
-    override suspend fun listPopularMovies(page: Int): NetworkResult<MovieResult> =
-        safeApiCall { moviesRemoteDataSource.listPopularMovies(page).mapToMovieResultDomain() }
+    override fun getPopularMovies(): Flow<PagingData<Movie>> = Pager(
+        config = PagingConfig(pageSize = 20, enablePlaceholders = false),
+        pagingSourceFactory = { MoviesPagingSource(remoteDataSource) }
+    ).flow
 
     override suspend fun listMovieDetails(movieId: Long): NetworkResult<Movie> =
-        safeApiCall { mapToMovie(moviesRemoteDataSource.listMovieDetails(movieId)) }
+        safeApiCall { mapToMovie(remoteDataSource.listMovieDetails(movieId)) }
 }

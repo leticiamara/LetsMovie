@@ -1,10 +1,11 @@
 package com.leticiafernandes.letsmovie.data.repository
 
+import androidx.paging.PagingData
 import com.leticiafernandes.letsmovie.data.remote.NetworkResult
 import com.leticiafernandes.letsmovie.domain.model.Movie
-import com.leticiafernandes.letsmovie.domain.model.MovieResult
+import kotlinx.coroutines.flow.Flow
 
 interface MoviesRepository {
-    suspend fun listPopularMovies(page: Int): NetworkResult<MovieResult>
+    fun getPopularMovies(): Flow<PagingData<Movie>>
     suspend fun listMovieDetails(movieId: Long): NetworkResult<Movie>
 }

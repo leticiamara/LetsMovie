@@ -85,6 +85,8 @@ dependencies {
     implementation(libs.compose.navigation)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.coil.compose)
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
 
     debugImplementation(libs.compose.ui.tooling)
 

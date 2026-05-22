@@ -1,12 +1,11 @@
 package com.leticiafernandes.letsmovie.domain.usecase
 
+import androidx.paging.PagingData
 import com.leticiafernandes.letsmovie.data.remote.NetworkResult
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
-import com.leticiafernandes.letsmovie.ui.movie.model.MovieResultItem
-
-private const val FIRST_PAGE = 1
+import kotlinx.coroutines.flow.Flow
 
 interface MoviesUseCase {
-    suspend fun listPopularMovies(page: Int = FIRST_PAGE): NetworkResult<MovieResultItem>
+    fun getPopularMovies(): Flow<PagingData<MovieItem>>
     suspend fun listMovieDetails(movieId: Long): NetworkResult<MovieItem>
 }

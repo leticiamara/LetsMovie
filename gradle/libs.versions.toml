@@ -33,6 +33,7 @@ androidx-junit = "1.2.1"
 espresso = "3.6.1"
 annotation = "1.9.1"
 test-rules = "1.6.1"
+paging = "3.3.6"
 
 [libraries]
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
@@ -89,6 +90,8 @@ androidx-espresso-contrib = { group = "androidx.test.espresso", name = "espresso
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "test-rules" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+paging-runtime = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
+paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
