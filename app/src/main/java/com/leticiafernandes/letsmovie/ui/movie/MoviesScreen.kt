@@ -41,7 +41,6 @@ import coil.compose.AsyncImage
 import com.leticiafernandes.letsmovie.extensions.formatToReleaseDate
 import com.leticiafernandes.letsmovie.extensions.toMovieAPIImageURL
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
-import com.leticiafernandes.letsmovie.ui.theme.Accent
 import com.leticiafernandes.letsmovie.ui.theme.Dimens
 import com.leticiafernandes.letsmovie.ui.theme.Spacing
 
@@ -69,7 +68,7 @@ fun MoviesScreen(
                     contentPadding = PaddingValues(Spacing.medium),
                     verticalArrangement = Arrangement.spacedBy(Spacing.medium),
                     horizontalArrangement = Arrangement.spacedBy(Spacing.medium),
-                    modifier = Modifier.verticalScrollbar(gridState, color = Accent)
+                    modifier = Modifier.verticalScrollbar(gridState)
                 ) {
                     items(count = movies.itemCount) { index ->
                         val movie = movies[index]

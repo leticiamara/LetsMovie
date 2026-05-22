@@ -1,40 +1,60 @@
 package com.leticiafernandes.letsmovie.ui.theme
 
-import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Primary,
-    secondary = Accent,
-    tertiary = Vote,
-    background = PrimaryDark,
-    surface = PrimaryDark,
-    onPrimary = White,
-    onSecondary = White,
-    onTertiary = White,
-    onBackground = White,
-    onSurface = White,
-)
+// TODO Dark Mode
+//private val DarkColorScheme = darkColorScheme(
+//    primary = ColorPrimaryDark,
+//    onPrimary = TextPrimaryDark,
+//    secondary = ColorSecondary,
+//    tertiary = ColorTertiary,
+//    background = BackgroundPrimaryDark,
+//    surface = BackgroundSecondaryDark,
+//    onBackground = TextPrimaryDark,
+//    onSurface = TextPrimaryDark,
+//    onSurfaceVariant = TextSecondaryDark
+//)
+
+val PlayfairDisplay = FontFamily.Serif
 
 private val LightColorScheme = lightColorScheme(
-    primary = Primary,
-    secondary = Accent,
-    tertiary = Vote,
-    background = AppBackground,
-    surface = White,
+    primary = ColorPrimary,
     onPrimary = White,
-    onSecondary = White,
-    onTertiary = White,
-    onBackground = TextDark,
-    onSurface = TextDark,
+    primaryContainer = ColorPrimaryContainer,
+    onPrimaryContainer = OnColorPrimaryContainer,
+    surface = LuminousSurface,
+    onSurface = OnLuminousSurface,
+    surfaceVariant = LuminousSurfaceContainer,
+    onSurfaceVariant = OnLuminousSurfaceVariant,
+    outline = LuminousOutline,
+    outlineVariant = LuminousOutlineVariant,
+    background = LuminousSurface
+)
+
+val LuminousTypography = Typography(
+    displayLarge = TextStyle(
+        fontFamily = PlayfairDisplay,
+        fontWeight = FontWeight.Bold,
+        fontSize = 32.sp
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = PlayfairDisplay,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 24.sp
+    ),
+    bodyLarge = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    )
 )
 
 @Composable
@@ -42,19 +62,12 @@ fun LetsMovieTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
-        }
-    }
+    //TODO Dark mode val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+    val colorScheme = LightColorScheme
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = LuminousTypography,
         content = content
     )
 }

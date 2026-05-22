@@ -23,15 +23,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.ui.theme.Accent
-import com.leticiafernandes.letsmovie.ui.theme.Primary
-import com.leticiafernandes.letsmovie.ui.theme.PrimaryDark
 import com.leticiafernandes.letsmovie.ui.theme.Spacing
 import androidx.compose.foundation.background
+import com.leticiafernandes.letsmovie.ui.theme.ColorPrimary
+import com.leticiafernandes.letsmovie.ui.theme.ColorPrimaryContainer
 
 @Composable
 fun SplashScreen() {
-    val backgroundGradient = Brush.verticalGradient(listOf(Primary, PrimaryDark))
+    val backgroundGradient = Brush.verticalGradient(listOf(ColorPrimary, ColorPrimaryContainer))
 
     Box(
         modifier = Modifier
@@ -47,8 +46,8 @@ fun SplashScreen() {
                 modifier = Modifier
                     .size(120.dp)
                     .clip(CircleShape)
-                    .background(Accent.copy(alpha = 0.2f))
-                    .border(2.dp, Accent.copy(alpha = 0.7f), CircleShape),
+                    .background(ColorPrimary.copy(alpha = 0.2f))
+                    .border(2.dp, ColorPrimary.copy(alpha = 0.7f), CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
