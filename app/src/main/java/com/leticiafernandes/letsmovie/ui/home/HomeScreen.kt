@@ -2,8 +2,6 @@ package com.leticiafernandes.letsmovie.ui.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,6 +20,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,7 +51,7 @@ fun HomeScreen(
                 title = {
                     val title = when (currentTab) {
                         HomeTab.Popular -> stringResource(R.string.title_populars)
-                        HomeTab.Favourite -> stringResource(R.string.title_favourites)
+                        HomeTab.Watchlist -> stringResource(R.string.title_watchlist)
                     }
                     Text(text = title)
                 },
@@ -94,10 +93,10 @@ fun HomeScreen(
                     unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Tab(
-                    selected = currentTab == HomeTab.Favourite,
-                    onClick = { currentTab = HomeTab.Favourite },
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
-                    text = { Text(stringResource(R.string.title_favourites)) },
+                    selected = currentTab == HomeTab.Watchlist,
+                    onClick = { currentTab = HomeTab.Watchlist },
+                    icon = { Icon(Icons.Default.Bookmark, contentDescription = null) },
+                    text = { Text(stringResource(R.string.title_watchlist)) },
                     selectedContentColor = MaterialTheme.colorScheme.primary,
                     unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -114,7 +113,7 @@ fun HomeScreen(
                     onMovieClick = { movie -> onMovieClick(movie.id) }
                 )
             }
-            HomeTab.Favourite -> {
+            HomeTab.Watchlist -> {
                 val favoritesViewModel: FavoritesViewModel = hiltViewModel()
                 FavoritesScreen(
                     viewModel = favoritesViewModel,
@@ -127,5 +126,5 @@ fun HomeScreen(
 }
 
 enum class HomeTab {
-    Popular, Favourite
+    Popular, Watchlist,
 }
