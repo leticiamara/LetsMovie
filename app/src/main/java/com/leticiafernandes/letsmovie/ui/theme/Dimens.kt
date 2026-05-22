@@ -9,4 +9,5 @@ object Dimens {
     val splashLogoSize = 96.dp
     val buttonHeight = 60.dp
     val buttonIconSize = 32.dp
+    val cardElevation = 2.dp
 }

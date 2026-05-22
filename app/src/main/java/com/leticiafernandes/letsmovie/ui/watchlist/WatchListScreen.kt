@@ -1,6 +1,5 @@
-package com.leticiafernandes.letsmovie.ui.favorite
+package com.leticiafernandes.letsmovie.ui.watchlist
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,33 +36,33 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
-fun FavoritesScreen(
-    viewModel: FavoritesViewModel,
+fun WatchListScreen(
+    viewModel: WatchlistViewModel,
     modifier: Modifier = Modifier,
     onMovieClick: (FavoriteMovieItem) -> Unit
 ) {
-    val uiState by viewModel.uiState.observeAsState(FavoritesUiState.Loading)
+    val uiState by viewModel.uiState.observeAsState(WatchlistUiState.Loading)
 
     Box(modifier = modifier.fillMaxSize()) {
         when (val state = uiState) {
-            is FavoritesUiState.Loading -> {
+            is WatchlistUiState.Loading -> {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
-            is FavoritesUiState.Empty -> {
+            is WatchlistUiState.Empty -> {
                 Text(
                     text = stringResource(R.string.favorites_empty),
                     modifier = Modifier.align(Alignment.Center),
                     style = MaterialTheme.typography.bodyLarge
                 )
             }
-            is FavoritesUiState.Content -> {
+            is WatchlistUiState.Content -> {
                 FavoritesList(
                     favorites = state.favorites,
                     onMovieClick = onMovieClick,
                     onRemoveClick = { viewModel.toggleFavorite(it.id) }
                 )
             }
-            is FavoritesUiState.Error -> {
+            is WatchlistUiState.Error -> {
                 Text(
                     text = state.message,
                     color = MaterialTheme.colorScheme.error,
@@ -99,38 +100,44 @@ private fun FavoriteMovieRow(
         SimpleDateFormat("MMM dd, yyyy", Locale.US).format(movie.releaseDate) ?: ""
     }
 
-    Row(
+    Card(
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick() }
-            .padding(Spacing.small),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(horizontal = Spacing.medium, vertical = Spacing.small),
+        elevation = CardDefaults.cardElevation(defaultElevation = Dimens.cardElevation)
     ) {
-        AsyncImage(
-            model = movie.posterPath?.toMovieAPIImageURL(),
-            contentDescription = null,
-            modifier = Modifier.size(Dimens.posterWidth, Dimens.posterHeight),
-            contentScale = ContentScale.Crop
-        )
-        Column(
-            modifier = Modifier
-                .padding(start = Spacing.small)
-                .weight(1f),
-            verticalArrangement = Arrangement.Center
+        Row(
+            modifier = Modifier.padding(Spacing.small),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = movie.title, style = MaterialTheme.typography.titleSmall)
-            Text(text = releaseDateLabel, style = MaterialTheme.typography.bodyMedium)
-            Text(
-                text = stringResource(R.string.rating_format, "%.1f".format(movie.voteAverage)),
-                style = MaterialTheme.typography.bodyMedium
+            AsyncImage(
+                model = movie.posterPath?.toMovieAPIImageURL(),
+                contentDescription = null,
+                modifier = Modifier.size(Dimens.posterWidth, Dimens.posterHeight),
+                contentScale = ContentScale.Crop
             )
-        }
-        IconButton(onClick = onRemoveClick) {
-            Icon(
-                imageVector = Icons.Default.Favorite,
-                contentDescription = stringResource(R.string.remove_from_favorites),
-                tint = MaterialTheme.colorScheme.primary
-            )
+            Column(
+                modifier = Modifier
+                    .padding(start = Spacing.small)
+                    .weight(1f),
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(text = movie.title, style = MaterialTheme.typography.titleSmall)
+                Text(text = releaseDateLabel, style = MaterialTheme.typography.bodyMedium)
+                Text(
+                    text = stringResource(R.string.rating_format, "%.1f".format(movie.voteAverage)),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+            IconButton(onClick = onRemoveClick) {
+                Icon(
+                    imageVector = Icons.Default.Bookmark,
+                    contentDescription = stringResource(R.string.remove_from_favorites),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
         }
     }
+
 }

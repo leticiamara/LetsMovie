@@ -1,4 +1,4 @@
-package com.leticiafernandes.letsmovie.ui.favorite
+package com.leticiafernandes.letsmovie.ui.watchlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,13 +15,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoritesViewModel @Inject constructor(
+class WatchlistViewModel @Inject constructor(
     private val observeFavoritesUseCase: ObserveFavoritesUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableLiveData<FavoritesUiState>(FavoritesUiState.Loading)
-    val uiState: LiveData<FavoritesUiState> get() = _uiState
+    private val _uiState = MutableLiveData<WatchlistUiState>(WatchlistUiState.Loading)
+    val uiState: LiveData<WatchlistUiState> get() = _uiState
 
     init {
         observeFavorites()
@@ -31,13 +31,13 @@ class FavoritesViewModel @Inject constructor(
         observeFavoritesUseCase()
             .onEach { favorites ->
                 _uiState.value = if (favorites.isEmpty()) {
-                    FavoritesUiState.Empty
+                    WatchlistUiState.Empty
                 } else {
-                    FavoritesUiState.Content(favorites.map { it.toItem() })
+                    WatchlistUiState.Content(favorites.map { it.toItem() })
                 }
             }
             .catch { throwable ->
-                _uiState.value = FavoritesUiState.Error(
+                _uiState.value = WatchlistUiState.Error(
                     throwable.message ?: "Unexpected error loading favorites."
                 )
             }
@@ -47,7 +47,7 @@ class FavoritesViewModel @Inject constructor(
     fun toggleFavorite(movieId: Long) {
         viewModelScope.launch {
             when (val result = toggleFavoriteUseCase(movieId)) {
-                is ToggleResult.Error -> _uiState.value = FavoritesUiState.Error(result.message)
+                is ToggleResult.Error -> _uiState.value = WatchlistUiState.Error(result.message)
                 ToggleResult.Added, ToggleResult.Removed -> {
 
                 }

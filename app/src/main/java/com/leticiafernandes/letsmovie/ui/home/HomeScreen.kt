@@ -31,8 +31,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.leticiafernandes.letsmovie.R
-import com.leticiafernandes.letsmovie.ui.favorite.FavoritesScreen
-import com.leticiafernandes.letsmovie.ui.favorite.FavoritesViewModel
+import com.leticiafernandes.letsmovie.ui.watchlist.WatchListScreen
+import com.leticiafernandes.letsmovie.ui.watchlist.WatchlistViewModel
 import com.leticiafernandes.letsmovie.ui.movie.MoviesScreen
 import com.leticiafernandes.letsmovie.ui.movie.MoviesViewModel
 
@@ -113,9 +113,9 @@ fun HomeScreen(
                 )
             }
             HomeTab.Watchlist -> {
-                val favoritesViewModel: FavoritesViewModel = hiltViewModel()
-                FavoritesScreen(
-                    viewModel = favoritesViewModel,
+                val watchlistViewModel: WatchlistViewModel = hiltViewModel()
+                WatchListScreen(
+                    viewModel = watchlistViewModel,
                     modifier = modifier,
                     onMovieClick = { favorite -> onMovieClick(favorite.id) }
                 )

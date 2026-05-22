@@ -1,4 +1,4 @@
-package com.leticiafernandes.letsmovie.ui.favorite
+package com.leticiafernandes.letsmovie.ui.watchlist
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
