@@ -3,8 +3,8 @@ package com.leticiafernandes.letsmovie.data.model
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.TypeConverters
-import com.leticiafernandes.letsmovie.data.local.DateConverter
-import com.leticiafernandes.letsmovie.data.local.LongListConverter
+import com.leticiafernandes.letsmovie.data.local.converter.DateConverter
+import com.leticiafernandes.letsmovie.data.local.converter.LongListConverter
 import kotlinx.parcelize.Parcelize
 import java.util.*
 

@@ -1,10 +1,7 @@
-package com.leticiafernandes.letsmovie.data.local
+package com.leticiafernandes.letsmovie.data.local.converter
 
 import androidx.room.TypeConverter
 
-/**
- * Created by leticiafernandes on 25/05/18.
- */
 object LongListConverter {
 
     @TypeConverter

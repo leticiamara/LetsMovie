@@ -1,4 +1,4 @@
-package com.leticiafernandes.letsmovie.data.local.dao
+package com.leticiafernandes.letsmovie.data.local.converter
 
 import androidx.room.TypeConverter
 import java.util.Date
