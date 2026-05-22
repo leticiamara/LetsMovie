@@ -1,8 +1,6 @@
 package com.leticiafernandes.letsmovie.data.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.leticiafernandes.letsmovie.data.local.converter.DateConverter
@@ -15,7 +13,8 @@ import com.leticiafernandes.letsmovie.data.model.Movie
 
 @Database(
     entities = [Movie::class, Genre::class, FavoriteMovieEntity::class],
-    version = 2
+    version = 2,
+    exportSchema = false
 )
 @TypeConverters(DateConverter::class)
 abstract class LetsMovieDataBase : RoomDatabase() {
@@ -27,25 +26,6 @@ abstract class LetsMovieDataBase : RoomDatabase() {
     abstract fun favoriteMovieDao(): FavoriteMovieDao
 
     companion object {
-        private var INSTANCE: LetsMovieDataBase? = null
-
-        val DATABASE_NAME = "letsmovie.db"
-
-        fun getInstance(context: Context): LetsMovieDataBase? {
-            if (INSTANCE == null) {
-                synchronized(LetsMovieDataBase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            LetsMovieDataBase::class.java, DATABASE_NAME
-                    )
-                            .fallbackToDestructiveMigration(dropAllTables = true)
-                            .build()
-                }
-            }
-            return INSTANCE
-        }
-
-        fun destroyInstance() {
-            INSTANCE = null
-        }
+        const val DATABASE_NAME = "letsmovie.db"
     }
 }

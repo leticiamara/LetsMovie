@@ -12,20 +12,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
+import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -61,26 +57,32 @@ fun HomeScreen(
             )
         },
         bottomBar = {
-            TabRow(
+            SecondaryTabRow(
                 selectedTabIndex = selectedIndex,
                 containerColor = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.onSurface,
                 divider = {},
-                indicator = { tabPositions ->
-                    val tab = tabPositions[selectedIndex]
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        Box(
-                            modifier = Modifier
-                                .align(Alignment.TopStart)
-                                .offset(x = tab.left)
-                                .width(tab.width)
-                                .height(3.dp)
-                                .background(
-                                    color = MaterialTheme.colorScheme.primary,
-                                    shape = RoundedCornerShape(bottomStart = 3.dp, bottomEnd = 3.dp)
+                indicator = {
+                    Box(
+                        modifier = Modifier
+                            .tabIndicatorLayout { measurable, constraints, tabPositions ->
+                                val tab = tabPositions[selectedIndex]
+                                val placeable = measurable.measure(
+                                    constraints.copy(
+                                        minWidth = tab.width.roundToPx(),
+                                        maxWidth = tab.width.roundToPx()
+                                    )
                                 )
-                        )
-                    }
+                                layout(constraints.maxWidth, constraints.maxHeight) {
+                                    placeable.place(tab.left.roundToPx(), 0)
+                                }
+                            }
+                            .height(3.dp)
+                            .background(
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = RoundedCornerShape(bottomStart = 3.dp, bottomEnd = 3.dp)
+                            )
+                    )
                 }
             ) {
                 Tab(
