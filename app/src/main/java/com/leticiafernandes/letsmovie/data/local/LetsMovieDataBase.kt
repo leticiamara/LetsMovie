@@ -9,21 +9,16 @@ import com.leticiafernandes.letsmovie.data.local.converter.DateConverter
 import com.leticiafernandes.letsmovie.data.local.dao.FavoriteMovieDao
 import com.leticiafernandes.letsmovie.data.local.dao.GenreDao
 import com.leticiafernandes.letsmovie.data.local.dao.MovieDao
-import com.leticiafernandes.letsmovie.data.local.entity.FavoriteMovieEntity
+import com.leticiafernandes.letsmovie.data.model.FavoriteMovieData
 import com.leticiafernandes.letsmovie.data.model.Genre
 import com.leticiafernandes.letsmovie.data.model.Movie
 
-/**
- * Created by leticiafernandes on 24/05/18.
- */
 @Database(
-    entities = [Movie::class, Genre::class, FavoriteMovieEntity::class],
+    entities = [Movie::class, Genre::class, FavoriteMovieData::class],
     version = 1
 )
 @TypeConverters(DateConverter::class)
 abstract class LetsMovieDataBase : RoomDatabase() {
-
-
 
     abstract fun movieDao(): MovieDao
 

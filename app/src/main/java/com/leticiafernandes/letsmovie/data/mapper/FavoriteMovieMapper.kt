@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.data.mapper
 
-import com.leticiafernandes.letsmovie.data.local.entity.FavoriteMovieEntity
+import com.leticiafernandes.letsmovie.data.model.FavoriteMovieData
 import com.leticiafernandes.letsmovie.data.remote.dto.FavoriteMovieDTO
 import com.leticiafernandes.letsmovie.domain.model.FavoriteMovie
 import java.text.SimpleDateFormat
@@ -13,7 +13,7 @@ private fun parseReleaseDate(value: String): Date =
     if (value.isNotEmpty()) runCatching { releaseDateFormat.parse(value)!! }.getOrDefault(Date(0))
     else Date(0)
 
-fun FavoriteMovieDTO.toEntity(): FavoriteMovieEntity = FavoriteMovieEntity(
+fun FavoriteMovieDTO.toEntity(): FavoriteMovieData = FavoriteMovieData(
     id = id,
     title = title,
     voteAverage = voteAverage,
@@ -23,7 +23,7 @@ fun FavoriteMovieDTO.toEntity(): FavoriteMovieEntity = FavoriteMovieEntity(
     releaseDate = parseReleaseDate(releaseDate)
 )
 
-fun FavoriteMovieEntity.toDomain(): FavoriteMovie = FavoriteMovie(
+fun FavoriteMovieData.toDomain(): FavoriteMovie = FavoriteMovie(
     id = id,
     title = title,
     voteAverage = voteAverage,
@@ -33,7 +33,7 @@ fun FavoriteMovieEntity.toDomain(): FavoriteMovie = FavoriteMovie(
     releaseDate = releaseDate
 )
 
-fun FavoriteMovie.toEntity(): FavoriteMovieEntity = FavoriteMovieEntity(
+fun FavoriteMovie.toEntity(): FavoriteMovie = FavoriteMovie(
     id = id,
     title = title,
     voteAverage = voteAverage,

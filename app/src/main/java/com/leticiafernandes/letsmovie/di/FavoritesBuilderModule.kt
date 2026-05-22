@@ -1,7 +1,7 @@
 package com.leticiafernandes.letsmovie.di
 
-import com.leticiafernandes.letsmovie.data.local.dao.FavoritesLocalDataSource
-import com.leticiafernandes.letsmovie.data.local.dao.FavoritesLocalDataSourceImpl
+import com.leticiafernandes.letsmovie.data.local.FavoritesLocalDataSource
+import com.leticiafernandes.letsmovie.data.local.FavoritesLocalDataSourceImpl
 import com.leticiafernandes.letsmovie.data.remote.FavoritesRemoteDataSource
 import com.leticiafernandes.letsmovie.data.remote.FavoritesRemoteDataSourceImpl
 import com.leticiafernandes.letsmovie.data.repository.FavoritesRepository

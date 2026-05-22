@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.data.repository
 
-import com.leticiafernandes.letsmovie.data.local.dao.FavoritesLocalDataSource
+import com.leticiafernandes.letsmovie.data.local.FavoritesLocalDataSource
 import com.leticiafernandes.letsmovie.data.remote.FavoritesRemoteDataSource
 import com.leticiafernandes.letsmovie.data.mapper.toDomain
 import com.leticiafernandes.letsmovie.data.mapper.toEntity
