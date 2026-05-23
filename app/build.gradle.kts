@@ -11,7 +11,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.google.services)
-    id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
+    alias(libs.plugins.kotlin.compose)
 }
 
 val localProperties = Properties().apply {
