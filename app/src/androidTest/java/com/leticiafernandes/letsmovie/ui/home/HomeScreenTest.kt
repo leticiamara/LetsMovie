@@ -18,7 +18,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-private const val POPULAR_MOVIES_TAB = "Popular movies"
+private const val POPULAR_MOVIES_TAB = "Movies"
 
 private const val WATCHLIST_TAB = "Watchlist"
 
@@ -61,7 +61,7 @@ class HomeScreenTest {
     fun showsPopularMoviesTitleByDefault() {
         setHomeScreenContent()
 
-        // "Popular movies" appears in both the TopAppBar and the tab label when Popular is active
+        // "Movies" appears in both the TopAppBar and the tab label when Popular is active
         composeTestRule.onAllNodesWithText(POPULAR_MOVIES_TAB)[0].assertIsDisplayed()
     }
 

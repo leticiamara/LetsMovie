@@ -15,6 +15,18 @@ interface MoviesService {
         @Query("page") page: Int = 1
     ): MovieResultDTO
 
+    @GET("/3/movie/now_playing")
+    suspend fun listNowPlayingMovies(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int = 1
+    ): MovieResultDTO
+
+    @GET("/3/movie/upcoming")
+    suspend fun listUpcomingMovies(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int = 1
+    ): MovieResultDTO
+
     @GET("/3/genre/movie/list")
     suspend fun listAllGenres(
         @Query("language") language: String = "en-US"

@@ -1,20 +1,24 @@
 package com.leticiafernandes.letsmovie.ui.movie
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
@@ -22,6 +26,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -46,11 +51,20 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.leticiafernandes.letsmovie.R
+import com.leticiafernandes.letsmovie.domain.model.MovieCategory
 import com.leticiafernandes.letsmovie.extensions.formatToReleaseDate
 import com.leticiafernandes.letsmovie.extensions.toMovieAPIImageURL
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
 import com.leticiafernandes.letsmovie.ui.theme.Dimens
 import com.leticiafernandes.letsmovie.ui.theme.Spacing
+
+@get:StringRes
+private val MovieCategory.labelRes: Int
+    get() = when (this) {
+        MovieCategory.Popular -> R.string.filter_popular
+        MovieCategory.NowPlaying -> R.string.filter_now_playing
+        MovieCategory.Upcoming -> R.string.filter_upcoming
+    }
 
 @Composable
 fun MoviesScreen(
@@ -60,48 +74,78 @@ fun MoviesScreen(
 ) {
     val movies = viewModel.movies.collectAsLazyPagingItems()
     val bookmarkedIds by viewModel.bookmarkedIds.collectAsState()
+    val selectedCategory by viewModel.selectedCategory.collectAsState()
     val gridState = rememberLazyGridState()
 
-    Box(modifier = modifier.fillMaxSize()) {
-        when (val refresh = movies.loadState.refresh) {
-            is LoadState.Loading -> CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            is LoadState.Error -> Text(
-                text = refresh.error.message ?: "Error loading movies",
-                modifier = Modifier.align(Alignment.Center),
-                color = MaterialTheme.colorScheme.error
-            )
-            else -> {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    state = gridState,
-                    contentPadding = PaddingValues(Spacing.medium),
-                    verticalArrangement = Arrangement.spacedBy(Spacing.medium),
-                    horizontalArrangement = Arrangement.spacedBy(Spacing.medium),
-                    modifier = Modifier.verticalScrollbar(gridState)
-                ) {
-                    items(count = movies.itemCount) { index ->
-                        val movie = movies[index]
-                        if (movie != null) {
-                            MovieCard(
-                                movie = movie,
-                                isBookmarked = movie.id in bookmarkedIds,
-                                onBookmarkClick = { viewModel.toggleBookmark(movie.id) },
-                                onClick = { onMovieClick(movie) },
-                            )
+    Column(modifier = modifier.fillMaxSize()) {
+        MovieFilterRow(
+            selectedCategory = selectedCategory,
+            onCategorySelected = viewModel::setCategory
+        )
+
+        Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
+            when (val refresh = movies.loadState.refresh) {
+                is LoadState.Loading -> CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                is LoadState.Error -> Text(
+                    text = refresh.error.message ?: stringResource(R.string.error_loading_movies),
+                    modifier = Modifier.align(Alignment.Center),
+                    color = MaterialTheme.colorScheme.error
+                )
+                else -> {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        state = gridState,
+                        contentPadding = PaddingValues(Spacing.medium),
+                        verticalArrangement = Arrangement.spacedBy(Spacing.medium),
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.medium),
+                        modifier = Modifier.verticalScrollbar(gridState)
+                    ) {
+                        items(count = movies.itemCount) { index ->
+                            val movie = movies[index]
+                            if (movie != null) {
+                                MovieCard(
+                                    movie = movie,
+                                    isBookmarked = movie.id in bookmarkedIds,
+                                    onBookmarkClick = { viewModel.toggleBookmark(movie.id) },
+                                    onClick = { onMovieClick(movie) },
+                                )
+                            }
                         }
-                    }
-                    if (movies.loadState.append is LoadState.Loading) {
-                        item(span = { GridItemSpan(maxLineSpan) }) {
-                            Box(
-                                modifier = Modifier.fillMaxWidth().padding(Spacing.medium),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                CircularProgressIndicator()
+                        if (movies.loadState.append is LoadState.Loading) {
+                            item(span = { GridItemSpan(maxLineSpan) }) {
+                                Box(
+                                    modifier = Modifier.fillMaxWidth().padding(Spacing.medium),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    CircularProgressIndicator()
+                                }
                             }
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun MovieFilterRow(
+    selectedCategory: MovieCategory,
+    onCategorySelected: (MovieCategory) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState())
+            .padding(horizontal = Spacing.medium, vertical = Spacing.small),
+        horizontalArrangement = Arrangement.spacedBy(Spacing.small)
+    ) {
+        MovieCategory.entries.forEach { category ->
+            FilterChip(
+                selected = category == selectedCategory,
+                onClick = { onCategorySelected(category) },
+                label = { Text(stringResource(category.labelRes)) }
+            )
         }
     }
 }

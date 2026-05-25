@@ -2,6 +2,7 @@ package com.leticiafernandes.letsmovie.domain.usecase
 
 import androidx.paging.testing.asSnapshot
 import com.leticiafernandes.letsmovie.data.remote.NetworkResult
+import com.leticiafernandes.letsmovie.domain.model.MovieCategory
 import com.leticiafernandes.letsmovie.fake.FakeMoviesRepository
 import com.leticiafernandes.letsmovie.fake.buildFakeMovieDomain
 import kotlinx.coroutines.test.runTest
@@ -22,11 +23,11 @@ class MoviesUseCaseTest {
     }
 
     @Test
-    fun `getPopularMovies maps Movie to MovieItem`() = runTest {
+    fun `getMovies maps Movie to MovieItem`() = runTest {
         val movie = buildFakeMovieDomain(id = 42L)
         repository.movies = listOf(movie)
 
-        val snapshot = useCase.getPopularMovies().asSnapshot()
+        val snapshot = useCase.getMovies(MovieCategory.Popular).asSnapshot()
 
         assertEquals(1, snapshot.size)
         assertEquals(movie.id, snapshot[0].id)
@@ -35,10 +36,10 @@ class MoviesUseCaseTest {
     }
 
     @Test
-    fun `getPopularMovies with empty list emits empty snapshot`() = runTest {
+    fun `getMovies with empty list emits empty snapshot`() = runTest {
         repository.movies = emptyList()
 
-        val snapshot = useCase.getPopularMovies().asSnapshot()
+        val snapshot = useCase.getMovies(MovieCategory.Popular).asSnapshot()
 
         assertTrue(snapshot.isEmpty())
     }

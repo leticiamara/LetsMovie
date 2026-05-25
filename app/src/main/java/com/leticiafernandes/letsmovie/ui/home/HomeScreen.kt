@@ -47,7 +47,7 @@ fun HomeScreen(
             TopAppBar(
                 title = {
                     val title = when (currentTab) {
-                        HomeTab.Popular -> stringResource(R.string.title_populars)
+                        HomeTab.Popular -> stringResource(R.string.title_movies)
                         HomeTab.Watchlist -> stringResource(R.string.title_watchlist)
                     }
                     Text(text = title)
@@ -91,7 +91,7 @@ fun HomeScreen(
                     selected = currentTab == HomeTab.Popular,
                     onClick = { currentTab = HomeTab.Popular },
                     icon = { Icon(Icons.Default.Movie, contentDescription = null) },
-                    text = { Text(stringResource(R.string.title_populars)) },
+                    text = { Text(stringResource(R.string.title_movies)) },
                     selectedContentColor = MaterialTheme.colorScheme.primary,
                     unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                 )

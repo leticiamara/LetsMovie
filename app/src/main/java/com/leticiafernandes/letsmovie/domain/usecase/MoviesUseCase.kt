@@ -5,6 +5,7 @@ import androidx.paging.map
 import com.leticiafernandes.letsmovie.data.remote.NetworkResult
 import com.leticiafernandes.letsmovie.data.repository.MoviesRepository
 import com.leticiafernandes.letsmovie.domain.mapper.mapToMovieItem
+import com.leticiafernandes.letsmovie.domain.model.MovieCategory
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -14,8 +15,8 @@ class MoviesUseCase @Inject constructor(
     private val moviesRepository: MoviesRepository
 ) {
 
-    fun getPopularMovies(): Flow<PagingData<MovieItem>> =
-        moviesRepository.getPopularMovies().map { pagingData ->
+    fun getMovies(category: MovieCategory): Flow<PagingData<MovieItem>> =
+        moviesRepository.getMovies(category).map { pagingData ->
             pagingData.map { movie -> mapToMovieItem(movie, null) }
         }
 

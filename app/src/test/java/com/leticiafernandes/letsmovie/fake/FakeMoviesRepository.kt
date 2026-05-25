@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import com.leticiafernandes.letsmovie.data.remote.NetworkResult
 import com.leticiafernandes.letsmovie.data.repository.MoviesRepository
 import com.leticiafernandes.letsmovie.domain.model.Movie
+import com.leticiafernandes.letsmovie.domain.model.MovieCategory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import java.util.Date
@@ -13,7 +14,7 @@ class FakeMoviesRepository : MoviesRepository {
     var movies: List<Movie> = emptyList()
     var movieDetailsResult: NetworkResult<Movie> = NetworkResult.HttpError(404, "Not Found")
 
-    override fun getPopularMovies(): Flow<PagingData<Movie>> = flowOf(PagingData.from(movies))
+    override fun getMovies(category: MovieCategory): Flow<PagingData<Movie>> = flowOf(PagingData.from(movies))
 
     override suspend fun listMovieDetails(movieId: Long): NetworkResult<Movie> = movieDetailsResult
 }

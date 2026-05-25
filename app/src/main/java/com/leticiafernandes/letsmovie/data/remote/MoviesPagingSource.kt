@@ -4,15 +4,17 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.leticiafernandes.letsmovie.data.mapper.mapToMovie
 import com.leticiafernandes.letsmovie.domain.model.Movie
+import com.leticiafernandes.letsmovie.domain.model.MovieCategory
 
 class MoviesPagingSource(
-    private val remoteDataSource: MoviesRemoteDataSource
+    private val remoteDataSource: MoviesRemoteDataSource,
+    private val category: MovieCategory
 ) : PagingSource<Int, Movie>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
         val page = params.key ?: 1
         return try {
-            val dto = remoteDataSource.listPopularMovies(page)
+            val dto = remoteDataSource.listMovies(category, page)
             LoadResult.Page(
                 data = dto.results.map { mapToMovie(it) },
                 prevKey = if (page == 1) null else page - 1,
