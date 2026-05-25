@@ -49,7 +49,10 @@ fun MovieDetailScreen(
                 title = { Text(text = stringResource(R.string.movie_detail_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.navigate_back)
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
