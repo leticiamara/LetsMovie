@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Lets Movie</string>
     <string name="title_movies">Filmes</string>
-    <string name="title_watchlist">Lista de filmes</string>
+    <string name="title_watchlist">Para Assistir</string>
     <string name="movie_detail_title">Detalhes do filme</string>
     <string name="overview">Sinopse</string>
     <string name="rating_format">Avaliação: %1$s</string>
@@ -16,4 +16,7 @@
     <string name="error_loading_movies">Erro ao carregar filmes</string>
     <string name="error_server">Erro do servidor %1$d</string>
     <string name="error_network">Erro de rede. Por favor, verifique sua conexão.</string>
+    <string name="genres">Gêneros</string>
+    <string name="original_title">Título original</string>
+    <string name="original_language">Idioma original</string>
 </resources>

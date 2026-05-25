@@ -16,4 +16,7 @@
     <string name="error_loading_movies">Error loading movies</string>
     <string name="error_server">Server error %1$d</string>
     <string name="error_network">Network error. Please check your connection.</string>
+    <string name="genres">Genres</string>
+    <string name="original_title">Original title</string>
+    <string name="original_language">Original language</string>
 </resources>

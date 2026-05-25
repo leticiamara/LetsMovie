@@ -3,7 +3,10 @@ package com.leticiafernandes.letsmovie.ui.movie
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.SavedStateHandle
 import com.leticiafernandes.letsmovie.data.remote.NetworkResult
+import com.leticiafernandes.letsmovie.domain.usecase.IsFavoriteUseCase
 import com.leticiafernandes.letsmovie.domain.usecase.MoviesUseCase
+import com.leticiafernandes.letsmovie.domain.usecase.ToggleFavoriteUseCase
+import com.leticiafernandes.letsmovie.fake.FakeFavoritesRepository
 import com.leticiafernandes.letsmovie.fake.FakeMoviesRepository
 import com.leticiafernandes.letsmovie.fake.buildFakeMovieDomain
 import com.leticiafernandes.letsmovie.util.MainCoroutineRule
@@ -32,12 +35,17 @@ class MovieDetailViewModelTest {
         moviesRepository = FakeMoviesRepository()
     }
 
-    private fun createViewModel(movieId: Long?) = MovieDetailViewModel(
-        savedStateHandle = SavedStateHandle(
-            if (movieId != null) mapOf("movieId" to movieId) else emptyMap()
-        ),
-        moviesUseCase = MoviesUseCase(moviesRepository)
-    )
+    private fun createViewModel(movieId: Long?): MovieDetailViewModel {
+        val favoritesRepository = FakeFavoritesRepository()
+        return MovieDetailViewModel(
+            savedStateHandle = SavedStateHandle(
+                if (movieId != null) mapOf("movieId" to movieId) else emptyMap()
+            ),
+            moviesUseCase = MoviesUseCase(moviesRepository),
+            toggleFavoriteUseCase = ToggleFavoriteUseCase(favoritesRepository, IsFavoriteUseCase(favoritesRepository)),
+            isFavoriteUseCase = IsFavoriteUseCase(favoritesRepository)
+        )
+    }
 
     @Test
     fun `when fetch succeeds, uiState is ShowMovieInfo with correct movie`() = runTest {
