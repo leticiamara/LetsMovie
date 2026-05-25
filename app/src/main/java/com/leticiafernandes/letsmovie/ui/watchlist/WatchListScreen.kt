@@ -126,7 +126,7 @@ private fun FavoriteMovieRow(
                 Text(text = movie.title, style = MaterialTheme.typography.titleSmall)
                 Text(text = releaseDateLabel, style = MaterialTheme.typography.bodyMedium)
                 Text(
-                    text = stringResource(R.string.rating_format, "%.1f".format(movie.voteAverage)),
+                    text = stringResource(R.string.rating_format, String.format(java.util.Locale.US, "%.1f", movie.voteAverage)),
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

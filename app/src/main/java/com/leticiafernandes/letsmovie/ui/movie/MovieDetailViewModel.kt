@@ -31,10 +31,11 @@ class MovieDetailViewModel @Inject constructor(
             return
         }
         viewModelScope.launch {
+            _uiState.value = ShowMovieLoading
             _uiState.value = when (val result = moviesUseCase.listMovieDetails(movieId)) {
                 is NetworkResult.Success -> ShowMovieInfo(result.data)
-                is NetworkResult.HttpError -> ShowMovieError("Server error ${result.code}: ${result.message}")
-                is NetworkResult.NetworkError -> ShowMovieError("Network error. Please check your connection.")
+                is NetworkResult.HttpError -> ShowMovieError.Http(result.code)
+                is NetworkResult.NetworkError -> ShowMovieError.Network
             }
         }
     }

@@ -1,11 +1,14 @@
 package com.leticiafernandes.letsmovie.ui.movie
 
+import android.content.Context
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.extensions.formatToReleaseDate
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
 import org.junit.Assert.assertTrue
@@ -14,12 +17,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.Date
 
-private const val ADD_TO_FAVORITES = "Add to favorites"
-
-private const val REMOVE_FROM_FAVORITES = "Remove from favorites"
-
 @RunWith(AndroidJUnit4::class)
 class MovieCardTest {
+
+    private val context: Context get() = ApplicationProvider.getApplicationContext()
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -81,7 +82,7 @@ class MovieCardTest {
             )
         }
 
-        composeTestRule.onNodeWithContentDescription(ADD_TO_FAVORITES).assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription(context.getString(R.string.add_to_favorites)).assertIsDisplayed()
     }
 
     @Test
@@ -95,7 +96,7 @@ class MovieCardTest {
             )
         }
 
-        composeTestRule.onNodeWithContentDescription(REMOVE_FROM_FAVORITES).assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription(context.getString(R.string.remove_from_favorites)).assertIsDisplayed()
     }
 
     @Test
@@ -129,7 +130,7 @@ class MovieCardTest {
             )
         }
 
-        composeTestRule.onNodeWithContentDescription(ADD_TO_FAVORITES).performClick()
+        composeTestRule.onNodeWithContentDescription(context.getString(R.string.add_to_favorites)).performClick()
 
         assertTrue(bookmarkClicked)
     }

@@ -3,6 +3,7 @@ package com.leticiafernandes.letsmovie.ui.movie
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.extensions.formatToReleaseDate
 import com.leticiafernandes.letsmovie.extensions.toMovieAPIImageURL
@@ -65,12 +67,19 @@ fun MovieDetailScreen(
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues).fillMaxSize()) {
             when (val state = uiState) {
+                is ShowMovieLoading -> CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 is ShowMovieInfo -> MovieDetailContent(movie = state.movie)
-                is ShowMovieError -> Text(
-                    text = state.message,
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.align(Alignment.Center)
-                )
+                is ShowMovieError -> {
+                    val message = when (state) {
+                        is ShowMovieError.Http -> stringResource(R.string.error_server, state.code)
+                        is ShowMovieError.Network -> stringResource(R.string.error_network)
+                    }
+                    Text(
+                        text = message,
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
                 else -> {}
             }
         }
@@ -84,13 +93,18 @@ fun MovieDetailContent(movie: MovieItem) {
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        AsyncImage(
+        SubcomposeAsyncImage(
             model = movie.backdropPath?.toMovieAPIImageURL(),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimens.backdropHeight),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
+            loading = {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
         )
         Row(
             modifier = Modifier
@@ -110,7 +124,7 @@ fun MovieDetailContent(movie: MovieItem) {
             ) {
                 Text(text = movie.title, style = MaterialTheme.typography.titleLarge)
                 Text(
-                    text = stringResource(R.string.rating_format, "%.1f".format(movie.voteAverage)),
+                    text = stringResource(R.string.rating_format, String.format(java.util.Locale.US, "%.1f", movie.voteAverage)),
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Text(text = movie.releaseDate.formatToReleaseDate(), style = MaterialTheme.typography.bodyMedium)

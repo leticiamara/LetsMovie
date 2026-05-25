@@ -1,11 +1,14 @@
 package com.leticiafernandes.letsmovie.ui.watchlist
 
+import android.content.Context
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.domain.usecase.IsFavoriteUseCase
 import com.leticiafernandes.letsmovie.domain.usecase.ObserveFavoritesUseCase
 import com.leticiafernandes.letsmovie.domain.usecase.ToggleFavoriteUseCase
@@ -20,6 +23,8 @@ class WatchListScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    private val context: Context get() = ApplicationProvider.getApplicationContext()
 
     private fun createViewModel(repository: FakeAndroidFavoritesRepository) =
         WatchlistViewModel(
@@ -36,7 +41,7 @@ class WatchListScreenTest {
         }
         composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithText("You haven't favorited any movies yet.")
+        composeTestRule.onNodeWithText(context.getString(R.string.favorites_empty))
             .assertIsDisplayed()
     }
 
@@ -112,7 +117,7 @@ class WatchListScreenTest {
 
         composeTestRule.onNodeWithText(movieTitle1).assertIsDisplayed()
 
-        composeTestRule.onAllNodesWithContentDescription("Remove from favorites")[0]
+        composeTestRule.onAllNodesWithContentDescription(context.getString(R.string.remove_from_favorites))[0]
             .performClick()
         composeTestRule.waitForIdle()
 

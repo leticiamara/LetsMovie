@@ -14,4 +14,6 @@
     <string name="filter_now_playing">Now Playing</string>
     <string name="filter_upcoming">Upcoming</string>
     <string name="error_loading_movies">Error loading movies</string>
+    <string name="error_server">Server error %1$d</string>
+    <string name="error_network">Network error. Please check your connection.</string>
 </resources>

@@ -14,4 +14,6 @@
     <string name="filter_now_playing">Em cartaz</string>
     <string name="filter_upcoming">Em breve</string>
     <string name="error_loading_movies">Erro ao carregar filmes</string>
+    <string name="error_server">Erro do servidor %1$d</string>
+    <string name="error_network">Erro de rede. Por favor, verifique sua conexão.</string>
 </resources>

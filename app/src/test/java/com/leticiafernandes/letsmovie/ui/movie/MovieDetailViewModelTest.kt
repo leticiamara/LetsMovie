@@ -54,27 +54,26 @@ class MovieDetailViewModelTest {
     }
 
     @Test
-    fun `when fetch returns HttpError, uiState is ShowMovieError with server message`() = runTest {
+    fun `when fetch returns HttpError, uiState is ShowMovieError Http with error code`() = runTest {
         moviesRepository.movieDetailsResult = NetworkResult.HttpError(404, "Not Found")
 
         val viewModel = createViewModel(movieId = 1L)
         advanceUntilIdle()
 
         val state = viewModel.uiState.value
-        assertTrue(state is ShowMovieError)
-        assertTrue((state as ShowMovieError).message.contains("404"))
+        assertTrue(state is ShowMovieError.Http)
+        assertEquals(404, (state as ShowMovieError.Http).code)
     }
 
     @Test
-    fun `when fetch returns NetworkError, uiState is ShowMovieError with network message`() = runTest {
+    fun `when fetch returns NetworkError, uiState is ShowMovieError Network`() = runTest {
         moviesRepository.movieDetailsResult = NetworkResult.NetworkError(RuntimeException("timeout"))
 
         val viewModel = createViewModel(movieId = 1L)
         advanceUntilIdle()
 
         val state = viewModel.uiState.value
-        assertTrue(state is ShowMovieError)
-        assertTrue((state as ShowMovieError).message.contains("Network error"))
+        assertEquals(ShowMovieError.Network, state)
     }
 
     @Test

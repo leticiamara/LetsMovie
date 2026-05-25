@@ -1,12 +1,15 @@
 package com.leticiafernandes.letsmovie.ui.movie
 
+import android.content.Context
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.lifecycle.SavedStateHandle
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.data.remote.NetworkResult
 import com.leticiafernandes.letsmovie.domain.usecase.MoviesUseCase
 import com.leticiafernandes.letsmovie.fake.FakeAndroidMoviesRepository
@@ -16,10 +19,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-private const val NAVIGATE_BACK = "Navigate back"
-
 @RunWith(AndroidJUnit4::class)
 class MovieDetailScreenTest {
+
+    private val context: Context get() = ApplicationProvider.getApplicationContext()
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -44,7 +47,7 @@ class MovieDetailScreenTest {
             MovieDetailScreen(viewModel = viewModel, onBackClick = {})
         }
 
-        composeTestRule.onNodeWithText("Movie Detail").assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.movie_detail_title)).assertIsDisplayed()
     }
 
     @Test
@@ -72,7 +75,7 @@ class MovieDetailScreenTest {
         }
         composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithText("Rating: 8.5").assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.rating_format, "8.5")).assertIsDisplayed()
     }
 
     @Test
@@ -87,7 +90,7 @@ class MovieDetailScreenTest {
         }
         composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithText("Overview").assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.overview)).assertIsDisplayed()
         composeTestRule.onNodeWithText(overviewText).assertIsDisplayed()
     }
 
@@ -102,7 +105,7 @@ class MovieDetailScreenTest {
         }
         composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithText("Server error 404: Not Found").assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.error_server, 404)).assertIsDisplayed()
     }
 
     @Test
@@ -116,7 +119,7 @@ class MovieDetailScreenTest {
         }
         composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithText("Network error. Please check your connection.").assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.error_network)).assertIsDisplayed()
     }
 
     @Test
@@ -130,7 +133,7 @@ class MovieDetailScreenTest {
             MovieDetailScreen(viewModel = viewModel, onBackClick = { backClicked = true })
         }
 
-        composeTestRule.onNodeWithContentDescription(NAVIGATE_BACK).performClick()
+        composeTestRule.onNodeWithContentDescription(context.getString(R.string.navigate_back)).performClick()
 
         assertTrue(backClicked)
     }
