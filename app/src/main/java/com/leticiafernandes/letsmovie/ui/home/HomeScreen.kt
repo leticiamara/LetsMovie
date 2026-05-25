@@ -35,7 +35,9 @@ import com.leticiafernandes.letsmovie.ui.movie.MoviesViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onMovieClick: (Long) -> Unit
+    onMovieClick: (Long) -> Unit,
+    moviesViewModel: MoviesViewModel = hiltViewModel(),
+    watchlistViewModel: WatchlistViewModel = hiltViewModel()
 ) {
     var currentTab by remember { mutableStateOf(HomeTab.Popular) }
     val selectedIndex = if (currentTab == HomeTab.Popular) 0 else 1
@@ -106,22 +108,16 @@ fun HomeScreen(
     ) { paddingValues ->
         val modifier = Modifier.padding(paddingValues)
         when (currentTab) {
-            HomeTab.Popular -> {
-                val moviesViewModel: MoviesViewModel = hiltViewModel()
-                MoviesScreen(
-                    viewModel = moviesViewModel,
-                    modifier = modifier,
-                    onMovieClick = { movie -> onMovieClick(movie.id) }
-                )
-            }
-            HomeTab.Watchlist -> {
-                val watchlistViewModel: WatchlistViewModel = hiltViewModel()
-                WatchListScreen(
-                    viewModel = watchlistViewModel,
-                    modifier = modifier,
-                    onMovieClick = { favorite -> onMovieClick(favorite.id) }
-                )
-            }
+            HomeTab.Popular -> MoviesScreen(
+                viewModel = moviesViewModel,
+                modifier = modifier,
+                onMovieClick = { movie -> onMovieClick(movie.id) }
+            )
+            HomeTab.Watchlist -> WatchListScreen(
+                viewModel = watchlistViewModel,
+                modifier = modifier,
+                onMovieClick = { favorite -> onMovieClick(favorite.id) }
+            )
         }
     }
 }
