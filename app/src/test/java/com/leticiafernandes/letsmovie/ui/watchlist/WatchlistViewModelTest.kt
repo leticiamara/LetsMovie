@@ -32,11 +32,13 @@ class WatchlistViewModelTest {
     @Before
     fun setUp() {
         repository = FakeFavoritesRepository()
-        viewModel = WatchlistViewModel(
-            observeFavoritesUseCase = ObserveFavoritesUseCase(repository),
-            toggleFavoriteUseCase = ToggleFavoriteUseCase(repository, IsFavoriteUseCase(repository))
-        )
+        viewModel = createViewModel()
     }
+
+    private fun createViewModel() = WatchlistViewModel(
+        observeFavoritesUseCase = ObserveFavoritesUseCase(repository),
+        toggleFavoriteUseCase = ToggleFavoriteUseCase(repository, IsFavoriteUseCase(repository))
+    )
 
     @Test
     fun `when favorites list is empty, uiState is Empty`() = runTest {
@@ -52,9 +54,7 @@ class WatchlistViewModelTest {
         repository.fillFavorites(movie1, movie2)
         advanceUntilIdle()
 
-        val state = viewModel.uiState.value
-        assertTrue(state is WatchlistUiState.Content)
-        state as WatchlistUiState.Content
+        val state = viewModel.uiState.value as WatchlistUiState.Content
         assertEquals(2, state.favorites.size)
         assertEquals(movie1.id, state.favorites[0].id)
         assertEquals(movie1.title, state.favorites[0].title)
@@ -63,17 +63,22 @@ class WatchlistViewModelTest {
 
     @Test
     fun `when favorites flow throws, uiState is Error`() = runTest {
-        val databaseErrorMessage = "Database error"
-        repository.observeError = RuntimeException(databaseErrorMessage)
-        val errorViewModel = WatchlistViewModel(
-            observeFavoritesUseCase = ObserveFavoritesUseCase(repository),
-            toggleFavoriteUseCase = ToggleFavoriteUseCase(repository, IsFavoriteUseCase(repository))
-        )
+        repository.observeError = RuntimeException("Database error")
+        val errorViewModel = createViewModel()
         advanceUntilIdle()
 
-        val state = errorViewModel.uiState.value
-        assertTrue(state is WatchlistUiState.Error)
-        assertTrue((state as WatchlistUiState.Error).message.contains(databaseErrorMessage))
+        val state = errorViewModel.uiState.value as WatchlistUiState.Error
+        assertTrue(state.message.contains("Database error"))
+    }
+
+    @Test
+    fun `when favorites flow throws with no message, uiState shows default error message`() = runTest {
+        repository.observeError = RuntimeException()
+        val errorViewModel = createViewModel()
+        advanceUntilIdle()
+
+        val state = errorViewModel.uiState.value as WatchlistUiState.Error
+        assertEquals("Unexpected error loading favorites.", state.message)
     }
 
     @Test
@@ -108,21 +113,7 @@ class WatchlistViewModelTest {
         viewModel.toggleFavorite(1L)
         advanceUntilIdle()
 
-        val state = viewModel.uiState.value
-        assertTrue(state is WatchlistUiState.Content)
-        assertEquals(1L, (state as WatchlistUiState.Content).favorites[0].id)
-    }
-
-    @Test
-    fun `when favorites flow throws with no message, uiState shows default error message`() = runTest {
-        repository.observeError = RuntimeException()
-        val errorViewModel = WatchlistViewModel(
-            observeFavoritesUseCase = ObserveFavoritesUseCase(repository),
-            toggleFavoriteUseCase = ToggleFavoriteUseCase(repository, IsFavoriteUseCase(repository))
-        )
-        advanceUntilIdle()
-
-        val state = errorViewModel.uiState.value as WatchlistUiState.Error
-        assertEquals("Unexpected error loading favorites.", state.message)
+        val state = viewModel.uiState.value as WatchlistUiState.Content
+        assertEquals(1L, state.favorites[0].id)
     }
 }

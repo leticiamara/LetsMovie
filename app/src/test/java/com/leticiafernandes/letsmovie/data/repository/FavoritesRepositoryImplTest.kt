@@ -5,16 +5,14 @@ import com.leticiafernandes.letsmovie.fake.FakeFavoritesLocalDataSource
 import com.leticiafernandes.letsmovie.fake.FakeFavoritesRemoteDataSource
 import com.leticiafernandes.letsmovie.fake.buildFakeEntity
 import com.leticiafernandes.letsmovie.fake.buildFakeFavoriteMovieDTO
+import com.leticiafernandes.letsmovie.util.buildHttpException
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
-import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import retrofit2.HttpException
-import retrofit2.Response
 import java.io.IOException
 
 class FavoritesRepositoryImplTest {
@@ -38,23 +36,19 @@ class FavoritesRepositoryImplTest {
     }
 
     @Test
-    fun `observeFavorites maps entities to domain models`() {
-        val movieTitle1 = "Inception"
-        val movieTitle2 = "Interstellar"
-        runTest {
-            localDataSource.seed(
-                buildFakeEntity(id = 1L, title = movieTitle1),
-                buildFakeEntity(id = 2L, title = movieTitle2)
-            )
+    fun `observeFavorites maps entities to domain models`() = runTest {
+        localDataSource.seed(
+            buildFakeEntity(id = 1L, title = "Inception"),
+            buildFakeEntity(id = 2L, title = "Interstellar")
+        )
 
-            val result = repository.observeFavorites().first()
+        val result = repository.observeFavorites().first()
 
-            assertEquals(2, result.size)
-            assertEquals(1L, result[0].id)
-            assertEquals(movieTitle1, result[0].title)
-            assertEquals(2L, result[1].id)
-            assertEquals(movieTitle2, result[1].title)
-        }
+        assertEquals(2, result.size)
+        assertEquals(1L, result[0].id)
+        assertEquals("Inception", result[0].title)
+        assertEquals(2L, result[1].id)
+        assertEquals("Interstellar", result[1].title)
     }
 
     @Test
@@ -95,7 +89,7 @@ class FavoritesRepositoryImplTest {
 
     @Test
     fun `addFavorite returns HttpError when remote throws HttpException`() = runTest {
-        remoteDataSource.exception = HttpException(Response.error<Unit>(403, "".toResponseBody(null)))
+        remoteDataSource.exception = buildHttpException(403)
 
         val result = repository.addFavorite(1L)
 

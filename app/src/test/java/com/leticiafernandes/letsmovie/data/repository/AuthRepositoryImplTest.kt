@@ -3,14 +3,12 @@ package com.leticiafernandes.letsmovie.data.repository
 import com.leticiafernandes.letsmovie.data.remote.NetworkResult
 import com.leticiafernandes.letsmovie.data.remote.dto.GuestSessionDTO
 import com.leticiafernandes.letsmovie.fake.FakeAuthRemoteDataSource
+import com.leticiafernandes.letsmovie.util.buildHttpException
 import kotlinx.coroutines.test.runTest
-import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import retrofit2.HttpException
-import retrofit2.Response
 import java.io.IOException
 
 class AuthRepositoryImplTest {
@@ -45,7 +43,7 @@ class AuthRepositoryImplTest {
 
     @Test
     fun `createGuestSession returns HttpError when HttpException is thrown`() = runTest {
-        remoteDataSource.exception = HttpException(Response.error<Unit>(401, "".toResponseBody(null)))
+        remoteDataSource.exception = buildHttpException(401)
 
         val result = repository.createGuestSession()
 
