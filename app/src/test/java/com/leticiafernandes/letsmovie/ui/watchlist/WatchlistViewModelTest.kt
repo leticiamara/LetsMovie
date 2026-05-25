@@ -112,4 +112,17 @@ class WatchlistViewModelTest {
         assertTrue(state is WatchlistUiState.Content)
         assertEquals(1L, (state as WatchlistUiState.Content).favorites[0].id)
     }
+
+    @Test
+    fun `when favorites flow throws with no message, uiState shows default error message`() = runTest {
+        repository.observeError = RuntimeException()
+        val errorViewModel = WatchlistViewModel(
+            observeFavoritesUseCase = ObserveFavoritesUseCase(repository),
+            toggleFavoriteUseCase = ToggleFavoriteUseCase(repository, IsFavoriteUseCase(repository))
+        )
+        advanceUntilIdle()
+
+        val state = errorViewModel.uiState.value as WatchlistUiState.Error
+        assertEquals("Unexpected error loading favorites.", state.message)
+    }
 }

@@ -37,6 +37,7 @@ extensions.configure<ApplicationExtension> {
 
     buildTypes {
         debug {
+            enableUnitTestCoverage = true
             buildConfigField("String", "TMDB_API_KEY", "\"$tmdbApiKey\"")
             buildConfigField("String", "MOVIE_IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/original\"")
         }
