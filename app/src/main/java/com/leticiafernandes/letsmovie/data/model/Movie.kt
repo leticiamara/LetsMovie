@@ -2,14 +2,10 @@ package com.leticiafernandes.letsmovie.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity
-import androidx.room.TypeConverters
-import com.leticiafernandes.letsmovie.data.local.converter.DateConverter
-import com.leticiafernandes.letsmovie.data.local.converter.LongListConverter
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Entity(tableName = "movie", primaryKeys = ["id"])
-@TypeConverters(LongListConverter::class, DateConverter::class)
 @Parcelize
 data class Movie(
     var id: Long,

@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.leticiafernandes.letsmovie.data.local.converter.DateConverter
+import com.leticiafernandes.letsmovie.data.local.converter.LongListConverter
 import com.leticiafernandes.letsmovie.data.local.dao.FavoriteMovieDao
 import com.leticiafernandes.letsmovie.data.local.dao.GenreDao
 import com.leticiafernandes.letsmovie.data.local.dao.MovieDao
@@ -16,7 +17,7 @@ import com.leticiafernandes.letsmovie.data.model.Movie
     version = 2,
     exportSchema = false
 )
-@TypeConverters(DateConverter::class)
+@TypeConverters(DateConverter::class, LongListConverter::class)
 abstract class LetsMovieDataBase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao

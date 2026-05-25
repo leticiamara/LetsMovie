@@ -13,8 +13,8 @@ import com.leticiafernandes.letsmovie.data.model.Genre
 interface GenreDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(genres: List<Genre>)
+    suspend fun insert(genres: List<Genre>)
 
     @Query("SELECT * from genre where id IN(:genreIds)")
-    fun findByIds(genreIds: List<Long>) : List<Genre>
+    suspend fun findByIds(genreIds: List<Long>) : List<Genre>
 }

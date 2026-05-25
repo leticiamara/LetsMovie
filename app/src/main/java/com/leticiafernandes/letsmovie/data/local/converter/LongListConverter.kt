@@ -2,25 +2,17 @@ package com.leticiafernandes.letsmovie.data.local.converter
 
 import androidx.room.TypeConverter
 
-object LongListConverter {
+class LongListConverter {
 
     @TypeConverter
-    @JvmStatic
-    fun stringToLongList(data: String?): List<Long>? {
-        return data?.let {
-            it.split(",").map {
-                try {
-                    it.toLong()
-                } catch (ex: NumberFormatException) {
-                    null
-                }
-            }
-        }?.filterNotNull()
+    fun stringToLongList(data: String?): List<Long> {
+        return data?.split(",")?.mapNotNull {
+            it.toLongOrNull()
+        } ?: emptyList()
     }
 
     @TypeConverter
-    @JvmStatic
-    fun longListToString(longs: List<Long>?): String? {
-        return longs?.joinToString(",")
+    fun longListToString(longs: List<Long>?): String {
+        return longs?.joinToString(",") ?: ""
     }
 }

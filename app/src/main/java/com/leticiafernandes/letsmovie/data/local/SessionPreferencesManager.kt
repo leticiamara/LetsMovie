@@ -9,14 +9,14 @@ import javax.inject.Singleton
 @Singleton
 class SessionPreferencesManager @Inject constructor(
     @ApplicationContext context: Context
-) {
+) : SessionManager {
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-    var guestSessionId: String?
+    override var guestSessionId: String?
         get() = prefs.getString(KEY_GUEST_SESSION_ID, null)
         set(value) = prefs.edit { putString(KEY_GUEST_SESSION_ID, value) }
 
-    val isLoggedIn: Boolean get() = guestSessionId != null
+    override val isLoggedIn: Boolean get() = guestSessionId != null
 
     companion object {
         private const val PREFS_NAME = "session_prefs"

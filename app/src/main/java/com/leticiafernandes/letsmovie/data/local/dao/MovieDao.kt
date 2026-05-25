@@ -17,11 +17,11 @@ interface MovieDao {
     suspend fun getAll(): List<Movie>
 
     @Query("SELECT * from movie where id = :id")
-    fun findMovieById(id: Long): Movie
+    suspend fun findMovieById(id: Long): Movie?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(movie: Movie)
+    suspend fun insert(movie: Movie)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(movie: Movie)
+    suspend fun update(movie: Movie)
 }
