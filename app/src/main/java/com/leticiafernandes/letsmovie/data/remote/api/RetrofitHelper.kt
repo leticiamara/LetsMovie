@@ -8,6 +8,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import java.util.Locale
 
 private const val MOVIE_BASE_URL = "https://api.themoviedb.org/"
 
@@ -25,20 +26,29 @@ object RetrofitHelper {
 
         val apiKeyInterceptor = Interceptor { chain ->
             val originalRequest = chain.request()
-            val originalUrl = originalRequest.url
-
-            val urlWithKey = originalUrl.newBuilder()
+            val urlWithKey = originalRequest.url.newBuilder()
                 .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
                 .build()
-
-            val requestWithKey = originalRequest.newBuilder()
-                .url(urlWithKey)
-                .build()
-
-            chain.proceed(requestWithKey)
+            chain.proceed(originalRequest.newBuilder().url(urlWithKey).build())
         }
+
+        val localeInterceptor = Interceptor { chain ->
+            val locale = Locale.getDefault()
+            val language = if (locale.country.isNotEmpty()) {
+                "${locale.language}-${locale.country}"
+            } else {
+                locale.language
+            }
+            val originalRequest = chain.request()
+            val urlWithLocale = originalRequest.url.newBuilder()
+                .setQueryParameter("language", language)
+                .build()
+            chain.proceed(originalRequest.newBuilder().url(urlWithLocale).build())
+        }
+
         val client = OkHttpClient.Builder()
             .addInterceptor(apiKeyInterceptor)
+            .addInterceptor(localeInterceptor)
             .addInterceptor(loggingInterceptor)
             .build()
 

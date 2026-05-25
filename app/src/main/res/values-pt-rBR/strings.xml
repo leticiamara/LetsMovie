@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Lets Movie</string>
+    <string name="title_movies">Filmes</string>
+    <string name="title_watchlist">Lista de filmes</string>
+    <string name="movie_detail_title">Detalhes do filme</string>
+    <string name="overview">Sinopse</string>
+    <string name="rating_format">Avaliação: %1$s</string>
+    <string name="add_to_favorites">Adicionar aos favoritos</string>
+    <string name="remove_from_favorites">Remover dos favoritos</string>
+    <string name="favorites_empty">Você ainda não favoritou nenhum filme.</string>
+    <string name="splash_tagline">Descubra seu próximo filme favorito</string>
+    <string name="navigate_back">Voltar</string>
+    <string name="filter_popular">Populares</string>
+    <string name="filter_now_playing">Em cartaz</string>
+    <string name="filter_upcoming">Em breve</string>
+    <string name="error_loading_movies">Erro ao carregar filmes</string>
+</resources>

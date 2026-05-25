@@ -11,30 +11,24 @@ interface MoviesService {
 
     @GET("/3/movie/popular")
     suspend fun listPopularMovies(
-        @Query("language") language: String = "en-US",
         @Query("page") page: Int = 1
     ): MovieResultDTO
 
     @GET("/3/movie/now_playing")
     suspend fun listNowPlayingMovies(
-        @Query("language") language: String = "en-US",
         @Query("page") page: Int = 1
     ): MovieResultDTO
 
     @GET("/3/movie/upcoming")
     suspend fun listUpcomingMovies(
-        @Query("language") language: String = "en-US",
         @Query("page") page: Int = 1
     ): MovieResultDTO
 
     @GET("/3/genre/movie/list")
-    suspend fun listAllGenres(
-        @Query("language") language: String = "en-US"
-    ): GenreResultDTO
+    suspend fun listAllGenres(): GenreResultDTO
 
     @GET("/3/movie/{movie_id}")
     suspend fun listMovieDetails(
-        @Path("movie_id") movieId: Long,
-        @Query("language") language: String = "en-US"
+        @Path("movie_id") movieId: Long
     ): MovieDTO
 }
