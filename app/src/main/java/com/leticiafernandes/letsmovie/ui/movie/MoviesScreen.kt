@@ -38,12 +38,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
+import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.extensions.formatToReleaseDate
 import com.leticiafernandes.letsmovie.extensions.toMovieAPIImageURL
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
@@ -170,7 +172,10 @@ fun MovieCard(
                     Icon(
                         imageVector = if (isBookmarked) Icons.Default.Bookmark
                         else Icons.Default.BookmarkBorder,
-                        contentDescription = null,
+                        contentDescription = stringResource(
+                            if (isBookmarked) R.string.remove_from_favorites
+                            else R.string.add_to_favorites
+                        ),
                         tint = if (isBookmarked) MaterialTheme.colorScheme.primary else Color.White,
                     )
                 }

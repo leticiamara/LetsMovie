@@ -128,6 +128,8 @@ dependencies {
     testImplementation(libs.coroutines.test)
     testImplementation(libs.androidx.arch.core.testing)
     testImplementation(libs.paging.testing)
+    androidTestImplementation(libs.compose.ui.test.junit4)
+    debugImplementation(libs.compose.ui.test.manifest)
     androidTestImplementation(libs.androidx.annotation)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.espresso.contrib) {

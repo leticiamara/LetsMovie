@@ -215,6 +215,7 @@ gradle-app.setting
 # IDE state
 /.idea/planningMode.xml
 /.idea/deploymentTargetSelector.xml
+/.idea/androidTestResultsUserPreferences.xml
 
 # Antigravity CLI
 .antigravitycli/
