@@ -5,6 +5,7 @@ import com.leticiafernandes.letsmovie.data.repository.FavoritesRepository
 import com.leticiafernandes.letsmovie.domain.model.FavoriteMovie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import java.util.Date
 
@@ -13,8 +14,12 @@ class FakeFavoritesRepository : FavoritesRepository {
     private val favorites = MutableStateFlow<List<FavoriteMovie>>(emptyList())
 
     var addFavoriteResult: NetworkResult<Unit> = NetworkResult.Success(Unit)
+    var observeError: Throwable? = null
 
-    override fun observeFavorites(): Flow<List<FavoriteMovie>> = favorites
+    override fun observeFavorites(): Flow<List<FavoriteMovie>> = when (val error = observeError) {
+        null -> favorites
+        else -> flow { throw error }
+    }
 
     override fun observeIsFavorite(movieId: Long): Flow<Boolean> =
         favorites.map { list -> list.any { it.id == movieId } }
