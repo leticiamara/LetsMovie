@@ -104,9 +104,6 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.kotlinx.serialization.converter)
 
-    // Picasso
-    implementation(libs.picasso)
-
     // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
