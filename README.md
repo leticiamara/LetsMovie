@@ -37,6 +37,63 @@ The app uses TMDB **guest sessions** — no account or login is required. On fir
 
 4. Run on a device or emulator (**min SDK 23**, target SDK 36).
 
+## Running the tests
+
+### Unit tests
+
+Run all unit tests (use cases, ViewModels, repositories) with:
+
+```bash
+./gradlew testDebugUnitTest
+```
+
+### Instrumented tests (Compose UI)
+
+Instrumented tests require a connected device or running emulator:
+
+```bash
+./gradlew connectedDebugAndroidTest
+```
+
+Tests use fake repositories instead of real network or database calls, so no API key or network connection is needed.
+
+## Architecture
+
+The app follows the [official Android architecture guidelines](https://developer.android.com/topic/architecture) with three layers. Dependencies flow in one direction: **UI → Domain → Data**.
+
+```
+app/src/main/java/com/leticiafernandes/letsmovie/
+├── ui/      ← Screens, ViewModels, UiState classes, UI models
+├── domain/  ← Use cases, domain models, mappers
+└── data/    ← Repositories, remote (Retrofit/DTOs) and local (Room/entities)
+```
+
+### UI layer
+
+Each screen has a sealed `UiState` class. ViewModels expose state via `StateFlow` or `LiveData` and are the only entry point for user events — screens never call repositories or use cases directly.
+
+### Domain layer
+
+One class per use case with a single `invoke` function. Use cases coordinate repositories and return domain models, keeping ViewModels thin and business logic testable without Android dependencies.
+
+### Data layer
+
+Repositories are the single source of truth. Network calls are wrapped in `NetworkResult<T>` (Success / HttpError / NetworkError) so error handling is typed end-to-end. Remote data uses **Retrofit + kotlinx.serialization**; local data uses **Room**. An OkHttp interceptor injects the API key and device locale into every request.
+
+### Key libraries
+
+| Concern | Library |
+|---|---|
+| UI | Jetpack Compose + Material 3 |
+| Navigation | Jetpack Navigation Component |
+| DI | Hilt |
+| Async | Kotlin Coroutines + Flow |
+| Paging | Paging 3 |
+| Networking | Retrofit + OkHttp |
+| Serialization | kotlinx.serialization |
+| Local storage | Room |
+| Image loading | Coil |
+
 ## Known limitations
 
 | Area              | Current behaviour                                             | Improvement                                                                                   |
