@@ -64,11 +64,7 @@ extensions.configure<ApplicationExtension> {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(libs.kotlin.stdlib)
-    implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.cardview)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.activity.ktx)
 
     // Compose
     val composeBom = platform(libs.compose.bom)
@@ -90,10 +86,6 @@ dependencies {
     implementation(libs.paging.compose)
 
     debugImplementation(libs.compose.ui.tooling)
-
-    // Firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.auth)
 
     // Coroutines
     implementation(libs.coroutines.core)
@@ -121,7 +113,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    testImplementation(libs.mockito.core)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.androidx.arch.core.testing)
     testImplementation(libs.paging.testing)
@@ -129,12 +120,6 @@ dependencies {
     debugImplementation(libs.compose.ui.test.manifest)
     androidTestImplementation(libs.androidx.annotation)
     androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(libs.androidx.espresso.contrib) {
-        exclude(group = "com.android.support", module = "appcompat-v7")
-        exclude(group = "com.android.support", module = "support-v4")
-        exclude(group = "com.android.support", module = "design")
-        exclude(group = "com.android.support", module = "recyclerview-v7")
-    }
 }
 
 kotlin {

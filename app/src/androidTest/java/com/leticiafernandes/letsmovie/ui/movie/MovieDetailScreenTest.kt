@@ -11,7 +11,10 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.data.remote.NetworkResult
+import com.leticiafernandes.letsmovie.domain.usecase.IsFavoriteUseCase
 import com.leticiafernandes.letsmovie.domain.usecase.MoviesUseCase
+import com.leticiafernandes.letsmovie.domain.usecase.ToggleFavoriteUseCase
+import com.leticiafernandes.letsmovie.fake.FakeAndroidFavoritesRepository
 import com.leticiafernandes.letsmovie.fake.FakeAndroidMoviesRepository
 import com.leticiafernandes.letsmovie.fake.buildAndroidFakeMovieDomain
 import org.junit.Assert.assertTrue
@@ -30,14 +33,19 @@ class MovieDetailScreenTest {
     private fun createViewModel(
         movieId: Long? = 1L,
         repository: FakeAndroidMoviesRepository = FakeAndroidMoviesRepository()
-    ) = MovieDetailViewModel(
-        savedStateHandle = if (movieId != null) {
-            SavedStateHandle(mapOf("movieId" to movieId))
-        } else {
-            SavedStateHandle()
-        },
-        moviesUseCase = MoviesUseCase(repository)
-    )
+    ): MovieDetailViewModel {
+        val favoritesRepository = FakeAndroidFavoritesRepository()
+        return MovieDetailViewModel(
+            savedStateHandle = if (movieId != null) {
+                SavedStateHandle(mapOf("movieId" to movieId))
+            } else {
+                SavedStateHandle()
+            },
+            moviesUseCase = MoviesUseCase(repository),
+            toggleFavoriteUseCase = ToggleFavoriteUseCase(favoritesRepository, IsFavoriteUseCase(favoritesRepository)),
+            isFavoriteUseCase = IsFavoriteUseCase(favoritesRepository)
+        )
+    }
 
     @Test
     fun showsMovieDetailTitle() {
@@ -75,7 +83,7 @@ class MovieDetailScreenTest {
         }
         composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithText(context.getString(R.string.rating_format, "8.5")).assertIsDisplayed()
+        composeTestRule.onNodeWithText("8.5").assertIsDisplayed()
     }
 
     @Test
