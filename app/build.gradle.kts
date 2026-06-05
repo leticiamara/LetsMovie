@@ -28,7 +28,7 @@ extensions.configure<ApplicationExtension> {
 
     defaultConfig {
         applicationId = "com.leticiafernandes.letsmovie"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -120,6 +120,12 @@ dependencies {
     debugImplementation(libs.compose.ui.test.manifest)
     androidTestImplementation(libs.androidx.annotation)
     androidTestImplementation(libs.androidx.test.rules)
+
+    //App Modules
+    implementation(project(":feature:login"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":data:user"))
+    implementation(project(":core:network"))
 }
 
 kotlin {

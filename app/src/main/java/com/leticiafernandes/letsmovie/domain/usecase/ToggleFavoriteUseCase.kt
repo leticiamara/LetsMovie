@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.domain.usecase
 
-import com.leticiafernandes.letsmovie.data.remote.NetworkResult
+import com.leticiafernandes.letsmovie.core.network.NetworkResult
 import com.leticiafernandes.letsmovie.data.repository.FavoritesRepository
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject

@@ -55,8 +55,8 @@ import com.leticiafernandes.letsmovie.domain.model.MovieCategory
 import com.leticiafernandes.letsmovie.extensions.formatToReleaseDate
 import com.leticiafernandes.letsmovie.extensions.toMovieAPIImageURL
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
-import com.leticiafernandes.letsmovie.ui.theme.Dimens
-import com.leticiafernandes.letsmovie.ui.theme.Spacing
+import com.leticiafernandes.letsmovie.designsystem.theme.Dimens
+import com.leticiafernandes.letsmovie.designsystem.theme.Spacing
 
 @get:StringRes
 private val MovieCategory.labelRes: Int

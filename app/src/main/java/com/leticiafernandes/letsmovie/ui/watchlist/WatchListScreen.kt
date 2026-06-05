@@ -30,8 +30,8 @@ import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.extensions.toMovieAPIImageURL
-import com.leticiafernandes.letsmovie.ui.theme.Dimens
-import com.leticiafernandes.letsmovie.ui.theme.Spacing
+import com.leticiafernandes.letsmovie.designsystem.theme.Dimens
+import com.leticiafernandes.letsmovie.designsystem.theme.Spacing
 import java.text.SimpleDateFormat
 import java.util.Locale
 

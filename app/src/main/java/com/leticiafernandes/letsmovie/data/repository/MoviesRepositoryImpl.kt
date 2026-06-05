@@ -3,11 +3,11 @@ package com.leticiafernandes.letsmovie.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.leticiafernandes.letsmovie.core.network.NetworkResult
+import com.leticiafernandes.letsmovie.core.network.safeApiCall
 import com.leticiafernandes.letsmovie.data.mapper.mapToMovie
 import com.leticiafernandes.letsmovie.data.remote.MoviesRemoteDataSource
 import com.leticiafernandes.letsmovie.data.remote.MoviesPagingSource
-import com.leticiafernandes.letsmovie.data.remote.NetworkResult
-import com.leticiafernandes.letsmovie.data.remote.safeApiCall
 import com.leticiafernandes.letsmovie.domain.model.Movie
 import com.leticiafernandes.letsmovie.domain.model.MovieCategory
 import kotlinx.coroutines.flow.Flow

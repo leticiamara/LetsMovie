@@ -2,7 +2,7 @@ package com.leticiafernandes.letsmovie.domain.usecase
 
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.leticiafernandes.letsmovie.data.remote.NetworkResult
+import com.leticiafernandes.letsmovie.core.network.NetworkResult
 import com.leticiafernandes.letsmovie.data.repository.MoviesRepository
 import com.leticiafernandes.letsmovie.domain.mapper.mapToMovieItem
 import com.leticiafernandes.letsmovie.domain.model.MovieCategory

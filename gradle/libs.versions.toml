@@ -32,6 +32,8 @@ annotation = "1.9.1"
 test-rules = "1.7.0"
 paging = "3.5.0"
 ksp = "2.3.4"
+android-built-in1-kotlin = "9.2.1"
+jetbrains-kotlin-jvm = "2.3.21"
 
 [libraries]
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
@@ -98,3 +100,5 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+android-built-in1-kotlin = { id = "com.android.built-in-kotlin", version.ref = "android-built-in1-kotlin" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrains-kotlin-jvm" }

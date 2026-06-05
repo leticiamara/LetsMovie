@@ -1,6 +1,6 @@
 package com.leticiafernandes.letsmovie.di
 
-import com.leticiafernandes.letsmovie.data.remote.api.AuthService
+import com.leticiafernandes.letsmovie.data.user.datasource.remote.AuthService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

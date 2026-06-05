@@ -1,14 +1,13 @@
 package com.leticiafernandes.letsmovie.ui.login
 
-import com.leticiafernandes.letsmovie.data.remote.NetworkResult
-import com.leticiafernandes.letsmovie.domain.usecase.CreateGuestSessionUseCase
+import com.leticiafernandes.letsmovie.core.network.NetworkResult
 import com.leticiafernandes.letsmovie.fake.FakeAuthRepository
-import com.leticiafernandes.letsmovie.fake.FakeSessionManager
+import com.leticiafernandes.letsmovie.login.domain.CreateGuestSessionUseCase
+import com.leticiafernandes.letsmovie.login.ui.SplashViewModel
 import com.leticiafernandes.letsmovie.util.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -21,39 +20,24 @@ class SplashViewModelTest {
     val mainCoroutineRule = MainCoroutineRule()
 
     private lateinit var authRepository: FakeAuthRepository
-    private lateinit var sessionManager: FakeSessionManager
 
     @Before
     fun setUp() {
         authRepository = FakeAuthRepository()
-        sessionManager = FakeSessionManager()
     }
 
     private fun createViewModel() = SplashViewModel(
-        createGuestSessionUseCase = CreateGuestSessionUseCase(authRepository, sessionManager),
-        sessionManager = sessionManager
+        createGuestSessionUseCase = CreateGuestSessionUseCase(authRepository)
     )
 
     @Test
     fun `when not logged in, creates guest session and becomes ready`() = runTest {
-        authRepository.result = NetworkResult.Success("session-123")
+        authRepository.result = NetworkResult.Success(Unit)
 
         val viewModel = createViewModel()
         advanceUntilIdle()
 
         assertTrue(viewModel.ready.value)
-        assertEquals("session-123", sessionManager.guestSessionId)
-    }
-
-    @Test
-    fun `when already logged in, skips session creation and becomes ready`() = runTest {
-        sessionManager.guestSessionId = "existing-session"
-
-        val viewModel = createViewModel()
-        advanceUntilIdle()
-
-        assertTrue(viewModel.ready.value)
-        assertEquals("existing-session", sessionManager.guestSessionId)
     }
 
     @Test

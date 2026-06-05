@@ -15,8 +15,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.leticiafernandes.letsmovie.ui.home.HomeScreen
-import com.leticiafernandes.letsmovie.ui.login.SplashScreen
-import com.leticiafernandes.letsmovie.ui.login.SplashViewModel
+import com.leticiafernandes.letsmovie.login.ui.SplashScreen
+import com.leticiafernandes.letsmovie.login.ui.SplashViewModel
 import com.leticiafernandes.letsmovie.ui.movie.MovieDetailScreen
 import com.leticiafernandes.letsmovie.ui.movie.MovieDetailViewModel
 

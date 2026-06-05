@@ -40,8 +40,8 @@ import com.leticiafernandes.letsmovie.R
 import com.leticiafernandes.letsmovie.extensions.formatToReleaseDate
 import com.leticiafernandes.letsmovie.extensions.toMovieAPIImageURL
 import com.leticiafernandes.letsmovie.ui.movie.model.MovieItem
-import com.leticiafernandes.letsmovie.ui.theme.Dimens
-import com.leticiafernandes.letsmovie.ui.theme.Spacing
+import com.leticiafernandes.letsmovie.designsystem.theme.Dimens
+import com.leticiafernandes.letsmovie.designsystem.theme.Spacing
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)

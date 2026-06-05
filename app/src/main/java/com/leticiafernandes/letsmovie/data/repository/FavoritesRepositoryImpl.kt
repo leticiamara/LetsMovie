@@ -1,11 +1,11 @@
 package com.leticiafernandes.letsmovie.data.repository
 
+import com.leticiafernandes.letsmovie.core.network.NetworkResult
+import com.leticiafernandes.letsmovie.core.network.safeApiCall
 import com.leticiafernandes.letsmovie.data.local.FavoritesLocalDataSource
 import com.leticiafernandes.letsmovie.data.remote.FavoritesRemoteDataSource
 import com.leticiafernandes.letsmovie.data.mapper.toDomain
 import com.leticiafernandes.letsmovie.data.mapper.toEntity
-import com.leticiafernandes.letsmovie.data.remote.NetworkResult
-import com.leticiafernandes.letsmovie.data.remote.safeApiCall
 import com.leticiafernandes.letsmovie.domain.model.FavoriteMovie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

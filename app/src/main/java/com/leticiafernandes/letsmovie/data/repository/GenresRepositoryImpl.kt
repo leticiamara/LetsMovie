@@ -1,9 +1,9 @@
 package com.leticiafernandes.letsmovie.data.repository
 
+import com.leticiafernandes.letsmovie.core.network.NetworkResult
+import com.leticiafernandes.letsmovie.core.network.safeApiCall
 import com.leticiafernandes.letsmovie.data.remote.GenresRemoteDataSource
 import com.leticiafernandes.letsmovie.data.mapper.mapToGenreDomain
-import com.leticiafernandes.letsmovie.data.remote.NetworkResult
-import com.leticiafernandes.letsmovie.data.remote.safeApiCall
 import com.leticiafernandes.letsmovie.domain.model.Genre
 import javax.inject.Inject
 

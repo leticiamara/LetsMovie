@@ -1,0 +1,78 @@
+package com.leticiafernandes.letsmovie.login.ui
+
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.background
+import com.leticiafernandes.letsmovie.designsystem.theme.ColorPrimary
+import com.leticiafernandes.letsmovie.designsystem.theme.ColorPrimaryContainer
+import com.leticiafernandes.letsmovie.designsystem.theme.Spacing
+import com.leticiafernandes.letsmovie.login.R
+
+@Composable
+fun SplashScreen() {
+    val backgroundGradient = Brush.verticalGradient(listOf(ColorPrimary, ColorPrimaryContainer))
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(backgroundGradient),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(120.dp)
+                    .clip(CircleShape)
+                    .background(ColorPrimary.copy(alpha = 0.2f))
+                    .border(2.dp, ColorPrimary.copy(alpha = 0.7f), CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(com.leticiafernandes.letsmovie.designsystem.R.drawable.ic_movie_white_48dp),
+                    contentDescription = null,
+                    modifier = Modifier.size(60.dp),
+                    tint = Color.White
+                )
+            }
+
+            Spacer(modifier = Modifier.height(Spacing.medium))
+
+            Text(
+                text = stringResource(R.string.app_name),
+                color = Color.White,
+                style = MaterialTheme.typography.titleLarge.copy(fontSize = 32.sp)
+            )
+
+            Spacer(modifier = Modifier.height(Spacing.extraSmall))
+
+            Text(
+                text = stringResource(R.string.splash_tagline),
+                color = Color.White.copy(alpha = 0.6f),
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+    }
+}

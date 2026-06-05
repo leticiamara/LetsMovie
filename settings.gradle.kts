@@ -22,3 +22,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "LetsMovie"
 include(":app")
+include(":feature:login")
+include(":core:designsystem")
+include(":data:user")
+include(":core:network")

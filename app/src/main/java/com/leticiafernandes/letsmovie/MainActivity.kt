@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.leticiafernandes.letsmovie.ui.navigation.Destination
 import com.leticiafernandes.letsmovie.ui.navigation.NavGraph
-import com.leticiafernandes.letsmovie.ui.theme.LetsMovieTheme
+import com.leticiafernandes.letsmovie.designsystem.theme.LetsMovieTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

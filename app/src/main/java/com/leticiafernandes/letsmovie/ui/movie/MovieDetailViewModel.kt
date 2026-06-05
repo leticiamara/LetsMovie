@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.leticiafernandes.letsmovie.data.remote.NetworkResult
+import com.leticiafernandes.letsmovie.core.network.NetworkResult
 import com.leticiafernandes.letsmovie.domain.usecase.IsFavoriteUseCase
 import com.leticiafernandes.letsmovie.domain.usecase.MoviesUseCase
 import com.leticiafernandes.letsmovie.domain.usecase.ToggleFavoriteUseCase
